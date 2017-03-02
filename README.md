@@ -8,7 +8,7 @@ As an example:
 
 ```sh
 # Specify RUSTFLAGS so the target crate is compiled with sanitization
-export RUSTFLAGS="-Cpasses=sancov -Cllvm-args=-sanitizer-coverage-level=3 -Zsanitizer=address -Cpanic=abort";
+export RUSTFLAGS="-Cpasses=sancov -Cllvm-args=-sanitizer-coverage-level=3 -Zsanitizer=address -Cpanic=abort"
 
 # Change directories into the crate we want to fuzz
 cd mp4parse
