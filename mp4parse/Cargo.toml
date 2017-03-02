@@ -1,0 +1,12 @@
+[package]
+name = "mp4parse-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+mp4parse = "0.7"
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_mp4"
+path = "read_mp4.rs"
