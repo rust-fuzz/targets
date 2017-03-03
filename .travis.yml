@@ -1,0 +1,6 @@
+language: rust
+rust: nightly
+install: cargo build --all --verbose
+script: echo ""
+sudo: required
+dist: trusty
