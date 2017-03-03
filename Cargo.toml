@@ -1,2 +1,5 @@
 [workspace]
-members = ["mp4parse"]
+members = [
+    "mp4parse",
+    "serde_json",
+]
