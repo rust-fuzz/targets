@@ -1,5 +1,6 @@
 [workspace]
 members = [
     "mp4parse",
+    "quick-xml",
     "serde_json",
 ]

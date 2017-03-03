@@ -1,0 +1,12 @@
+[package]
+name = "quick-xml-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+quick-xml = "0.6"
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_xml"
+path = "read_xml.rs"
