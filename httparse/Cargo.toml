@@ -4,7 +4,7 @@ version = "0.0.0"
 publish = false
 
 [dependencies]
-httparse = "1.2"
+httparse = { git = "https://github.com/seanmonstar/httparse" }
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
 
 [[bin]]

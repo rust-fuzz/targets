@@ -4,7 +4,7 @@ version = "0.0.0"
 publish = false
 
 [dependencies]
-quick-xml = "0.6"
+quick-xml = { git = "https://github.com/tafia/quick-xml" }
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
 
 [[bin]]
