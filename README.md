@@ -7,14 +7,7 @@ A collection of fuzzing targets written in Rust.
 As an example:
 
 ```sh
-# Specify RUSTFLAGS so the target crate is compiled with sanitization
-export RUSTFLAGS="-Cpasses=sancov -Cllvm-args=-sanitizer-coverage-level=3 -Zsanitizer=address -Cpanic=abort"
-
-# Change directories into the crate we want to fuzz
-cd mp4parse
-
-# Start fuzzing using the 'read_mp4' fuzz target
-cargo run --bin read_mp4
+./run-fuzzer.sh mp4parse read_mp4
 ```
 
 ## Contributing
