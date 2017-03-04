@@ -1,0 +1,12 @@
+[package]
+name = "cssparser-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+cssparser = { git = "https://github.com/servo/rust-cssparser.git" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_css"
+path = "read_css.rs"
