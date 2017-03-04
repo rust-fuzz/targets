@@ -1,0 +1,12 @@
+[package]
+name = "tar-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+tar = "0.4"
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_tar"
+path = "read_tar.rs"
