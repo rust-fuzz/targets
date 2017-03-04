@@ -5,4 +5,5 @@ members = [
     "quick-xml",
     "serde_json",
     "tar",
+    "xml-rs",
 ]
