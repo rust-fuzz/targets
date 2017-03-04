@@ -1,0 +1,12 @@
+[package]
+name = "flac-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+flac = { git = "https://github.com/sourrust/flac.git" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_flac"
+path = "read_flac.rs"
