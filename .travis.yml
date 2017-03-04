@@ -1,5 +1,6 @@
 language: rust
 rust: nightly
+cache: cargo
 install: cargo build --all --verbose
 script: echo ""
 sudo: required
