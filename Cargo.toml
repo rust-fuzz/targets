@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "httparse",
+    "flac",
     "mp4parse",
     "quick-xml",
     "serde_json",
