@@ -1,0 +1,16 @@
+[package]
+name = "httparse-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+httparse = "1.2"
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "parse_request"
+path = "parse_request.rs"
+
+[[bin]]
+name = "parse_response"
+path = "parse_response.rs"
