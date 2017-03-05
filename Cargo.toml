@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "crypto-hashes",
     "cssparser",
     "httparse",
     "flac",
