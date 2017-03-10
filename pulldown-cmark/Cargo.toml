@@ -1,0 +1,12 @@
+[package]
+name = "pulldown-cmark-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+pulldown-cmark = { git = "https://github.com/google/pulldown-cmark.git" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_markdown"
+path = "read_markdown.rs"

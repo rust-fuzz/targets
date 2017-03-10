@@ -5,6 +5,7 @@ members = [
     "httparse",
     "flac",
     "mp4parse",
+    "pulldown-cmark",
     "quick-xml",
     "serde_json",
     "tar",
