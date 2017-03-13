@@ -2,11 +2,12 @@
 members = [
     "crypto-hashes",
     "cssparser",
-    "httparse",
     "flac",
+    "httparse",
     "mp4parse",
     "pulldown-cmark",
     "quick-xml",
+    "regex",
     "serde_json",
     "tar",
     "xml-rs",
