@@ -2,6 +2,7 @@
 members = [
     "crypto-hashes",
     "cssparser",
+    "encoding_rs",
     "flac",
     "httparse",
     "lz4-compress",
