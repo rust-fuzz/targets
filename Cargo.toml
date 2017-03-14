@@ -8,6 +8,7 @@ members = [
     "pulldown-cmark",
     "quick-xml",
     "regex",
+    "rustfmt",
     "serde_json",
     "tar",
     "xml-rs",
