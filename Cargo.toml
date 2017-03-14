@@ -12,5 +12,6 @@ members = [
     "rustfmt",
     "serde_json",
     "tar",
+    "uuid",
     "xml-rs",
 ]
