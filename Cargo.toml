@@ -7,6 +7,7 @@ members = [
     "mp4parse",
     "pulldown-cmark",
     "quick-xml",
+    "rustfmt",
     "serde_json",
     "tar",
     "xml-rs",
