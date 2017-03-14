@@ -11,6 +11,7 @@ members = [
     "regex",
     "rustfmt",
     "serde_json",
+    "serde_yaml",
     "tar",
     "xml-rs",
 ]
