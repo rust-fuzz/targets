@@ -13,4 +13,5 @@ members = [
     "serde_json",
     "tar",
     "xml-rs",
+    "zopfli",
 ]
