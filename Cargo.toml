@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "chrono",
     "crypto-hashes",
     "cssparser",
     "flac",
