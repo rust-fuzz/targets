@@ -4,6 +4,7 @@ members = [
     "cssparser",
     "flac",
     "httparse",
+    "lz4-compress",
     "mp4parse",
     "pulldown-cmark",
     "quick-xml",
