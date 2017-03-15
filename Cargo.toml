@@ -13,5 +13,6 @@ members = [
     "serde_json",
     "serde_yaml",
     "tar",
+    "uuid",
     "xml-rs",
 ]
