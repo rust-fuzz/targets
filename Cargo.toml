@@ -1,10 +1,16 @@
 [workspace]
 members = [
     "brotli",
+    "bson",
+    "chrono",
     "crypto-hashes",
     "cssparser",
+    "deflate",
+    "dns-parser",
+    "encoding_rs",
     "flac",
     "httparse",
+    "image",
     "lz4-compress",
     "mp4parse",
     "pulldown-cmark",
@@ -12,6 +18,10 @@ members = [
     "regex",
     "rustfmt",
     "serde_json",
+    "serde_yaml",
     "tar",
+    "toml",
+    "uuid",
     "xml-rs",
+    "zopfli",
 ]

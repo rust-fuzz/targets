@@ -1,2 +1,6 @@
 Cargo.lock
 target/
+
+*/*.log
+*/crash-*
+*/corpus

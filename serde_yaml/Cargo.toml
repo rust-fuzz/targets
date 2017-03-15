@@ -1,0 +1,12 @@
+[package]
+name = "serde_yaml-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+serde_yaml = { git = "https://github.com/dtolnay/serde-yaml" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_yaml"
+path = "read_yaml.rs"

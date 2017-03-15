@@ -1,0 +1,25 @@
+---
+none_f:
+  &none_f
+  ~
+none_s:
+  &none_s
+  ~
+none_b:
+  &none_b
+  ~
+some_f:
+  &some_f
+  1.0
+some_s:
+  &some_s
+  x
+some_b:
+  &some_b
+  true
+a: *none_f
+b: *none_s
+c: *none_b
+d: *some_f
+e: *some_s
+f: *some_b"
