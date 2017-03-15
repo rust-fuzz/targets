@@ -1,0 +1,17 @@
+[package]
+name = "image-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+png = { git = "https://github.com/PistonDevelopers/image-png" }
+image = { git = "https://github.com/PistonDevelopers/image" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_png"
+path = "read_png.rs"
+
+[[bin]]
+name = "read_image"
+path = "read_image.rs"
