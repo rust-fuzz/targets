@@ -1,8 +1,10 @@
 [workspace]
 members = [
+    "bson",
     "crypto-hashes",
     "cssparser",
     "deflate",
+    "dns-parser",
     "flac",
     "httparse",
     "lz4-compress",
@@ -12,6 +14,9 @@ members = [
     "regex",
     "rustfmt",
     "serde_json",
+    "serde_yaml",
     "tar",
+    "uuid",
     "xml-rs",
+    "zopfli",
 ]
