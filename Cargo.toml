@@ -10,6 +10,7 @@ members = [
     "encoding_rs",
     "flac",
     "httparse",
+    "humantime",
     "image",
     "lz4-compress",
     "mp4parse",
