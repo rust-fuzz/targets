@@ -1,17 +1,35 @@
-#!/bin/sh
+#!/bin/bash
 
-set -ex
+set -e
 
-if [ "$#" -ne 2 ]; then
-    echo "Usage: run-fuzzer.sh <crate> <target>" 1>&2
+if [ "$#" -lt 2 ]; then
+    echo "Usage: run-fuzzer.sh <crate> <target> [<options...>]" 1>&2
     exit 1
 fi
 
-# Specify RUSTFLAGS so the target crate is compiled with sanitization
-export RUSTFLAGS="-Cpasses=sancov -Cllvm-args=-sanitizer-coverage-level=3 -Zsanitizer=address -Cpanic=abort"
+# Specify RUSTFLAGS:
+export RUSTFLAGS=""
+# - so the target crate is compiled with sanitization
+export RUSTFLAGS="$RUSTFLAGS -C passes=sancov -C llvm-args=-sanitizer-coverage-level=3 -Z sanitizer=address -C panic=abort"
+# - optimizations
+export RUSTFLAGS="$RUSTFLAGS -C opt-level=3"
+# - and all debug infos
+export RUSTFLAGS="$RUSTFLAGS -C debug-assertions=on -C debuginfo=2"
+
+# Specify asan options to disable things that don't work
+export ASAN_OPTIONS="$ASAN_OPTIONS detect_odr_violation=0"
+
+# Show all the rust errors
+export RUST_BACKTRACE=full
 
 # Change directory to the crate we want to fuzz
 cd "$1"
 
+# Create seed directory if it does not exist. Add example files here.
+mkdir -p seeds
+
+# Create corpus directory which the fuzzer will fill with interesting inputs.
+mkdir -p corpus
+
 # Run the fuzzer with that target
-cargo run --bin "$2"
+cargo run --bin "$2" -- ${@:3} `pwd`/corpus `pwd`/seeds

@@ -1,0 +1,12 @@
+[package]
+name = "bson-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+bson = { git = "https://github.com/zonyitoo/bson-rs" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_bson"
+path = "read_bson.rs"
