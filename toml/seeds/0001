@@ -1,0 +1,7 @@
+[package]
+name = "toml"
+version = "0.2.1"
+authors = ["Alex Crichton <alex@alexcrichton.com>"]
+
+[dependencies]
+serde = "0.9"
