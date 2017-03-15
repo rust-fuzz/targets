@@ -5,12 +5,17 @@ publish = false
 
 [dependencies]
 png = { git = "https://github.com/PistonDevelopers/image-png" }
+jpeg-decoder = { git = "https://github.com/kaksmet/jpeg-decoder" }
 image = { git = "https://github.com/PistonDevelopers/image" }
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
 
 [[bin]]
 name = "read_png"
 path = "read_png.rs"
+
+[[bin]]
+name = "read_jpeg"
+path = "read_jpeg.rs"
 
 [[bin]]
 name = "read_image"
