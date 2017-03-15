@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "bson",
+    "chrono",
     "crypto-hashes",
     "cssparser",
     "deflate",
