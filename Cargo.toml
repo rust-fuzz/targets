@@ -3,6 +3,7 @@ members = [
     "bson",
     "crypto-hashes",
     "cssparser",
+    "deflate",
     "dns-parser",
     "flac",
     "httparse",
