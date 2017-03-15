@@ -11,6 +11,7 @@ members = [
     "flac",
     "httparse",
     "image",
+    "iso8601",
     "lz4-compress",
     "mp4parse",
     "pulldown-cmark",
