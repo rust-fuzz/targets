@@ -17,6 +17,7 @@ members = [
     "serde_json",
     "serde_yaml",
     "tar",
+    "toml",
     "uuid",
     "xml-rs",
     "zopfli",
