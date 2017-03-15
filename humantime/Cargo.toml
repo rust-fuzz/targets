@@ -1,0 +1,12 @@
+[package]
+name = "humantime-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+humantime = { git = "https://github.com/tailhook/humantime" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_time"
+path = "read_time.rs"
