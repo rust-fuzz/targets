@@ -16,4 +16,5 @@ members = [
     "tar",
     "uuid",
     "xml-rs",
+    "zopfli",
 ]
