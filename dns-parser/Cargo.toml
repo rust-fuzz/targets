@@ -1,0 +1,12 @@
+[package]
+name = "dns-parser-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+dns-parser = { git = "https://github.com/tailhook/dns-parser" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_packet"
+path = "read_packet.rs"
