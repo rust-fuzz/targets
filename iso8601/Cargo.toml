@@ -1,0 +1,12 @@
+[package]
+name = "iso8601-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+iso8601 = { git = "https://github.com/badboy/iso8601" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "read_dates"
+path = "read_dates.rs"
