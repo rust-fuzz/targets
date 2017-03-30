@@ -5,3 +5,5 @@ install: cargo build --all --verbose
 script: echo ""
 sudo: required
 dist: trusty
+
+notifications: { email: false }
