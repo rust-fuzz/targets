@@ -1,12 +1,12 @@
 #![no_main]
 
 #[macro_use] extern crate libfuzzer_sys;
-extern crate blake2;
+extern crate crypto_hashes;
 
-use blake2::Digest;
+use crypto_hashes::digest::Digest;
 
 fuzz_target!(|data| {
-    let mut hasher = blake2::Blake2b::new_keyed(&[]);
+    let mut hasher = crypto_hashes::blake2::Blake2b::default();
     hasher.input(data);
     hasher.result();
 });

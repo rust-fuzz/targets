@@ -1,12 +1,12 @@
 #![no_main]
 
 #[macro_use] extern crate libfuzzer_sys;
-extern crate streebog;
+extern crate crypto_hashes;
 
-use streebog::Digest;
+use crypto_hashes::digest::Digest;
 
 fuzz_target!(|data| {
-    let mut hasher = streebog::Streebog256::new();
+    let mut hasher = crypto_hashes::streebog::Streebog256::default();
     hasher.input(data);
     hasher.result();
 });

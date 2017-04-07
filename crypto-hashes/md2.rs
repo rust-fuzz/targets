@@ -1,12 +1,12 @@
 #![no_main]
 
 #[macro_use] extern crate libfuzzer_sys;
-extern crate md2;
+extern crate crypto_hashes;
 
-use md2::Digest;
+use crypto_hashes::digest::Digest;
 
 fuzz_target!(|data| {
-    let mut hasher = md2::Md2::new();
+    let mut hasher = crypto_hashes::md2::Md2::default();
     hasher.input(data);
     hasher.result();
 });
