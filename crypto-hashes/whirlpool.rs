@@ -1,12 +1,12 @@
 #![no_main]
 
 #[macro_use] extern crate libfuzzer_sys;
-extern crate whirlpool;
+extern crate crypto_hashes;
 
-use whirlpool::Digest;
+use crypto_hashes::digest::Digest;
 
 fuzz_target!(|data| {
-    let mut hasher = whirlpool::Whirlpool::new();
+    let mut hasher = crypto_hashes::whirlpool::Whirlpool::default();
     hasher.input(data);
     hasher.result();
 });

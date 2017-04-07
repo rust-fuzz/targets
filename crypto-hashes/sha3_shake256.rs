@@ -1,15 +1,16 @@
 #![no_main]
 
 #[macro_use] extern crate libfuzzer_sys;
-extern crate sha3;
+extern crate crypto_hashes;
 extern crate generic_array;
 
-use sha3::Digest;
+use crypto_hashes::digest::{Input, VariableOutput};
 use generic_array::typenum::U256;
 
 fuzz_target!(|data| {
-    let mut hasher = sha3::Shake256::<U256>::new();
-    hasher.input(data);
-    hasher.result();
+    let mut buffer = [0; 256];
+    let mut hasher = crypto_hashes::sha3::Shake256::default();
+    hasher.digest(data);
+    hasher.variable_result(&mut buffer);
 });
 

@@ -4,18 +4,7 @@ version = "0.0.0"
 publish = false
 
 [dependencies]
-blake2 = { git = "https://github.com/RustCrypto/hashes" }
-gost94 = { git = "https://github.com/RustCrypto/hashes" }
-groestl = { git = "https://github.com/RustCrypto/hashes" }
-md2 = { git = "https://github.com/RustCrypto/hashes" }
-md4 = { git = "https://github.com/RustCrypto/hashes" }
-md5 = { git = "https://github.com/RustCrypto/hashes" }
-ripemd160 = { git = "https://github.com/RustCrypto/hashes" }
-sha1 = { git = "https://github.com/RustCrypto/hashes" }
-sha2 = { git = "https://github.com/RustCrypto/hashes" }
-sha3 = { git = "https://github.com/RustCrypto/hashes" }
-streebog = { git = "https://github.com/RustCrypto/hashes" }
-whirlpool = { git = "https://github.com/RustCrypto/hashes" }
+crypto-hashes = { features = ["include_weak"], git = "https://github.com/RustCrypto/meta" }
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
 generic-array = "0.7"
 
@@ -30,14 +19,6 @@ path = "blake2s.rs"
 [[bin]]
 name = "gost94"
 path = "gost94.rs"
-
-[[bin]]
-name = "groestl_256"
-path = "groestl_256.rs"
-
-[[bin]]
-name = "groestl_512"
-path = "groestl_512.rs"
 
 [[bin]]
 name = "md2"
