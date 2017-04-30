@@ -1,0 +1,25 @@
+[package]
+name = "ring-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+ring = { git = "https://github.com/briansmith/ring" }
+openssl = { git = "https://github.com/sfackler/rust-openssl.git" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "digest-sha1-openssl"
+path = "digest-sha1-openssl.rs"
+
+[[bin]]
+name = "digest-sha256-openssl"
+path = "digest-sha256-openssl.rs"
+
+[[bin]]
+name = "digest-sha384-openssl"
+path = "digest-sha384-openssl.rs"
+
+[[bin]]
+name = "digest-sha512-openssl"
+path = "digest-sha512-openssl.rs"

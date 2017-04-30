@@ -18,6 +18,7 @@ members = [
     "pulldown-cmark",
     "quick-xml",
     "regex",
+    "ring",
     "rustfmt",
     "serde_json",
     "serde_yaml",
