@@ -32,4 +32,4 @@ mkdir -p seeds
 mkdir -p corpus
 
 # Run the fuzzer with that target
-cargo run --bin "$2" -- ${@:3} `pwd`/corpus `pwd`/seeds
+cargo run --target x86_64-unknown-linux-gnu --bin "$2" -- ${@:3} `pwd`/corpus `pwd`/seeds
