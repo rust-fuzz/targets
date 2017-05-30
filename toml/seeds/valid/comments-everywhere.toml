@@ -1,24 +1,24 @@
-# Top comment.
-  # Top comment.
-# Top comment.
+# Top comment
+  # Top comment
+# Top comment
 
-# [no-extraneous-groups-please]
+# [extra-group]
 
 [group] # Comment
 answer = 42 # Comment
-# no-extraneous-keys-please = 999
-# Inbetween comment.
+# extra-key = 999
+# Inbetween comment
 more = [ # Comment
-  # What about multiple # comments?
+  # multiple # comments
   # Can you handle it?
   #
-          # Evil.
-# Evil.
-  42, 42, # Comments within arrays are fun.
-  # What about multiple # comments?
+          # Evil
+# Evil
+  42, 42, # Comment within array
+  # multiple # comments
   # Can you handle it?
   #
-          # Evil.
-# Evil.
+          # Evil
+# Evil
 # ] Did I fool you?
-] # Hopefully not.
+] # Hopefully not
