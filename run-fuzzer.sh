@@ -32,4 +32,13 @@ mkdir -p seeds
 mkdir -p corpus
 
 # Run the fuzzer with that target
-cargo run --bin "$2" -- ${@:3} `pwd`/corpus `pwd`/seeds
+if [ "$(uname -s)" == "Darwin" ]; then
+    export TARGET="x86_64-apple-darwin"
+elif [ "$(uname -s)" == "Linux" ]; then
+    export TARGET="x86_64-unknown-linux-gnu"
+else
+    echo "Sorry, only Mac OS and Linux are supported"
+    exit 1
+fi
+
+cargo run --target $TARGET --bin "$2" -- ${@:3} `pwd`/corpus `pwd`/seeds

@@ -1,9 +1,16 @@
+sudo: required
+dist: trusty
+
 language: rust
 rust: nightly
 cache: cargo
-install: cargo build --all --verbose
+
+env:
+
+install:
+- export ASAN_OPTIONS="detect_odr_violation=0"
+- export RUSTFLAGS="-C passes=sancov -C llvm-args=-sanitizer-coverage-level=3 -Z sanitizer=address -C panic=abort -C opt-level=3 -C debug-assertions=on -C debuginfo=2"
+- cargo build --all --verbose --target x86_64-unknown-linux-gnu
 script: echo ""
-sudo: required
-dist: trusty
 
 notifications: { email: false }
