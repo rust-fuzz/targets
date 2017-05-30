@@ -5,6 +5,8 @@ extern crate toml;
 
 fuzz_target!(|data| {
     if let Ok(data) = toml::from_slice::<toml::Value>(data) {
-        let _ = toml::to_string(&data);
+        let s = toml::to_string(&data).unwrap();
+        let copy = toml::from_str(&s).unwrap();
+        assert_eq!(data, copy);
     }
 });
