@@ -1,0 +1,24 @@
+# Top comment
+  # Top comment
+# Top comment
+
+# [extra-group]
+
+[group] # Comment
+answer = 42 # Comment
+# extra-key = 999
+# Inbetween comment
+more = [ # Comment
+  # multiple # comments
+  # Can you handle it?
+  #
+          # Evil
+# Evil
+  42, 42, # Comment within array
+  # multiple # comments
+  # Can you handle it?
+  #
+          # Evil
+# Evil
+# ] Did I fool you?
+] # Hopefully not

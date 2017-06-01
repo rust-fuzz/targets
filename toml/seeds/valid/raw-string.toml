@@ -1,0 +1,7 @@
+backspace = 'a \b backspace char'
+tab = 'a \t tab char'
+newline = 'a \n new line char'
+formfeed = 'a \f form feed char'
+carriage = 'a \r carriage return char'
+slash = 'a \/ slash char'
+backslash = 'a \\ backslash char'
