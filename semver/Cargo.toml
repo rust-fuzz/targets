@@ -1,0 +1,16 @@
+[package]
+name = "semver-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+semver = { git = "https://github.com/steveklabnik/semver" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "version_read_write_read"
+path = "version_read_write_read.rs"
+
+[[bin]]
+name = "version_req_read_write_read"
+path = "version_req_read_write_read.rs"
