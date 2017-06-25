@@ -1,10 +1,10 @@
 #![no_main]
 
 #[macro_use] extern crate libfuzzer_sys;
-extern crate rustfmt;
+extern crate rustfmt_nightly;
 
-use rustfmt::{format_input, Input};
-use rustfmt::config::Config;
+use rustfmt_nightly::{format_input, Input};
+use rustfmt_nightly::config::Config;
 
 fuzz_target!(|data: &[u8]| {
     if let Ok(s) = std::str::from_utf8(data) {
