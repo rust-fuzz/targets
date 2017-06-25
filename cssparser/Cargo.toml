@@ -8,5 +8,9 @@ cssparser = { git = "https://github.com/servo/rust-cssparser.git" }
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
 
 [[bin]]
-name = "read_css"
-path = "read_css.rs"
+name = "css_read"
+path = "css_read.rs"
+
+[[bin]]
+name = "css_read_write_read"
+path = "css_read_write_read.rs"
