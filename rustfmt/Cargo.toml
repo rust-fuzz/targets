@@ -5,7 +5,7 @@ publish = false
 
 [dependencies]
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
-rustfmt = { git = "https://github.com/rust-lang-nursery/rustfmt" }
+rustfmt-nightly = { git = "https://github.com/rust-lang-nursery/rustfmt" }
 
 [[bin]]
 name = "fmt"
