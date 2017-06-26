@@ -26,5 +26,6 @@ members = [
     "toml",
     "uuid",
     "xml-rs",
+    "zip",
     "zopfli",
 ]
