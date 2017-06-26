@@ -2,11 +2,6 @@
 
 set -e
 
-if [ "$#" -lt 2 ]; then
-    echo "Usage: run-fuzzer.sh <crate> <target> [<options...>]" 1>&2
-    exit 1
-fi
-
 # Specify RUSTFLAGS:
 export RUSTFLAGS=""
 # - so the target crate is compiled with sanitization
@@ -21,6 +16,17 @@ export ASAN_OPTIONS="$ASAN_OPTIONS detect_odr_violation=0"
 
 # Show all the rust errors
 export RUST_BACKTRACE=full
+
+# If Travis CI executes this script, just build all the crates with the env vars set
+if [ -n "$CI" ]; then
+    cargo build -j 1 --all --verbose --target x86_64-unknown-linux-gnu
+    exit 0
+fi
+
+if [ "$#" -lt 2 ]; then
+    echo "Usage: run-fuzzer.sh <crate> <target> [<options...>]" 1>&2
+    exit 1
+fi
 
 # Change directory to the crate we want to fuzz
 cd "$1"
