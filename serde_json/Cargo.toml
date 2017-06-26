@@ -8,5 +8,9 @@ serde_json = { git = "https://github.com/serde-rs/json" }
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
 
 [[bin]]
-name = "read_json"
-path = "read_json.rs"
+name = "read"
+path = "read.rs"
+
+[[bin]]
+name = "read_write_read"
+path = "read_write_read.rs"
