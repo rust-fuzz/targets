@@ -14,7 +14,11 @@ fuzz_target!(|data: &[u8]| {
     let tokens1: Vec<Token> = {
         let mut parser_input = ParserInput::new(str1);
         let mut parser = Parser::new(&mut parser_input);
-        parser.next_including_whitespace_and_comments().into_iter().collect()
+        let mut tokens = vec![];
+        while let Ok(token) = parser.next_including_whitespace_and_comments() {
+            tokens.push(token)
+        }
+        tokens
     };
 
     // dump the tokens into a string and parse again into tokens
@@ -22,7 +26,11 @@ fuzz_target!(|data: &[u8]| {
     let tokens2: Vec<Token> = {
         let mut parser_input = ParserInput::new(&str2);
         let mut parser = Parser::new(&mut parser_input);
-        parser.next_including_whitespace_and_comments().into_iter().collect()
+        let mut tokens = vec![];
+        while let Ok(token) = parser.next_including_whitespace_and_comments() {
+            tokens.push(token)
+        }
+        tokens
     };
 
     assert_eq!(tokens1, tokens2);
