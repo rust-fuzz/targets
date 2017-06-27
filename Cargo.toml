@@ -20,6 +20,7 @@ members = [
     "regex",
     "ring",
     # "rustfmt",
+    "semver",
     "serde_json",
     "serde_yaml",
     "tar",
