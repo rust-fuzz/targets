@@ -9,6 +9,7 @@ members = [
     "dns-parser",
     "encoding_rs",
     "flac",
+    "html5ever",
     "httparse",
     "humantime",
     "image",
