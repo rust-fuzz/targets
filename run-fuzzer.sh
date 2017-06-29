@@ -39,12 +39,19 @@ mkdir -p corpus
 
 # Run the fuzzer with that target
 if [ "$(uname -s)" == "Darwin" ]; then
-    export TARGET="x86_64-apple-darwin"
+    TARGET="x86_64-apple-darwin"
 elif [ "$(uname -s)" == "Linux" ]; then
-    export TARGET="x86_64-unknown-linux-gnu"
+    TARGET="x86_64-unknown-linux-gnu"
 else
     echo "Sorry, only Mac OS and Linux are supported"
     exit 1
 fi
 
-cargo run --target $TARGET --bin "$2" -- ${@:3} `pwd`/corpus `pwd`/seeds
+if [ "$3" == "minimize" ]; then
+    OPTS="-minimize_crash=1 $4"
+else
+  	OPTS="${@:3} $(pwd)/corpus $(pwd)/seeds"
+fi
+
+cargo run --target $TARGET --bin "$2" -- $OPTS
+
