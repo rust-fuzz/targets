@@ -50,7 +50,7 @@ fi
 if [ "$3" == "minimize" ]; then
     OPTS="-minimize_crash=1 $4"
 else
-  	OPTS="${@:3} $(pwd)/corpus $(pwd)/seeds"
+    OPTS="${@:3} $(pwd)/corpus $(pwd)/seeds"
 fi
 
 cargo run --target $TARGET --bin "$2" -- $OPTS
