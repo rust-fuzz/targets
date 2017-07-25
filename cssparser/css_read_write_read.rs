@@ -16,7 +16,7 @@ fuzz_target!(|data: &[u8]| {
         let mut parser = Parser::new(&mut parser_input);
         let mut tokens = vec![];
         while let Ok(token) = parser.next_including_whitespace_and_comments() {
-            tokens.push(token)
+            tokens.push(token.clone())
         }
         tokens
     };
@@ -28,7 +28,7 @@ fuzz_target!(|data: &[u8]| {
         let mut parser = Parser::new(&mut parser_input);
         let mut tokens = vec![];
         while let Ok(token) = parser.next_including_whitespace_and_comments() {
-            tokens.push(token)
+            tokens.push(token.clone())
         }
         tokens
     };
