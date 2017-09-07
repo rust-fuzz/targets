@@ -16,6 +16,7 @@ members = [
     "iso8601",
     "lz4-compress",
     "mp4parse",
+    "patch",
     "pulldown-cmark",
     "quick-xml",
     "regex",

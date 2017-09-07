@@ -1,0 +1,12 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 916ec94..78f3dd8 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -16,6 +16,7 @@ members = [
+     "iso8601",
+     "lz4-compress",
+     "mp4parse",
++    "patch",
+     "pulldown-cmark",
+     "quick-xml",
+     "regex",
