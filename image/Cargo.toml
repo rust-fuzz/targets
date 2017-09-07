@@ -15,6 +15,10 @@ name = "read_png"
 path = "read_png.rs"
 
 [[bin]]
+name = "read_write_read_png"
+path = "read_write_read_png.rs"
+
+[[bin]]
 name = "read_jpeg"
 path = "read_jpeg.rs"
 
