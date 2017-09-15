@@ -17,6 +17,7 @@ members = [
     "lz4-compress",
     "mp4parse",
     "patch",
+    "pikkr",
     "pulldown-cmark",
     "quick-xml",
     "regex",

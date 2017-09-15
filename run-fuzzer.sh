@@ -10,6 +10,8 @@ export RUSTFLAGS="$RUSTFLAGS -C passes=sancov -C llvm-args=-sanitizer-coverage-l
 export RUSTFLAGS="$RUSTFLAGS -C opt-level=3"
 # - and all debug infos
 export RUSTFLAGS="$RUSTFLAGS -C debug-assertions=on -C debuginfo=2"
+# - AVX instructions for pikkr
+export RUSTFLAGS="$RUSTFLAGS -C target-cpu=native"
 
 # Specify asan options to disable things that don't work
 export ASAN_OPTIONS="$ASAN_OPTIONS detect_odr_violation=0"

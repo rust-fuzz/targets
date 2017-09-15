@@ -1,0 +1,12 @@
+[package]
+name = "pikkr-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+pikkr = { git = "https://github.com/pikkr/pikkr" }
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "parse"
+path = "parse.rs"
