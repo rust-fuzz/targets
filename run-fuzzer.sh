@@ -12,6 +12,8 @@ export RUSTFLAGS="$RUSTFLAGS -C opt-level=3"
 export RUSTFLAGS="$RUSTFLAGS -C debug-assertions=on -C debuginfo=2"
 # - AVX instructions for pikkr
 export RUSTFLAGS="$RUSTFLAGS -C target-cpu=native"
+# - Work around rustc bug https://github.com/rust-lang/rust/issues/47071
+export RUSTFLAGS="$RUSTFLAGS -C codegen-units=1"
 
 # Specify asan options to disable things that don't work
 export ASAN_OPTIONS="$ASAN_OPTIONS detect_odr_violation=0"
