@@ -15,6 +15,7 @@ members = [
     "image",
     "iso8601",
     "lz4-compress",
+    "minidump",
     "mp4parse",
     "patch",
     "pikkr",
