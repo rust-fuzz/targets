@@ -1,0 +1,11 @@
+[package]
+name = "rustc-syntax-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[[bin]]
+name = "lexer-read"
+path = "lexer-read.rs"
