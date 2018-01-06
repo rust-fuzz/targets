@@ -24,6 +24,7 @@ members = [
     "regex",
     "ring",
     # "rustfmt",
+    "rustc-syntax",
     "semver",
     "serde_json",
     "serde_yaml",
