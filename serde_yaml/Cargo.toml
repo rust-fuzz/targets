@@ -8,5 +8,9 @@ serde_yaml = { git = "https://github.com/dtolnay/serde-yaml" }
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
 
 [[bin]]
-name = "read_yaml"
-path = "read_yaml.rs"
+name = "read"
+path = "read.rs"
+
+[[bin]]
+name = "read_write_read"
+path = "read_write_read.rs"
