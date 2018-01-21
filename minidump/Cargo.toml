@@ -1,0 +1,12 @@
+[package]
+name = "minidump-targets"
+version = "0.0.0"
+publish = false
+
+[dependencies]
+libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+minidump = { git = "https://github.com/luser/rust-minidump.git" }
+
+[[bin]]
+name = "read"
+path = "read.rs"

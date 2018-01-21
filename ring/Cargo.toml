@@ -5,7 +5,7 @@ publish = false
 
 [dependencies]
 ring = { git = "https://github.com/briansmith/ring" }
-openssl = { git = "https://github.com/sfackler/rust-openssl.git" }
+openssl = { git = "https://github.com/sfackler/rust-openssl.git", tag = "v0.9.23" }
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
 
 [[bin]]
