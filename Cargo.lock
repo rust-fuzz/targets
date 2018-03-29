@@ -1072,8 +1072,8 @@ source = "git+https://github.com/servo/rust-cssparser.git#1373dac3a1954bcd17c5dd
 
 [[package]]
 name = "pulldown-cmark"
-version = "0.0.15"
-source = "git+https://github.com/google/pulldown-cmark.git#13918e7d177af03644670639afc9fe0af4eec2f3"
+version = "0.1.2"
+source = "git+https://github.com/google/pulldown-cmark.git#dad39d1be53015eb940c2672facba97cd98fbff6"
 dependencies = [
  "bitflags 0.9.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "getopts 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1084,7 +1084,7 @@ name = "pulldown-cmark-targets"
 version = "0.0.0"
 dependencies = [
  "libfuzzer-sys 0.1.0 (git+https://github.com/rust-fuzz/libfuzzer-sys.git)",
- "pulldown-cmark 0.0.15 (git+https://github.com/google/pulldown-cmark.git)",
+ "pulldown-cmark 0.1.2 (git+https://github.com/google/pulldown-cmark.git)",
 ]
 
 [[package]]
@@ -1812,7 +1812,7 @@ dependencies = [
 "checksum podio 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)" = "e5422a1ee1bc57cc47ae717b0137314258138f38fd5f3cea083f43a9725383a0"
 "checksum precomputed-hash 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "cdf1fc3616b3ef726a847f2cd2388c646ef6a1f1ba4835c2629004da48184150"
 "checksum procedural-masquerade 0.1.2 (git+https://github.com/servo/rust-cssparser.git)" = "<none>"
-"checksum pulldown-cmark 0.0.15 (git+https://github.com/google/pulldown-cmark.git)" = "<none>"
+"checksum pulldown-cmark 0.1.2 (git+https://github.com/google/pulldown-cmark.git)" = "<none>"
 "checksum quick-error 1.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "3c36987d4978eb1be2e422b1e0423a557923a5c3e7e6f31d5699e9aafaefa469"
 "checksum quick-xml 0.8.0 (git+https://github.com/tafia/quick-xml)" = "<none>"
 "checksum quote 0.3.15 (registry+https://github.com/rust-lang/crates.io-index)" = "7a6e920b65c65f10b2ae65c831a81a073a89edd28c7cce89475bff467ab4167a"
