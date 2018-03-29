@@ -4,8 +4,11 @@ version = "0.0.0"
 publish = false
 
 [dependencies]
-serde_json = { git = "https://github.com/serde-rs/json" }
 libfuzzer-sys = { git = "https://github.com/rust-fuzz/libfuzzer-sys.git" }
+
+[dependencies.serde_json]
+git = "https://github.com/serde-rs/json"
+features = ["arbitrary_precision"]
 
 [[bin]]
 name = "read"
