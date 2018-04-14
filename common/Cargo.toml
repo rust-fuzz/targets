@@ -8,3 +8,4 @@ chrono = {git = "https://github.com/chronotope/chrono" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
+url = { git = "https://github.com/servo/rust-url" }

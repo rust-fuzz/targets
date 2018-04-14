@@ -2,6 +2,7 @@ extern crate chrono;
 extern crate regex;
 extern crate iso8601;
 extern crate httparse;
+extern crate url;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
@@ -53,4 +54,11 @@ pub fn fuzz_httparse_response(data: &[u8]) {
 	let mut headers = [httparse::EMPTY_HEADER; 16];
     let mut res = httparse::Response::new(&mut headers);
     let _ = res.parse(data);
+}
+
+#[inline(always)]
+pub fn fuzz_url(data: &[u8]) {
+    if let Ok(s) = std::str::from_utf8(data) {
+        let _ = url::Url::parse(s);
+    }
 }
