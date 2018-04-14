@@ -1,0 +1,10 @@
+[package]
+name = "fuzz-targets-common"
+version = "0.1.0"
+authors = ["Paul Grandperrin <paul.grandperrin@gmail.com>"]
+
+[dependencies]
+chrono = {git = "https://github.com/chronotope/chrono" }
+regex = { git = "https://github.com/rust-lang-nursery/regex" }
+iso8601 = { git = "https://github.com/badboy/iso8601" }
+httparse = { git = "https://github.com/seanmonstar/httparse" }
