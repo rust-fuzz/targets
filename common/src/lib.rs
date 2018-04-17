@@ -3,6 +3,7 @@ extern crate regex;
 extern crate iso8601;
 extern crate httparse;
 extern crate url;
+extern crate proc_macro2;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
@@ -60,5 +61,14 @@ pub fn fuzz_httparse_response(data: &[u8]) {
 pub fn fuzz_url(data: &[u8]) {
     if let Ok(s) = std::str::from_utf8(data) {
         let _ = url::Url::parse(s);
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_proc_macro2(data: &[u8]) {
+    if let Ok(data) = std::str::from_utf8(data) {
+        if let Ok(token_stream) = data.parse::<proc_macro2::TokenStream>() {
+            for _ in token_stream { }
+        }
     }
 }
