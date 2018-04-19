@@ -1,2 +1,5 @@
 /target
 **/*.rs.bk
+fuzzer-*/corpus-*
+fuzzer-*/seed-corpus
+fuzzer-*/src/bin
