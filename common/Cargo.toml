@@ -11,6 +11,7 @@ crypto-hashes = { features = ["include_weak"], git = "https://github.com/RustCry
 cssparser = { git = "https://github.com/servo/rust-cssparser.git" }
 deflate = { git = "https://github.com/oyvindln/deflate-rs", branch = "dev" }
 dns-parser = { git = "https://github.com/tailhook/dns-parser" }
+flac = { git = "https://github.com/sourrust/flac.git" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
 proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }

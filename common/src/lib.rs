@@ -4,6 +4,7 @@ extern crate crypto_hashes;
 extern crate cssparser;
 extern crate deflate;
 extern crate dns_parser;
+extern crate flac;
 extern crate httparse;
 extern crate iso8601;
 extern crate proc_macro2;
@@ -234,6 +235,21 @@ pub fn fuzz_deflate(data: &[u8]) {
 pub fn fuzz_dns_parser(data: &[u8]) {
     let _ = dns_parser::Packet::parse(data);
 }
+
+#[inline(always)]
+pub fn fuzz_flac(data: &[u8]) {
+    use flac::{ByteStream, Stream};
+    
+    let s = Stream::<ByteStream>::from_buffer(data);
+    if let Ok(mut stream) = s {
+        let _ = stream.info();
+        let _ = stream.metadata();
+        let mut iter = stream.iter::<i8>();
+        while iter.next().is_some() { }
+    }
+
+}
+
 
 #[inline(always)]
 pub fn fuzz_httparse_request(data: &[u8]) {
