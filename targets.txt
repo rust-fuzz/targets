@@ -19,6 +19,7 @@ crypto_hashes_streebog_512
 crypto_hashes_whirlpool
 css_parser_read
 css_parser_read_write_read
+deflate
 httparse_request
 httparse_response
 iso8601
