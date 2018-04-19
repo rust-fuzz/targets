@@ -1,6 +1,7 @@
 extern crate brotli;
 extern crate chrono;
 extern crate crypto_hashes;
+extern crate cssparser;
 extern crate httparse;
 extern crate iso8601;
 extern crate proc_macro2;
@@ -175,6 +176,51 @@ pub fn fuzz_crypto_hashes_sha3_whirlpool(data: &[u8]) {
     let mut hasher = crypto_hashes::whirlpool::Whirlpool::default();
     hasher.input(data);
     hasher.result();
+}
+
+#[inline(always)]
+pub fn fuzz_css_parser_read(data: &[u8]) {
+    use cssparser::{Parser, ParserInput};
+
+    if let Ok(str_) = std::str::from_utf8(data) {
+        let mut parser_input = ParserInput::new(str_);
+        let mut parser = Parser::new(&mut parser_input);
+        while parser.next_including_whitespace_and_comments().is_ok() { }
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_css_parser_read_write_read(data: &[u8]) {
+    use cssparser::{Parser, ParserInput, ToCss, Token};
+
+    // parse `data` into tokens
+    let str1 = match std::str::from_utf8(data) {
+        Ok(d) => d,
+        Err(..) => return,
+    };
+    let tokens1: Vec<Token> = {
+        let mut parser_input = ParserInput::new(str1);
+        let mut parser = Parser::new(&mut parser_input);
+        let mut tokens = vec![];
+        while let Ok(token) = parser.next_including_whitespace_and_comments() {
+            tokens.push(token.clone())
+        }
+        tokens
+    };
+
+    // dump the tokens into a string and parse again into tokens
+    let str2 = tokens1.iter().map(|t| t.to_css_string()).collect::<String>();
+    let tokens2: Vec<Token> = {
+        let mut parser_input = ParserInput::new(&str2);
+        let mut parser = Parser::new(&mut parser_input);
+        let mut tokens = vec![];
+        while let Ok(token) = parser.next_including_whitespace_and_comments() {
+            tokens.push(token.clone())
+        }
+        tokens
+    };
+
+    assert_eq!(tokens1, tokens2);
 }
 
 #[inline(always)]
