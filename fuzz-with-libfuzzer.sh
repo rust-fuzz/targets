@@ -15,7 +15,6 @@ export RUSTFLAGS="$RUSTFLAGS \
 -C llvm-args=-sanitizer-coverage-level=4 \
 -C llvm-args=-sanitizer-coverage-trace-pc-guard \
 -C llvm-args=-sanitizer-coverage-prune-blocks=0 \
--C panic=abort \
 -C debug-assertions=on \
 -C debuginfo=0 \
 -C opt-level=3 "
