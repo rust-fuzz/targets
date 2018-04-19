@@ -5,4 +5,4 @@ authors = ["Paul Grandperrin <paul.grandperrin@gmail.com>"]
 
 [dependencies]
 fuzz-targets-common = {path = "../common"}
-honggfuzz = "0.5"
+honggfuzz = "^0.5.18"
