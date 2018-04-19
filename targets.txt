@@ -22,6 +22,7 @@ css_parser_read_write_read
 deflate
 dns_parser
 flac
+html5ever
 httparse_request
 httparse_response
 iso8601

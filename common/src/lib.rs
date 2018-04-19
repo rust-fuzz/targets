@@ -1,3 +1,5 @@
+extern crate tendril;
+
 extern crate brotli;
 extern crate chrono;
 extern crate crypto_hashes;
@@ -5,6 +7,7 @@ extern crate cssparser;
 extern crate deflate;
 extern crate dns_parser;
 extern crate flac;
+extern crate html5ever;
 extern crate httparse;
 extern crate iso8601;
 extern crate proc_macro2;
@@ -239,7 +242,7 @@ pub fn fuzz_dns_parser(data: &[u8]) {
 #[inline(always)]
 pub fn fuzz_flac(data: &[u8]) {
     use flac::{ByteStream, Stream};
-    
+
     let s = Stream::<ByteStream>::from_buffer(data);
     if let Ok(mut stream) = s {
         let _ = stream.info();
@@ -250,6 +253,34 @@ pub fn fuzz_flac(data: &[u8]) {
 
 }
 
+#[inline(always)]
+pub fn fuzz_html5ever(data: &[u8]) {
+    use std::default::Default;
+    use std::io::BufReader;
+
+    use html5ever::driver::ParseOpts;
+    use html5ever::tree_builder::TreeBuilderOpts;
+    use html5ever::{parse_document, serialize};
+    use html5ever::tendril::TendrilSink;
+    use html5ever::rcdom::RcDom;
+
+    let opts = ParseOpts {
+        tree_builder: TreeBuilderOpts {
+            drop_doctype: true,
+            ..Default::default()
+        },
+        ..Default::default()
+    };
+
+    let dom = parse_document(RcDom::default(), opts)
+        .from_utf8()
+        .read_from(&mut BufReader::new(data));
+
+    let dom = if let Ok(dom) = dom { dom } else { return; };
+
+    let mut out = Vec::with_capacity(data.len());
+    let _ = serialize(&mut out, &dom.document, Default::default());
+}
 
 #[inline(always)]
 pub fn fuzz_httparse_request(data: &[u8]) {

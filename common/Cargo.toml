@@ -4,6 +4,8 @@ version = "0.1.0"
 authors = ["Paul Grandperrin <paul.grandperrin@gmail.com>"]
 
 [dependencies]
+tendril = "0.2.2"
+
 brotli = { git = "https://github.com/dropbox/rust-brotli" }
 bson = { git = "https://github.com/zonyitoo/bson-rs" }
 chrono = {git = "https://github.com/chronotope/chrono" }
@@ -12,6 +14,7 @@ cssparser = { git = "https://github.com/servo/rust-cssparser.git" }
 deflate = { git = "https://github.com/oyvindln/deflate-rs", branch = "dev" }
 dns-parser = { git = "https://github.com/tailhook/dns-parser" }
 flac = { git = "https://github.com/sourrust/flac.git" }
+html5ever = { git = "https://github.com/servo/html5ever" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
 proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }
