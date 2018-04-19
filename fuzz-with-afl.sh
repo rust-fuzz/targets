@@ -5,6 +5,8 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
+./gen-targets-src.sh
+
 cd fuzzer-afl
 cargo afl build --release
 mkdir -p "corpus-$1"

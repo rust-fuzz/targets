@@ -5,5 +5,7 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
+./gen-targets-src.sh
+
 cd fuzzer-honggfuzz
 cargo hfuzz run $1
