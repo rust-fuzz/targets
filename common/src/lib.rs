@@ -9,6 +9,7 @@ extern crate dns_parser;
 extern crate flac;
 extern crate html5ever;
 extern crate httparse;
+extern crate humantime;
 extern crate iso8601;
 extern crate proc_macro2;
 extern crate regex;
@@ -294,6 +295,13 @@ pub fn fuzz_httparse_response(data: &[u8]) {
 	let mut headers = [httparse::EMPTY_HEADER; 16];
     let mut res = httparse::Response::new(&mut headers);
     let _ = res.parse(data);
+}
+
+#[inline(always)]
+pub fn fuzz_humantime(data: &[u8]) {
+    if let Ok(data) = std::str::from_utf8(data) {
+        let _ = humantime::parse_duration(data);
+    }
 }
 
 #[inline(always)]

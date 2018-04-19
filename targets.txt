@@ -25,6 +25,7 @@ flac
 html5ever
 httparse_request
 httparse_response
+humantime
 iso8601
 proc_macro2
 regex

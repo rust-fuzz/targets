@@ -16,6 +16,7 @@ dns-parser = { git = "https://github.com/tailhook/dns-parser" }
 flac = { git = "https://github.com/sourrust/flac.git" }
 html5ever = { git = "https://github.com/servo/html5ever" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
+humantime = { git = "https://github.com/tailhook/humantime" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
 proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
