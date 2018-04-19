@@ -1,3 +1,4 @@
+extern crate brotli;
 extern crate chrono;
 extern crate httparse;
 extern crate iso8601;
@@ -6,6 +7,18 @@ extern crate regex;
 extern crate url;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
+
+#[inline(always)]
+pub fn fuzz_brotli(data: &[u8]) {
+    use std::io::{Cursor, Read};
+
+    let mut data_reader = Cursor::new(data);
+    let mut result = Vec::with_capacity(data.len());
+
+    let mut de = brotli::Decompressor::new(&mut data_reader, data.len());
+
+    let _ = de.read_exact(&mut result);
+}
 
 #[inline(always)]
 pub fn fuzz_chrono(data: &[u8]) {

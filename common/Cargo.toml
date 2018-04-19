@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Paul Grandperrin <paul.grandperrin@gmail.com>"]
 
 [dependencies]
+brotli = { git = "https://github.com/dropbox/rust-brotli" }
 chrono = {git = "https://github.com/chronotope/chrono" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
