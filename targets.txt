@@ -1,3 +1,4 @@
+bson
 brotli
 chrono
 httparse_request

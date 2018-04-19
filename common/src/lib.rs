@@ -5,6 +5,7 @@ extern crate iso8601;
 extern crate proc_macro2;
 extern crate regex;
 extern crate url;
+extern crate bson;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
@@ -18,6 +19,11 @@ pub fn fuzz_brotli(data: &[u8]) {
     let mut de = brotli::Decompressor::new(&mut data_reader, data.len());
 
     let _ = de.read_exact(&mut result);
+}
+
+#[inline(always)]
+pub fn fuzz_bson(data: &[u8]) {
+    let _ = bson::decode_document(&mut std::io::Cursor::new(data));
 }
 
 #[inline(always)]

@@ -5,6 +5,7 @@ authors = ["Paul Grandperrin <paul.grandperrin@gmail.com>"]
 
 [dependencies]
 brotli = { git = "https://github.com/dropbox/rust-brotli" }
+bson = { git = "https://github.com/zonyitoo/bson-rs" }
 chrono = {git = "https://github.com/chronotope/chrono" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
