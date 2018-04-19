@@ -20,6 +20,7 @@ crypto_hashes_whirlpool
 css_parser_read
 css_parser_read_write_read
 deflate
+dns_parser
 httparse_request
 httparse_response
 iso8601

@@ -3,6 +3,7 @@ extern crate chrono;
 extern crate crypto_hashes;
 extern crate cssparser;
 extern crate deflate;
+extern crate dns_parser;
 extern crate httparse;
 extern crate iso8601;
 extern crate proc_macro2;
@@ -227,6 +228,11 @@ pub fn fuzz_css_parser_read_write_read(data: &[u8]) {
 #[inline(always)]
 pub fn fuzz_deflate(data: &[u8]) {
     let _compressed = deflate::deflate_bytes(&data);
+}
+
+#[inline(always)]
+pub fn fuzz_dns_parser(data: &[u8]) {
+    let _ = dns_parser::Packet::parse(data);
 }
 
 #[inline(always)]
