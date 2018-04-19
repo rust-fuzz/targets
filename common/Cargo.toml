@@ -7,6 +7,7 @@ authors = ["Paul Grandperrin <paul.grandperrin@gmail.com>"]
 brotli = { git = "https://github.com/dropbox/rust-brotli" }
 bson = { git = "https://github.com/zonyitoo/bson-rs" }
 chrono = {git = "https://github.com/chronotope/chrono" }
+crypto-hashes = { features = ["include_weak"], git = "https://github.com/RustCrypto/meta" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
 proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }
