@@ -1,9 +1,9 @@
 extern crate chrono;
-extern crate regex;
-extern crate iso8601;
 extern crate httparse;
-extern crate url;
+extern crate iso8601;
 extern crate proc_macro2;
+extern crate regex;
+extern crate url;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
@@ -13,6 +13,38 @@ pub fn fuzz_chrono(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
         let _ = DateTime::parse_from_rfc2822(data);
         let _ = DateTime::parse_from_rfc3339(data);
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_httparse_request(data: &[u8]) {
+	let mut headers = [httparse::EMPTY_HEADER; 16];
+    let mut req = httparse::Request::new(&mut headers);
+    let _ = req.parse(data);
+}
+
+#[inline(always)]
+pub fn fuzz_httparse_response(data: &[u8]) {
+	let mut headers = [httparse::EMPTY_HEADER; 16];
+    let mut res = httparse::Response::new(&mut headers);
+    let _ = res.parse(data);
+}
+
+#[inline(always)]
+pub fn fuzz_iso8601(data: &[u8]) {
+    if let Ok(data) = std::str::from_utf8(data) {
+        let _ = iso8601::date(data);
+        let _ = iso8601::time(data);
+        let _ = iso8601::datetime(data);
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_proc_macro2(data: &[u8]) {
+    if let Ok(data) = std::str::from_utf8(data) {
+        if let Ok(token_stream) = data.parse::<proc_macro2::TokenStream>() {
+            for _ in token_stream { }
+        }
     }
 }
 
@@ -35,40 +67,8 @@ pub fn fuzz_regex(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_iso8601(data: &[u8]) {
-    if let Ok(data) = std::str::from_utf8(data) {
-        let _ = iso8601::date(data);
-        let _ = iso8601::time(data);
-        let _ = iso8601::datetime(data);
-    }
-}
-
-#[inline(always)]
-pub fn fuzz_httparse_request(data: &[u8]) {
-	let mut headers = [httparse::EMPTY_HEADER; 16];
-    let mut req = httparse::Request::new(&mut headers);
-    let _ = req.parse(data);
-}
-
-#[inline(always)]
-pub fn fuzz_httparse_response(data: &[u8]) {
-	let mut headers = [httparse::EMPTY_HEADER; 16];
-    let mut res = httparse::Response::new(&mut headers);
-    let _ = res.parse(data);
-}
-
-#[inline(always)]
 pub fn fuzz_url(data: &[u8]) {
     if let Ok(s) = std::str::from_utf8(data) {
         let _ = url::Url::parse(s);
-    }
-}
-
-#[inline(always)]
-pub fn fuzz_proc_macro2(data: &[u8]) {
-    if let Ok(data) = std::str::from_utf8(data) {
-        if let Ok(token_stream) = data.parse::<proc_macro2::TokenStream>() {
-            for _ in token_stream { }
-        }
     }
 }

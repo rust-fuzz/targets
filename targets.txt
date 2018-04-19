@@ -1,7 +1,7 @@
 chrono
-regex
-iso8601
 httparse_request
 httparse_response
-url
+iso8601
 proc_macro2
+regex
+url
