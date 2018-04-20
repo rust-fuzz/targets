@@ -50,4 +50,6 @@ serde_json_read
 serde_json_read_write_read
 serde_yaml_read
 serde_yaml_read_write_read
+tar_read
+tar_roundtrip
 url

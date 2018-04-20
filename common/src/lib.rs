@@ -29,6 +29,7 @@ extern crate ring;
 extern crate semver;
 extern crate serde_json;
 extern crate serde_yaml;
+extern crate tar;
 extern crate url;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
@@ -607,6 +608,110 @@ pub fn fuzz_serde_yaml_read_write_read(data: &[u8]) {
     if let Ok(v) = serde_yaml::from_slice::<serde_yaml::Value>(&serialized) {
         assert_eq!(v, value);
     }
+}
+
+#[inline(always)]
+pub fn fuzz_tar_read(data: &[u8]) {
+    use std::io::Cursor;
+
+    let cursor = Cursor::new(data);
+    let mut archive = tar::Archive::new(cursor);
+    let entries = match archive.entries() {
+        Ok(entries) => entries,
+        Err(..) => return,
+    };
+    for entry in entries {
+        if let Ok(mut entry) = entry {
+            let _ = entry.path();
+            let _ = entry.path_bytes();
+            let _ = entry.link_name();
+            let _ = entry.link_name_bytes();
+            if let Ok(Some(mut extensions)) = entry.pax_extensions() {
+                while let Some(Ok(extension)) = extensions.next() {
+                    let _ = extension.key();
+                    let _ = extension.key_bytes();
+                    let _ = extension.value();
+                    let _ = extension.value_bytes();
+                }
+            }
+            let _ = entry.header().as_old();
+            let _ = entry.header().as_ustar();
+            let _ = entry.header().as_gnu();
+            let _ = entry.header().as_bytes();
+            let _ = entry.header().entry_size();
+            let _ = entry.header().size();
+            let _ = entry.header().path();
+            let _ = entry.header().path_bytes();
+            let _ = entry.header().link_name();
+            let _ = entry.header().link_name_bytes();
+            let _ = entry.header().mode();
+            let _ = entry.header().uid();
+            let _ = entry.header().gid();
+            let _ = entry.header().mtime();
+            let _ = entry.header().username();
+            let _ = entry.header().username_bytes();
+            let _ = entry.header().groupname();
+            let _ = entry.header().groupname_bytes();
+            let _ = entry.header().device_major();
+            let _ = entry.header().device_minor();
+            let _ = entry.header().entry_type();
+            let _ = entry.header().cksum();
+        }
+    }
+}
+
+fn tar_roundtrip(data: &[u8]) -> std::io::Result<()> {
+    use std::io::{Read, Cursor};
+
+    let mut output = Vec::with_capacity(data.len());
+    {
+        let mut archive = tar::Archive::new(Cursor::new(data));
+        let mut builder = tar::Builder::new(&mut output);
+
+        for entry in archive.entries()? {
+            let mut entry = entry?;
+            let mut buf = Vec::new();
+            entry.read_to_end(&mut buf).unwrap();
+            builder.append(entry.header(), Cursor::new(buf));
+        }
+        builder.finish().unwrap();
+    }
+
+
+    {
+        let mut original = tar::Archive::new(Cursor::new(data));
+        let mut output = tar::Archive::new(Cursor::new(&output));
+
+        let mut iter = original
+            .entries()
+            .unwrap()
+            .zip(output.entries().unwrap());
+
+        for (e1, e2) in iter {
+            let mut e1 = e1.unwrap();
+            let mut e2 = e2.unwrap();
+
+            // File data is the same
+            let mut b1 = Vec::new();
+            let mut b2 = Vec::new();
+            e1.read_to_end(&mut b1).unwrap();
+            e2.read_to_end(&mut b2).unwrap();
+            assert_eq!(b1, b2);
+
+            // headers are the same
+            let h1 = e1.header().as_bytes();
+            let h2 = e2.header().as_bytes();
+            assert!(h1.iter()
+                .zip(h2.iter())
+                .all(|(a, b)| a == b));
+        }
+    }
+    Ok(())
+}
+
+#[inline(always)]
+pub fn fuzz_tar_roundtrip(data: &[u8]) {
+    let _ = tar_roundtrip(data);
 }
 
 #[inline(always)]

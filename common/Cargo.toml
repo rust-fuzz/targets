@@ -35,4 +35,5 @@ ring = { git = "https://github.com/briansmith/ring" }
 semver = { git = "https://github.com/steveklabnik/semver" }
 serde_json = { git = "https://github.com/serde-rs/json", features = ["arbitrary_precision"] }
 serde_yaml = { git = "https://github.com/dtolnay/serde-yaml" }
+tar = { git = "https://github.com/alexcrichton/tar-rs" }
 url = { git = "https://github.com/servo/rust-url" }
