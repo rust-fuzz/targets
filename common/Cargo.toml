@@ -24,6 +24,7 @@ jpeg-decoder = { git = "https://github.com/kaksmet/jpeg-decoder" }
 minidump = { git = "https://github.com/luser/rust-minidump.git" }
 mp4parse = { git = "https://github.com/mozilla/mp4parse-rust" }
 patch = { git = "https://github.com/uniphil/patch-rs" }
+pikkr = { git = "https://github.com/pikkr/pikkr" }
 png = { git = "https://github.com/PistonDevelopers/image-png" }
 proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
