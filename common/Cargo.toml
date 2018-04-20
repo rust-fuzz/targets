@@ -38,3 +38,4 @@ serde_yaml = { git = "https://github.com/dtolnay/serde-yaml" }
 tar = { git = "https://github.com/alexcrichton/tar-rs" }
 toml = { git = "https://github.com/alexcrichton/toml-rs" }
 url = { git = "https://github.com/servo/rust-url" }
+uuid = { git = "https://github.com/rust-lang-nursery/uuid" }

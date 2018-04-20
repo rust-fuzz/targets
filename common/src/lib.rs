@@ -32,6 +32,7 @@ extern crate serde_yaml;
 extern crate tar;
 extern crate toml;
 extern crate url;
+extern crate uuid;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
@@ -728,5 +729,16 @@ pub fn fuzz_toml_roundtrip(data: &[u8]) {
 pub fn fuzz_url(data: &[u8]) {
     if let Ok(s) = std::str::from_utf8(data) {
         let _ = url::Url::parse(s);
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_uuid_read(data: &[u8]) {
+    use uuid::Uuid;
+
+    if let Ok(data) = std::str::from_utf8(data) {
+        let _ = Uuid::parse_str(data);
+    } else {
+        let _ = Uuid::from_bytes(data);
     }
 }
