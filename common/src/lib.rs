@@ -16,6 +16,7 @@ extern crate iso8601;
 extern crate jpeg_decoder;
 extern crate minidump;
 extern crate mp4parse;
+extern crate patch;
 extern crate png;
 extern crate proc_macro2;
 extern crate regex;
@@ -355,6 +356,13 @@ pub fn fuzz_mp4parse(data: &[u8]) {
 
     let mut context = mp4parse::MediaContext::new();
     let _ = mp4parse::read_mp4(&mut reader, &mut context);
+}
+
+#[inline(always)]
+pub fn fuzz_patch(data: &[u8]) {
+    if let Ok(data) = std::str::from_utf8(data) {
+        let _ = patch::parse(data);
+    }
 }
 
 fn png_decode(data: &[u8]) -> Result<(png::OutputInfo, Vec<u8>), ()> {

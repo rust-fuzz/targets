@@ -32,6 +32,7 @@ iso8601
 jpeg_decoder
 minidump
 mp4parse
+patch
 png_read
 png_read_write_read
 proc_macro2
