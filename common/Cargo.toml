@@ -5,6 +5,7 @@ authors = ["Paul Grandperrin <paul.grandperrin@gmail.com>"]
 
 [dependencies]
 tendril = "0.2.2"
+openssl = { git = "https://github.com/sfackler/rust-openssl.git", tag = "v0.9.23" }
 
 brotli = { git = "https://github.com/dropbox/rust-brotli" }
 bson = { git = "https://github.com/zonyitoo/bson-rs" }
@@ -30,4 +31,5 @@ proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }
 pulldown-cmark = { git = "https://github.com/google/pulldown-cmark.git" }
 quick-xml = { git = "https://github.com/tafia/quick-xml" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
+ring = { git = "https://github.com/briansmith/ring" }
 url = { git = "https://github.com/servo/rust-url" }

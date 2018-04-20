@@ -1,4 +1,5 @@
 extern crate tendril;
+extern crate openssl;
 
 extern crate brotli;
 extern crate chrono;
@@ -23,6 +24,7 @@ extern crate proc_macro2;
 extern crate pulldown_cmark;
 extern crate quick_xml;
 extern crate regex;
+extern crate ring;
 extern crate url;
 extern crate bson;
 
@@ -479,6 +481,62 @@ pub fn fuzz_regex(data: &[u8]) {
             }
         }
     }
+}
+
+#[inline(always)]
+pub fn fuzz_ring_digest_sha1(data: &[u8]) {
+    assert_eq!(
+        ring::digest::digest(
+            &ring::digest::SHA1,
+            data
+        ).as_ref(),
+        &*openssl::hash::hash2(
+            openssl::hash::MessageDigest::sha1(),
+            data
+        ).unwrap()
+    )
+}
+
+#[inline(always)]
+pub fn fuzz_ring_digest_sha256(data: &[u8]) {
+    assert_eq!(
+        ring::digest::digest(
+            &ring::digest::SHA256,
+            data
+        ).as_ref(),
+        &*openssl::hash::hash2(
+            openssl::hash::MessageDigest::sha256(),
+            data
+        ).unwrap()
+    )
+}
+
+#[inline(always)]
+pub fn fuzz_ring_digest_sha384(data: &[u8]) {
+    assert_eq!(
+        ring::digest::digest(
+            &ring::digest::SHA384,
+            data
+        ).as_ref(),
+        &*openssl::hash::hash2(
+            openssl::hash::MessageDigest::sha384(),
+            data
+        ).unwrap()
+    )
+}
+
+#[inline(always)]
+pub fn fuzz_ring_digest_sha512(data: &[u8]) {
+    assert_eq!(
+        ring::digest::digest(
+            &ring::digest::SHA512,
+            data
+        ).as_ref(),
+        &*openssl::hash::hash2(
+            openssl::hash::MessageDigest::sha512(),
+            data
+        ).unwrap()
+    )
 }
 
 #[inline(always)]
