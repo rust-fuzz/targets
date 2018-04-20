@@ -55,3 +55,4 @@ tar_roundtrip
 toml_roundtrip
 url
 uuid_read
+xml_read

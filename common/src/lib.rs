@@ -33,6 +33,7 @@ extern crate tar;
 extern crate toml;
 extern crate url;
 extern crate uuid;
+extern crate xml;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
@@ -741,4 +742,12 @@ pub fn fuzz_uuid_read(data: &[u8]) {
     } else {
         let _ = Uuid::from_bytes(data);
     }
+}
+
+#[inline(always)]
+pub fn fuzz_xml_read(data: &[u8]) {
+    use uuid::Uuid;
+
+    let reader = xml::reader::EventReader::new(data);
+    for _ in reader.into_iter() { }
 }
