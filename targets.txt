@@ -30,6 +30,7 @@ humantime
 image
 iso8601
 jpeg_decoder
+minidump
 png_read
 png_read_write_read
 proc_macro2

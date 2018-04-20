@@ -14,6 +14,7 @@ extern crate humantime;
 extern crate image;
 extern crate iso8601;
 extern crate jpeg_decoder;
+extern crate minidump;
 extern crate png;
 extern crate proc_macro2;
 extern crate regex;
@@ -335,6 +336,14 @@ pub fn fuzz_jpeg_decoder(data: &[u8]) {
     let mut decoder = jpeg_decoder::Decoder::new(data);
     let _pixels = decoder.decode();
     let _metadata = decoder.info();
+}
+
+#[inline(always)]
+pub fn fuzz_minidump(data: &[u8]) {
+    use std::io::Cursor;
+
+    let cursor = Cursor::new(data);
+    let _ = minidump::Minidump::read(cursor);
 }
 
 fn png_decode(data: &[u8]) -> Result<(png::OutputInfo, Vec<u8>), ()> {
