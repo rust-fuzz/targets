@@ -20,6 +20,7 @@ extern crate patch;
 extern crate pikkr;
 extern crate png;
 extern crate proc_macro2;
+extern crate pulldown_cmark;
 extern crate regex;
 extern crate url;
 extern crate bson;
@@ -434,6 +435,14 @@ pub fn fuzz_proc_macro2(data: &[u8]) {
         if let Ok(token_stream) = data.parse::<proc_macro2::TokenStream>() {
             for _ in token_stream { }
         }
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_pulldown_cmark(data: &[u8]) {
+    if let Ok(s) = std::str::from_utf8(data) {
+        let parser = pulldown_cmark::Parser::new(s);
+        for _ in parser { }
     }
 }
 

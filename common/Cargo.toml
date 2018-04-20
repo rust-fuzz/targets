@@ -27,5 +27,6 @@ patch = { git = "https://github.com/uniphil/patch-rs" }
 pikkr = { git = "https://github.com/pikkr/pikkr" }
 png = { git = "https://github.com/PistonDevelopers/image-png" }
 proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }
+pulldown-cmark = { git = "https://github.com/google/pulldown-cmark.git" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
 url = { git = "https://github.com/servo/rust-url" }
