@@ -22,11 +22,16 @@ css_parser_read_write_read
 deflate
 dns_parser
 flac
+gif
 html5ever
 httparse_request
 httparse_response
 humantime
+image
 iso8601
+jpeg_decoder
+png_read
+png_read_write_read
 proc_macro2
 regex
 url

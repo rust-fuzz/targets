@@ -14,10 +14,14 @@ cssparser = { git = "https://github.com/servo/rust-cssparser.git" }
 deflate = { git = "https://github.com/oyvindln/deflate-rs", branch = "dev" }
 dns-parser = { git = "https://github.com/tailhook/dns-parser" }
 flac = { git = "https://github.com/sourrust/flac.git" }
+gif = { git = "https://github.com/PistonDevelopers/image-gif" }
 html5ever = { git = "https://github.com/servo/html5ever" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
 humantime = { git = "https://github.com/tailhook/humantime" }
+image = { git = "https://github.com/PistonDevelopers/image" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
+jpeg-decoder = { git = "https://github.com/kaksmet/jpeg-decoder" }
+png = { git = "https://github.com/PistonDevelopers/image-png" }
 proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
 url = { git = "https://github.com/servo/rust-url" }

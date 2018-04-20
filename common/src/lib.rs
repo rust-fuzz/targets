@@ -7,10 +7,14 @@ extern crate cssparser;
 extern crate deflate;
 extern crate dns_parser;
 extern crate flac;
+extern crate gif;
 extern crate html5ever;
 extern crate httparse;
 extern crate humantime;
+extern crate image;
 extern crate iso8601;
+extern crate jpeg_decoder;
+extern crate png;
 extern crate proc_macro2;
 extern crate regex;
 extern crate url;
@@ -251,7 +255,15 @@ pub fn fuzz_flac(data: &[u8]) {
         let mut iter = stream.iter::<i8>();
         while iter.next().is_some() { }
     }
+}
 
+#[inline(always)]
+pub fn fuzz_gif(data: &[u8]) {
+    let decoder = gif::Decoder::new(std::io::Cursor::new(data));
+
+    if let Ok(mut decoder) = decoder.read_info() {
+        while let Ok(Some(_frame)) = decoder.read_next_frame() { }
+    }
 }
 
 #[inline(always)]
@@ -305,12 +317,79 @@ pub fn fuzz_humantime(data: &[u8]) {
 }
 
 #[inline(always)]
+pub fn fuzz_image(data: &[u8]) {
+    let _ = image::load_from_memory(data);
+}
+
+#[inline(always)]
 pub fn fuzz_iso8601(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
         let _ = iso8601::date(data);
         let _ = iso8601::time(data);
         let _ = iso8601::datetime(data);
     }
+}
+
+#[inline(always)]
+pub fn fuzz_jpeg_decoder(data: &[u8]) {
+    let mut decoder = jpeg_decoder::Decoder::new(data);
+    let _pixels = decoder.decode();
+    let _metadata = decoder.info();
+}
+
+fn png_decode(data: &[u8]) -> Result<(png::OutputInfo, Vec<u8>), ()> {
+    let decoder = png::Decoder::new(data);
+    let (info, mut reader) = decoder.read_info().map_err(|_| ())?;
+
+    if info.buffer_size() > 50_000_000 {
+        return Err(());
+    }
+
+    let mut img_data = Vec::with_capacity(info.buffer_size());
+    reader.next_frame(&mut img_data).map_err(|_| ())?;
+
+    Ok((info, img_data))
+}
+
+fn png_encode(info: &png::OutputInfo, data: &[u8]) -> Result<Vec<u8>, ()> {
+    use png::HasParameters;
+
+    let mut out = Vec::with_capacity(data.len());
+
+    {
+        let mut encoder = png::Encoder::new(&mut out, info.width, info.height);
+        encoder.set(info.color_type).set(info.bit_depth);
+        let mut writer = encoder.write_header().map_err(|_| ())?;
+        writer.write_image_data(&data).map_err(|_| ())?;
+    }
+
+    Ok(out)
+}
+
+#[inline(always)]
+pub fn fuzz_png_read(data: &[u8]) {
+    if let Ok((info, pixels)) = png_decode(data) {
+        let encoded = png_encode(&info, &pixels).expect("encode fail");
+        let (_info2, pixels2) = png_decode(&encoded).expect("decode failed");
+
+        assert_eq!(pixels, pixels2);
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_png_read_write_read(data: &[u8]) {
+    let decoder = png::Decoder::new(data);
+    let (info, mut reader) = match decoder.read_info() {
+        Ok(r) => r,
+        Err(_) => return
+    };
+
+    if info.buffer_size() > 50_000_000 {
+        return;
+    }
+
+    let mut img_data = vec![0; info.buffer_size()];
+    let _ = reader.next_frame(&mut img_data);
 }
 
 #[inline(always)]
