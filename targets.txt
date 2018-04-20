@@ -57,3 +57,4 @@ url
 uuid_read
 xml_read
 zip_read
+zopfli_compress

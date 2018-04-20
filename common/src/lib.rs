@@ -35,6 +35,7 @@ extern crate url;
 extern crate uuid;
 extern crate xml;
 extern crate zip;
+extern crate zopfli;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
@@ -761,5 +762,19 @@ pub fn fuzz_zip_read(data: &[u8]) {
 
         let file = archive.by_index(i).unwrap();
         let _size = file.bytes().count();
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_zopfli_compress(data: &[u8]) {
+    let options = zopfli::Options::default();
+
+    for output_type in &[
+        zopfli::Format::Deflate,
+        zopfli::Format::Gzip,
+        zopfli::Format::Zlib,
+    ] {
+        let mut res = Vec::with_capacity(data.len() / 2);
+        let _ = zopfli::compress(&options, &output_type, &data, &mut res);
     }
 }
