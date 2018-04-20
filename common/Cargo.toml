@@ -32,4 +32,5 @@ pulldown-cmark = { git = "https://github.com/google/pulldown-cmark.git" }
 quick-xml = { git = "https://github.com/tafia/quick-xml" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
 ring = { git = "https://github.com/briansmith/ring" }
+semver = { git = "https://github.com/steveklabnik/semver" }
 url = { git = "https://github.com/servo/rust-url" }

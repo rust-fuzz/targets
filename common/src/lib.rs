@@ -2,6 +2,7 @@ extern crate tendril;
 extern crate openssl;
 
 extern crate brotli;
+extern crate bson;
 extern crate chrono;
 extern crate crypto_hashes;
 extern crate cssparser;
@@ -25,8 +26,8 @@ extern crate pulldown_cmark;
 extern crate quick_xml;
 extern crate regex;
 extern crate ring;
+extern crate semver;
 extern crate url;
-extern crate bson;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
@@ -537,6 +538,34 @@ pub fn fuzz_ring_digest_sha512(data: &[u8]) {
             data
         ).unwrap()
     )
+}
+
+#[inline(always)]
+pub fn fuzz_semver_read_write_read(data: &[u8]) {
+    let data = match ::std::str::from_utf8(data) {
+        Ok(d) => d,
+        Err(..) => return,
+    };
+    let version = match semver::Version::parse(data) {
+        Ok(v) => v,
+        Err(..) => return,
+    };
+    let version_s = version.to_string();
+    assert_eq!(version, semver::Version::parse(&version_s).unwrap());
+}
+
+#[inline(always)]
+pub fn fuzz_semver_req_read_write_read(data: &[u8]) {
+    let data = match ::std::str::from_utf8(data) {
+        Ok(d) => d,
+        Err(..) => return,
+    };
+    let version_req = match semver::VersionReq::parse(data) {
+        Ok(v) => v,
+        Err(..) => return,
+    };
+    let version_req_s = version_req.to_string();
+    assert_eq!(version_req, semver::VersionReq::parse(&version_req_s).unwrap());
 }
 
 #[inline(always)]

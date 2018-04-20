@@ -44,4 +44,6 @@ ring_digest_sha1
 ring_digest_sha256
 ring_digest_sha384
 ring_digest_sha512
+semver_read_write_read
+semver_req_read_write_read
 url
