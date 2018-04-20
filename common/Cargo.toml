@@ -33,4 +33,5 @@ quick-xml = { git = "https://github.com/tafia/quick-xml" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
 ring = { git = "https://github.com/briansmith/ring" }
 semver = { git = "https://github.com/steveklabnik/semver" }
+serde_json = { git = "https://github.com/serde-rs/json", features = ["arbitrary_precision"] }
 url = { git = "https://github.com/servo/rust-url" }

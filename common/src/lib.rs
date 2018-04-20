@@ -27,6 +27,7 @@ extern crate quick_xml;
 extern crate regex;
 extern crate ring;
 extern crate semver;
+extern crate serde_json;
 extern crate url;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
@@ -566,6 +567,25 @@ pub fn fuzz_semver_req_read_write_read(data: &[u8]) {
     };
     let version_req_s = version_req.to_string();
     assert_eq!(version_req, semver::VersionReq::parse(&version_req_s).unwrap());
+}
+
+#[inline(always)]
+pub fn fuzz_serde_json_read(data: &[u8]) {
+    let _ = serde_json::from_slice::<serde_json::Value>(data);
+}
+
+#[inline(always)]
+pub fn fuzz_serde_json_read_write_read(bytes1: &[u8]) {
+    let parsed1 = match serde_json::from_slice::<serde_json::Value>(bytes1) {
+        Ok(p) => p,
+        Err(..) => return,
+    };
+    let bytes2 = serde_json::to_vec(&parsed1).unwrap();
+    let parsed2 = match serde_json::from_slice::<serde_json::Value>(&bytes2) {
+        Ok(p) => p,
+        Err(..) => return,
+    };
+    assert_eq!(parsed1, parsed2);
 }
 
 #[inline(always)]
