@@ -38,5 +38,6 @@ png_read
 png_read_write_read
 proc_macro2
 pulldown_cmark
+quick_xml
 regex
 url

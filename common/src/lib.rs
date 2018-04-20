@@ -21,6 +21,7 @@ extern crate pikkr;
 extern crate png;
 extern crate proc_macro2;
 extern crate pulldown_cmark;
+extern crate quick_xml;
 extern crate regex;
 extern crate url;
 extern crate bson;
@@ -443,6 +444,22 @@ pub fn fuzz_pulldown_cmark(data: &[u8]) {
     if let Ok(s) = std::str::from_utf8(data) {
         let parser = pulldown_cmark::Parser::new(s);
         for _ in parser { }
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_quick_xml(data: &[u8]) {
+    use quick_xml::Reader;
+    use std::io::Cursor;
+
+    let cursor = Cursor::new(data);
+    let mut reader = Reader::from_reader(cursor);
+    let mut buf = vec![];
+    loop {
+        match reader.read_event(&mut buf) {
+            Ok(quick_xml::events::Event::Eof) | Err(..) => break,
+            _ => buf.clear(),
+        }
     }
 }
 
