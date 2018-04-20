@@ -34,6 +34,7 @@ extern crate toml;
 extern crate url;
 extern crate uuid;
 extern crate xml;
+extern crate zip;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
@@ -746,8 +747,19 @@ pub fn fuzz_uuid_read(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_xml_read(data: &[u8]) {
-    use uuid::Uuid;
-
     let reader = xml::reader::EventReader::new(data);
     for _ in reader.into_iter() { }
+}
+
+#[inline(always)]
+pub fn fuzz_zip_read(data: &[u8]) {
+    let reader = std::io::Cursor::new(data);
+    let mut archive = if let Ok(x) = zip::ZipArchive::new(reader) { x } else { return; };
+
+    for i in 0..archive.len() {
+        use std::io::prelude::*;
+
+        let file = archive.by_index(i).unwrap();
+        let _size = file.bytes().count();
+    }
 }

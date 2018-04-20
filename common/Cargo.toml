@@ -40,3 +40,4 @@ toml = { git = "https://github.com/alexcrichton/toml-rs" }
 url = { git = "https://github.com/servo/rust-url" }
 uuid = { git = "https://github.com/rust-lang-nursery/uuid" }
 xml-rs = { git = "https://github.com/netvl/xml-rs.git" }
+zip = { git = "https://github.com/mvdnes/zip-rs" }

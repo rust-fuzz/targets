@@ -56,3 +56,4 @@ toml_roundtrip
 url
 uuid_read
 xml_read
+zip_read
