@@ -30,6 +30,7 @@ extern crate semver;
 extern crate serde_json;
 extern crate serde_yaml;
 extern crate tar;
+extern crate toml;
 extern crate url;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
@@ -672,7 +673,7 @@ fn tar_roundtrip(data: &[u8]) -> std::io::Result<()> {
             let mut entry = entry?;
             let mut buf = Vec::new();
             entry.read_to_end(&mut buf).unwrap();
-            builder.append(entry.header(), Cursor::new(buf));
+            builder.append(entry.header(), Cursor::new(buf))?;
         }
         builder.finish().unwrap();
     }
@@ -682,7 +683,7 @@ fn tar_roundtrip(data: &[u8]) -> std::io::Result<()> {
         let mut original = tar::Archive::new(Cursor::new(data));
         let mut output = tar::Archive::new(Cursor::new(&output));
 
-        let mut iter = original
+        let iter = original
             .entries()
             .unwrap()
             .zip(output.entries().unwrap());
@@ -712,6 +713,15 @@ fn tar_roundtrip(data: &[u8]) -> std::io::Result<()> {
 #[inline(always)]
 pub fn fuzz_tar_roundtrip(data: &[u8]) {
     let _ = tar_roundtrip(data);
+}
+
+#[inline(always)]
+pub fn fuzz_toml_roundtrip(data: &[u8]) {
+    if let Ok(data) = toml::from_slice::<toml::Value>(data) {
+        let s = toml::to_string(&data).unwrap();
+        let copy = toml::from_str(&s).unwrap();
+        assert_eq!(data, copy);
+    }
 }
 
 #[inline(always)]
