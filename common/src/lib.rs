@@ -28,6 +28,7 @@ extern crate regex;
 extern crate ring;
 extern crate semver;
 extern crate serde_json;
+extern crate serde_yaml;
 extern crate url;
 
 // many function bodies are copied from https://github.com/rust-fuzz/targets
@@ -575,17 +576,37 @@ pub fn fuzz_serde_json_read(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_serde_json_read_write_read(bytes1: &[u8]) {
-    let parsed1 = match serde_json::from_slice::<serde_json::Value>(bytes1) {
+pub fn fuzz_serde_json_read_write_read(data: &[u8]) {
+    let value = match serde_json::from_slice::<serde_json::Value>(data) {
+        Ok(v) => v,
+        Err(..) => return,
+    };
+    let serialized = serde_json::to_vec(&value).unwrap();
+    let value2 = match serde_json::from_slice::<serde_json::Value>(&serialized) {
         Ok(p) => p,
         Err(..) => return,
     };
-    let bytes2 = serde_json::to_vec(&parsed1).unwrap();
-    let parsed2 = match serde_json::from_slice::<serde_json::Value>(&bytes2) {
-        Ok(p) => p,
-        Err(..) => return,
+    assert_eq!(value, value2);
+}
+
+#[inline(always)]
+pub fn fuzz_serde_yaml_read(data: &[u8]) {
+    let _ = serde_yaml::from_slice::<serde_yaml::Value>(data);
+}
+
+#[inline(always)]
+pub fn fuzz_serde_yaml_read_write_read(data: &[u8]) {
+    let value = match serde_yaml::from_slice::<serde_yaml::Value>(data) {
+        Ok(v) => v,
+        Err(_) => return,
     };
-    assert_eq!(parsed1, parsed2);
+    let serialized = match serde_yaml::to_vec(&value) {
+        Ok(s) => s,
+        Err(_) => return,
+    };
+    if let Ok(v) = serde_yaml::from_slice::<serde_yaml::Value>(&serialized) {
+        assert_eq!(v, value);
+    }
 }
 
 #[inline(always)]

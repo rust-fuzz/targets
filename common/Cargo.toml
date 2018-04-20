@@ -9,7 +9,7 @@ openssl = { git = "https://github.com/sfackler/rust-openssl.git", tag = "v0.9.23
 
 brotli = { git = "https://github.com/dropbox/rust-brotli" }
 bson = { git = "https://github.com/zonyitoo/bson-rs" }
-chrono = {git = "https://github.com/chronotope/chrono" }
+chrono = { git = "https://github.com/chronotope/chrono" }
 crypto-hashes = { features = ["include_weak"], git = "https://github.com/RustCrypto/meta" }
 cssparser = { git = "https://github.com/servo/rust-cssparser.git" }
 deflate = { git = "https://github.com/oyvindln/deflate-rs", branch = "dev" }
@@ -34,4 +34,5 @@ regex = { git = "https://github.com/rust-lang-nursery/regex" }
 ring = { git = "https://github.com/briansmith/ring" }
 semver = { git = "https://github.com/steveklabnik/semver" }
 serde_json = { git = "https://github.com/serde-rs/json", features = ["arbitrary_precision"] }
+serde_yaml = { git = "https://github.com/dtolnay/serde-yaml" }
 url = { git = "https://github.com/servo/rust-url" }
