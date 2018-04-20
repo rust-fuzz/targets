@@ -44,5 +44,4 @@ ring_digest_sha1
 ring_digest_sha256
 ring_digest_sha384
 ring_digest_sha512
-rustfmt
 url

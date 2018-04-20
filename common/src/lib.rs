@@ -540,23 +540,6 @@ pub fn fuzz_ring_digest_sha512(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_rustfmt(data: &[u8]) {
-    use rustfmt_nightly::{format_input, Input};
-    use rustfmt_nightly::config::Config;
-
-    if let Ok(s) = std::str::from_utf8(data) {
-        let mut out = Vec::with_capacity(2_048);
-
-        if let Ok(_) = format_input(
-            Input::Text(s.to_string()),
-            &Config::default(),
-            Some(&mut out),
-        ) {}
-    }
-}
-
-
-#[inline(always)]
 pub fn fuzz_url(data: &[u8]) {
     if let Ok(s) = std::str::from_utf8(data) {
         let _ = url::Url::parse(s);
