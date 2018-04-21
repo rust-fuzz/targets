@@ -1,21 +1,21 @@
 #!/bin/sh -ve
 
-./gen-targets-src.sh
+sh -ve gen-targets-src.sh
 
-cargo install afl honggfuzz --force
+cargo install afl honggfuzz --force --verbose
 
 # AFL
 
 cd fuzzer-afl
 cargo update
-cargo afl build
+cargo afl build --verbose
 cd ..
 
 # Honggfuzz
 
 cd fuzzer-honggfuzz
 cargo update
-cargo hfuzz build-debug
+cargo hfuzz build-debug --verbose
 cd ..
 
 # LibFuzzer
@@ -43,5 +43,5 @@ else
 fi
 
 cargo update
-cargo build --target $TARGET
+cargo build --target $TARGET --verbose
 cd ..
