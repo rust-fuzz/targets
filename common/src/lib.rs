@@ -327,7 +327,7 @@ pub fn fuzz_httparse_response(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_humantime(data: &[u8]) {
+pub fn fuzz_humantime_read(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
         let _ = humantime::parse_duration(data);
     }

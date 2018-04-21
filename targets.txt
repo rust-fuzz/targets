@@ -26,7 +26,7 @@ gif_read
 html5ever_read
 httparse_request
 httparse_response
-humantime
+humantime_read
 image_read
 iso8601_read
 jpeg_decoder_read
