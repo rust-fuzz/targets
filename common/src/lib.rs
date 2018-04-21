@@ -40,7 +40,7 @@ extern crate zopfli;
 // many function bodies are copied from https://github.com/rust-fuzz/targets
 
 #[inline(always)]
-pub fn fuzz_brotli(data: &[u8]) {
+pub fn fuzz_brotli_read(data: &[u8]) {
     use std::io::{Cursor, Read};
 
     let mut data_reader = Cursor::new(data);
@@ -52,12 +52,12 @@ pub fn fuzz_brotli(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_bson(data: &[u8]) {
+pub fn fuzz_bson_read(data: &[u8]) {
     let _ = bson::decode_document(&mut std::io::Cursor::new(data));
 }
 
 #[inline(always)]
-pub fn fuzz_chrono(data: &[u8]) {
+pub fn fuzz_chrono_read(data: &[u8]) {
     use chrono::prelude::*;
     if let Ok(data) = std::str::from_utf8(data) {
         let _ = DateTime::parse_from_rfc2822(data);
@@ -180,7 +180,7 @@ pub fn fuzz_crypto_hashes_sha3_shake256(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_crypto_hashes_sha3_streebog_256(data: &[u8]) {
+pub fn fuzz_crypto_hashes_streebog_256(data: &[u8]) {
     use crypto_hashes::digest::Digest;
 
     let mut hasher = crypto_hashes::streebog::Streebog256::default();
@@ -189,7 +189,7 @@ pub fn fuzz_crypto_hashes_sha3_streebog_256(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_crypto_hashes_sha3_streebog_512(data: &[u8]) {
+pub fn fuzz_crypto_hashes_streebog_512(data: &[u8]) {
     use crypto_hashes::digest::Digest;
 
     let mut hasher = crypto_hashes::streebog::Streebog512::default();
@@ -198,7 +198,7 @@ pub fn fuzz_crypto_hashes_sha3_streebog_512(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_crypto_hashes_sha3_whirlpool(data: &[u8]) {
+pub fn fuzz_crypto_hashes_whirlpool(data: &[u8]) {
     use crypto_hashes::digest::Digest;
 
     let mut hasher = crypto_hashes::whirlpool::Whirlpool::default();
@@ -252,17 +252,17 @@ pub fn fuzz_css_parser_read_write_read(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_deflate(data: &[u8]) {
+pub fn fuzz_deflate_compress(data: &[u8]) {
     let _compressed = deflate::deflate_bytes(&data);
 }
 
 #[inline(always)]
-pub fn fuzz_dns_parser(data: &[u8]) {
+pub fn fuzz_dns_parser_read_paquet(data: &[u8]) {
     let _ = dns_parser::Packet::parse(data);
 }
 
 #[inline(always)]
-pub fn fuzz_flac(data: &[u8]) {
+pub fn fuzz_flac_read(data: &[u8]) {
     use flac::{ByteStream, Stream};
 
     let s = Stream::<ByteStream>::from_buffer(data);
@@ -275,7 +275,7 @@ pub fn fuzz_flac(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_gif(data: &[u8]) {
+pub fn fuzz_gif_read(data: &[u8]) {
     let decoder = gif::Decoder::new(std::io::Cursor::new(data));
 
     if let Ok(mut decoder) = decoder.read_info() {
@@ -284,7 +284,7 @@ pub fn fuzz_gif(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_html5ever(data: &[u8]) {
+pub fn fuzz_html5ever_read(data: &[u8]) {
     use std::default::Default;
     use std::io::BufReader;
 
@@ -334,12 +334,12 @@ pub fn fuzz_humantime(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_image(data: &[u8]) {
+pub fn fuzz_image_read(data: &[u8]) {
     let _ = image::load_from_memory(data);
 }
 
 #[inline(always)]
-pub fn fuzz_iso8601(data: &[u8]) {
+pub fn fuzz_iso8601_read(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
         let _ = iso8601::date(data);
         let _ = iso8601::time(data);
@@ -348,14 +348,14 @@ pub fn fuzz_iso8601(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_jpeg_decoder(data: &[u8]) {
+pub fn fuzz_jpeg_decoder_read(data: &[u8]) {
     let mut decoder = jpeg_decoder::Decoder::new(data);
     let _pixels = decoder.decode();
     let _metadata = decoder.info();
 }
 
 #[inline(always)]
-pub fn fuzz_minidump(data: &[u8]) {
+pub fn fuzz_minidump_read(data: &[u8]) {
     use std::io::Cursor;
 
     let cursor = Cursor::new(data);
@@ -363,7 +363,7 @@ pub fn fuzz_minidump(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_mp4parse(data: &[u8]) {
+pub fn fuzz_mp4parse_read(data: &[u8]) {
     use std::io::Cursor;
 
     let mut reader = Cursor::new(data);
@@ -373,14 +373,14 @@ pub fn fuzz_mp4parse(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_patch(data: &[u8]) {
+pub fn fuzz_patch_read(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
         let _ = patch::parse(data);
     }
 }
 
 #[inline(always)]
-pub fn fuzz_pikkr(data: &[u8]) {
+pub fn fuzz_pikkr_read(data: &[u8]) {
     let q = vec!["$.x".as_bytes()];
     let mut parser = pikkr::Pikkr::new(&q, 1).unwrap();
     let _ = parser.parse(data);
@@ -442,7 +442,7 @@ pub fn fuzz_png_read_write_read(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_proc_macro2(data: &[u8]) {
+pub fn fuzz_proc_macro2_read(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
         if let Ok(token_stream) = data.parse::<proc_macro2::TokenStream>() {
             for _ in token_stream { }
@@ -451,7 +451,7 @@ pub fn fuzz_proc_macro2(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_pulldown_cmark(data: &[u8]) {
+pub fn fuzz_pulldown_cmark_read(data: &[u8]) {
     if let Ok(s) = std::str::from_utf8(data) {
         let parser = pulldown_cmark::Parser::new(s);
         for _ in parser { }
@@ -459,7 +459,7 @@ pub fn fuzz_pulldown_cmark(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_quick_xml(data: &[u8]) {
+pub fn fuzz_quick_xml_read(data: &[u8]) {
     use quick_xml::Reader;
     use std::io::Cursor;
 
@@ -475,7 +475,7 @@ pub fn fuzz_quick_xml(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_regex(data: &[u8]) {
+pub fn fuzz_regex_is_match(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
         // split data into regular expression and actual input to search through
         use std::cmp::max;
@@ -729,7 +729,7 @@ pub fn fuzz_toml_roundtrip(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_url(data: &[u8]) {
+pub fn fuzz_url_read(data: &[u8]) {
     if let Ok(s) = std::str::from_utf8(data) {
         let _ = url::Url::parse(s);
     }
