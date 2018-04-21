@@ -37,8 +37,6 @@ extern crate xml;
 extern crate zip;
 extern crate zopfli;
 
-// many function bodies are copied from https://github.com/rust-fuzz/targets
-
 #[inline(always)]
 pub fn fuzz_brotli_read(data: &[u8]) {
     use std::io::{Cursor, Read};
