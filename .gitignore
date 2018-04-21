@@ -1,5 +1,0 @@
-target/
-
-*/*.log
-*/crash-*
-*/corpus

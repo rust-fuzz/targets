@@ -1,7 +1,0 @@
----
-first:
-  &alias
-  1
-second:
-  *alias
-third: 3
