@@ -4,7 +4,7 @@ rust:
 os:
   - linux
 script:
-  - ./test.sh
+  - sh -ve gen-targets-src.sh
 env:
  global:
     - RUST_BACKTRACE=full
