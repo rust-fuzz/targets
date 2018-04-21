@@ -31,5 +31,11 @@ else
     exit 1
 fi
 
+if [ -d "../common/seeds/$1" ]; then
+	SEEDS="../common/seeds/$1"
+else
+	SEEDS="../common/seeds/nullbyte"
+fi
+
 mkdir -p "corpus-$1"
-cargo run --target $TARGET --bin "$1" -- "corpus-$1" seed-corpus
+cargo run --target $TARGET --bin "$1" -- "corpus-$1" $SEEDS

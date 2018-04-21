@@ -8,4 +8,9 @@ fi
 ./gen-targets-src.sh
 
 cd fuzzer-honggfuzz
+
+if [ -d "../common/seeds/$1" ]; then
+	export HFUZZ_RUN_ARGS="-f ../common/seeds/$1 --covdir_all hfuzz_workspace/$1/input"
+fi
+
 cargo hfuzz run $1
