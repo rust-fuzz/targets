@@ -2,7 +2,6 @@
 **/Cargo.lock
 **/*.rs.bk
 fuzzer-*/corpus-*
-fuzzer-*/seed-corpus
 fuzzer-*/src/bin
 fuzzer-honggfuzz/hfuzz_target/
 fuzzer-honggfuzz/hfuzz_workspace/
