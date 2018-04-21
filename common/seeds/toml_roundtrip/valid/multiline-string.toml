@@ -1,0 +1,23 @@
+empty_one = """"""
+empty_two = """
+"""
+empty_three = """\
+    """
+empty_four = """\
+   \
+   \
+   """
+
+equiv_one = "The quick brown fox jumps over the lazy dog"
+equiv_two = """
+The quick brown \
+
+
+  fox jumps over \
+    the lazy dog"""
+
+equivalent_three = """\
+   The quick brown \
+   fox jumps over \
+   the lazy dog\
+   """
