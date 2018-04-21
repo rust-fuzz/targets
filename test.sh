@@ -7,12 +7,14 @@ cargo install afl honggfuzz --force
 # AFL
 
 cd fuzzer-afl
+cargo update
 cargo afl build
 cd ..
 
 # Honggfuzz
 
 cd fuzzer-honggfuzz
+cargo update
 cargo hfuzz build-debug
 cd ..
 
@@ -40,5 +42,6 @@ else
     exit 1
 fi
 
+cargo update
 cargo build --target $TARGET
 cd ..
