@@ -1,0 +1,27 @@
+language: rust
+rust:
+  - nightly
+os:
+  - linux
+script:
+  - ./test.sh
+env:
+ global:
+    - RUST_BACKTRACE=full
+addons:
+  apt:
+    packages:
+      - binutils-dev
+      - libunwind8-dev
+sudo: required
+notifications:
+  email:
+    recipients:
+      - paul.grandperrin@gmail.com
+    on_success: change
+    on_failure: change
+branches:
+  only:
+    - staging
+    - trying
+    - master
