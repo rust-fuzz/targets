@@ -10,7 +10,7 @@ fi
 cd fuzzer-honggfuzz
 
 if [ -d "../common/seeds/$1" ]; then
-	export HFUZZ_RUN_ARGS="-f ../common/seeds/$1 --covdir_all hfuzz_workspace/$1/input"
+	export HFUZZ_RUN_ARGS="-f ../common/seeds/$1 --covdir_all hfuzz_workspace/$1/input $HFUZZ_RUN_ARGS"
 fi
 
 cargo hfuzz run $1

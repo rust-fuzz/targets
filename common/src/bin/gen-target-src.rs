@@ -28,6 +28,7 @@ fn main() {
 
     for target in BufReader::new(targets_file).lines() {
         let target = target.unwrap();
+        let target = target.split_whitespace().next().unwrap();
         let path = format!("{}/{}.rs", out_path, target);
         let mut file = OpenOptions::new()
         .write(true)
