@@ -8,6 +8,7 @@ script:
 env:
  global:
     - RUST_BACKTRACE=full
+cache: cargo
 addons:
   apt:
     packages:
