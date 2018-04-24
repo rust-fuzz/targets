@@ -7,13 +7,13 @@ else
 end
 
 loop do
-    system 'cd fuzzer-honggfuzz; cargo update'
-
     File.open("targets.txt").each do |line|
         target, weight = line.split
         time = weight.to_i * time_mul.to_i
     
-        system "HFUZZ_RUN_ARGS=\"--run_time #{time} $HFUZZ_RUN_ARGS\" ./fuzz-with-honggfuzz.sh #{target}"
+        system "LIBFUZZER_ARGS=\"-max_total_time=#{time} $LIBFUZZER_ARGS\" ./fuzz-with-libfuzzer.sh #{target}"
     end
+
+    system 'cd fuzzer-libfuzzer; cargo update'
 end
 

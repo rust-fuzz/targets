@@ -38,4 +38,4 @@ else
 fi
 
 mkdir -p "corpus-$1"
-cargo run --target $TARGET --bin "$1" -- "corpus-$1" $SEEDS
+cargo run --target $TARGET --bin "$1" -- "corpus-$1" $SEEDS $LIBFUZZER_ARGS
