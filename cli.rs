@@ -1,3 +1,5 @@
+#![allow(deprecated)]
+
 #[macro_use]
 extern crate structopt;
 #[macro_use]
@@ -74,16 +76,21 @@ fn run() -> Result<(), Error> {
                 Libfuzzer => run_libfuzzer(&target, None)?,
             }
         }
-        Continuous { filter, timeout, fuzzer } => {
-            let targets = get_targets()?;
-            loop {
-                for target in &targets {
-                    use Fuzzer::*;
-                    match fuzzer {
-                        Afl => run_afl(&target, Some(timeout))?,
-                        Honggfuzz => run_honggfuzz(&target, Some(timeout))?,
-                        Libfuzzer => run_libfuzzer(&target, Some(timeout))?,
-                    }
+        Continuous {
+            filter,
+            timeout,
+            fuzzer,
+        } => {
+            for target in get_targets()?
+                .iter()
+                .filter(|x| filter.as_ref().map(|f| x.contains(f)).unwrap_or(true))
+                .cycle()
+            {
+                use Fuzzer::*;
+                match fuzzer {
+                    Afl => run_afl(&target, Some(timeout))?,
+                    Honggfuzz => run_honggfuzz(&target, Some(timeout))?,
+                    Libfuzzer => run_libfuzzer(&target, Some(timeout))?,
                 }
             }
         }
@@ -127,7 +134,11 @@ fn run_honggfuzz(target: &str, timeout: Option<i32>) -> Result<(), Error> {
          {}",
         seed_dir.to_string_lossy(),
         target,
-        if let Some(t) = timeout { format!("--run_time {}", t) } else { "".into() },
+        if let Some(t) = timeout {
+            format!("--run_time {}", t)
+        } else {
+            "".into()
+        },
         env::var("HFUZZ_RUN_ARGS").unwrap_or_default()
     );
 
@@ -211,7 +222,6 @@ fn run_libfuzzer(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
     Ok(())
 }
 
-#[allow(deprecated)]
 arg_enum!{
     #[derive(StructOpt, Debug)]
     enum Fuzzer {
