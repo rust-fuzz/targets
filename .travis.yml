@@ -1,10 +1,28 @@
-dist: trusty
-
 language: rust
-rust: nightly
+rust:
+  - nightly
+os:
+  - linux
+script:
+  - sh -ve gen-targets-src.sh
+env:
+ global:
+    - RUST_BACKTRACE=full
 cache: cargo
-
-install: ./run-fuzzer.sh
-script: echo ""
-
-notifications: { email: false }
+addons:
+  apt:
+    packages:
+      - binutils-dev
+      - libunwind8-dev
+sudo: required
+notifications:
+  email:
+    recipients:
+      - paul.grandperrin@gmail.com
+    on_success: change
+    on_failure: change
+branches:
+  only:
+    - staging
+    - trying
+    - master

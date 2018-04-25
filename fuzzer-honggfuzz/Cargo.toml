@@ -1,0 +1,8 @@
+[package]
+name = "fuzz-targets-honggfuzz"
+version = "0.1.0"
+authors = ["The rust-fuzz Project Developers"]
+
+[dependencies]
+fuzz-targets-common = {path = "../common"}
+honggfuzz = "^0.5.18"

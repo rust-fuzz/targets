@@ -7,7 +7,14 @@ A collection of fuzzing targets written in Rust.
 As an example:
 
 ```sh
-./run-fuzzer.sh mp4parse read_mp4
+# with AFL
+./fuzz-with-afl.sh url_read
+
+# with LibFuzzer
+./fuzz-with-libfuzzer.sh url_read
+
+# with Honggfuzz
+./fuzz-with-honggfuzz.sh url_read
 ```
 
 ## Contributing

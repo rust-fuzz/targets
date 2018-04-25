@@ -1,0 +1,44 @@
+[package]
+name = "fuzz-targets-common"
+version = "0.1.0"
+authors = ["The rust-fuzz Project Developers"]
+
+[dependencies]
+tendril = "0.2.2"
+openssl = { git = "https://github.com/sfackler/rust-openssl.git", tag = "v0.9.23" }
+
+brotli = { git = "https://github.com/dropbox/rust-brotli" }
+bson = { git = "https://github.com/zonyitoo/bson-rs" }
+chrono = { git = "https://github.com/chronotope/chrono" }
+crypto-hashes = { features = ["include_weak"], git = "https://github.com/RustCrypto/meta" }
+cssparser = { git = "https://github.com/servo/rust-cssparser.git" }
+deflate = { git = "https://github.com/oyvindln/deflate-rs", branch = "dev" }
+dns-parser = { git = "https://github.com/tailhook/dns-parser" }
+flac = { git = "https://github.com/sourrust/flac.git" }
+gif = { git = "https://github.com/PistonDevelopers/image-gif" }
+html5ever = { git = "https://github.com/servo/html5ever" }
+httparse = { git = "https://github.com/seanmonstar/httparse" }
+humantime = { git = "https://github.com/tailhook/humantime" }
+image = { git = "https://github.com/PistonDevelopers/image" }
+iso8601 = { git = "https://github.com/badboy/iso8601" }
+jpeg-decoder = { git = "https://github.com/kaksmet/jpeg-decoder" }
+minidump = { git = "https://github.com/luser/rust-minidump.git" }
+mp4parse = { git = "https://github.com/mozilla/mp4parse-rust" }
+patch = { git = "https://github.com/uniphil/patch-rs" }
+pikkr = { git = "https://github.com/pikkr/pikkr" }
+png = { git = "https://github.com/PistonDevelopers/image-png" }
+proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }
+pulldown-cmark = { git = "https://github.com/google/pulldown-cmark.git" }
+quick-xml = { git = "https://github.com/tafia/quick-xml" }
+regex = { git = "https://github.com/rust-lang-nursery/regex" }
+ring = { git = "https://github.com/briansmith/ring" }
+semver = { git = "https://github.com/steveklabnik/semver" }
+serde_json = { git = "https://github.com/serde-rs/json", features = ["arbitrary_precision"] }
+serde_yaml = { git = "https://github.com/dtolnay/serde-yaml" }
+tar = { git = "https://github.com/alexcrichton/tar-rs" }
+toml = { git = "https://github.com/alexcrichton/toml-rs" }
+url = { git = "https://github.com/servo/rust-url" }
+uuid = { git = "https://github.com/rust-lang-nursery/uuid" }
+xml-rs = { git = "https://github.com/netvl/xml-rs.git" }
+zip = { git = "https://github.com/mvdnes/zip-rs" }
+zopfli = { git = "https://github.com/carols10cents/zopfli" }

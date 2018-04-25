@@ -1,0 +1,8 @@
+[package]
+name = "fuzz-targets-libfuzzer"
+version = "0.1.0"
+authors = ["The rust-fuzz Project Developers"]
+
+[dependencies]
+fuzz-targets-common = {path = "../common"}
+libfuzzer-sys = {git = "https://github.com/rust-fuzz/libfuzzer-sys.git"}

@@ -1,5 +1,8 @@
-target/
-
-*/*.log
-*/crash-*
-*/corpus
+**/target
+**/Cargo.lock
+**/*.rs.bk
+fuzzer-*/corpus-*
+fuzzer-*/src/bin
+fuzzer-honggfuzz/hfuzz_target/
+fuzzer-honggfuzz/hfuzz_workspace/
+fuzzer-libfuzzer/crash-*
