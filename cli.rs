@@ -185,7 +185,7 @@ fn run_afl(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
     Ok(())
 }
 
-fn run_libfuzzer(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
+fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
     let fuzzer = Fuzzer::Libfuzzer;
     write_fuzzer_target(fuzzer, target)?;
     let dir = fuzzer.dir()?;
@@ -212,6 +212,12 @@ fn run_libfuzzer(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
          -C opt-level=3 ",
     );
 
+    let libfuzzer_args = if let Some(timeout) = timeout {
+        format!("{} -max_total_time={}", env::var("LIBFUZZER_ARGS").unwrap_or_default(), timeout)
+    } else {
+        env::var("LIBFUZZER_ARGS").unwrap_or_default()
+    };
+
     let mut asan_options = env::var("ASAN_OPTIONS").unwrap_or_default();
     asan_options.push_str(" detect_odr_violation=0 ");
 
@@ -221,6 +227,7 @@ fn run_libfuzzer(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
         .arg(&seed_dir)
         .env("RUSTFLAGS", &rust_flags)
         .env("ASAN_OPTIONS", &asan_options)
+        .env("LIBFUZZER_ARGS", &libfuzzer_args)
         .current_dir(&dir)
         .spawn()?
         .wait()?;
