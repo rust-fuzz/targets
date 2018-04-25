@@ -4,7 +4,8 @@ rust:
 os:
   - linux
 script:
-  - sh -ve gen-targets-src.sh
+  - cargo build
+  - cd common; cargo build
 env:
  global:
     - RUST_BACKTRACE=full
