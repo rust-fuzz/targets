@@ -20,13 +20,18 @@ use structopt::StructOpt;
 /// Run fuzzer collection
 #[derive(StructOpt, Debug)]
 enum Cli {
-    /// Run fuzz targets until the end of time (or Ctrl+C)
+    /// Run all fuzz targets
     #[structopt(name = "continuous")]
     Continuous {
+        /// Only run target containing this string
         #[structopt(short = "q", long = "filter")]
         filter: Option<String>,
+        /// Set timeout per target
         #[structopt(short = "t", long = "timeout", default_value = "10")]
         timeout: i32,
+        // Run until the end of time (or Ctrl+C)
+        #[structopt(short = "i", long = "infinite")]
+        infinite: bool,
         /// Which fuzzer to run
         #[structopt(
             long = "fuzzer",
@@ -80,19 +85,27 @@ fn run() -> Result<(), Error> {
         Continuous {
             filter,
             timeout,
+            infinite,
             fuzzer,
         } => {
-            for target in get_targets()?
-                .iter()
-                .filter(|x| filter.as_ref().map(|f| x.contains(f)).unwrap_or(true))
-                .cycle()
-            {
+            let run = |target: &str| -> Result<(), Error> {
                 use Fuzzer::*;
                 match fuzzer {
                     Afl => run_afl(&target, Some(timeout))?,
                     Honggfuzz => run_honggfuzz(&target, Some(timeout))?,
                     Libfuzzer => run_libfuzzer(&target, Some(timeout))?,
                 }
+                Ok(())
+            };
+
+            let targets = get_targets()?;
+            let targets = targets.iter()
+                .filter(|x| filter.as_ref().map(|f| x.contains(f)).unwrap_or(true));
+
+            if infinite {
+                for target in targets.cycle() { run(target)?; }
+            } else {
+                for target in targets { run(target)?; }
             }
         }
     }
