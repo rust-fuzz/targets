@@ -21,7 +21,7 @@ use structopt::StructOpt;
 #[derive(StructOpt, Debug)]
 enum Cli {
     /// Run all fuzz targets
-    #[structopt(name = "continuous")]
+    #[structopt(name = "continuously")]
     Continuous {
         /// Only run target containing this string
         #[structopt(short = "q", long = "filter")]
@@ -41,7 +41,7 @@ enum Cli {
         fuzzer: Fuzzer,
     },
     /// Run one target with specific fuzzer
-    #[structopt(name = "run")]
+    #[structopt(name = "target")]
     Run {
         /// Which target to run
         target: String,
