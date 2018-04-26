@@ -38,6 +38,7 @@ extern crate zip;
 extern crate zopfli;
 extern crate svgtypes;
 extern crate xmlparser;
+extern crate usvg;
 
 #[inline(always)]
 pub fn fuzz_brotli_read(data: &[u8]) {
@@ -881,5 +882,14 @@ pub fn fuzz_xmlparser_xml(data: &[u8]) {
                 panic!("endless loop");
             }
         }
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_usvg_parse_tree(data: &[u8]) {
+    use std::str;
+
+    if let Ok(text) = str::from_utf8(data) {
+        let _ = usvg::parse_tree_from_data(text, &usvg::Options::default());
     }
 }
