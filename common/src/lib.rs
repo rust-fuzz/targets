@@ -37,6 +37,7 @@ extern crate xml;
 extern crate zip;
 extern crate zopfli;
 extern crate svgtypes;
+extern crate xmlparser;
 
 #[inline(always)]
 pub fn fuzz_brotli_read(data: &[u8]) {
@@ -847,6 +848,33 @@ pub fn fuzz_svgtypes_transforms(data: &[u8]) {
         // Must not panic.
         let mut n = 0;
         for _ in svgtypes::TransformListParser::from(s) {
+            n += 1;
+
+            if n == 1000 {
+                panic!("endless loop");
+            }
+        }
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_xmlparser_unescape(data: &[u8]) {
+    use std::str;
+    use xmlparser::{TextUnescape, XmlSpace};
+
+    if let Ok(s) = str::from_utf8(data) {
+        let _ = TextUnescape::unescape(s, XmlSpace::Default);
+        let _ = TextUnescape::unescape(s, XmlSpace::Preserve);
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_xmlparser_xml(data: &[u8]) {
+    use std::str;
+
+    if let Ok(text) = str::from_utf8(data) {
+        let mut n = 0;
+        for _ in xmlparser::Tokenizer::from(text) {
             n += 1;
 
             if n == 1000 {
