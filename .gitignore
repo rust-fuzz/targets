@@ -6,6 +6,3 @@ fuzzer-*/src/bin
 fuzzer-honggfuzz/hfuzz_target/
 fuzzer-honggfuzz/hfuzz_workspace/
 fuzzer-libfuzzer/crash-*
-
-/target
-**/*.rs.bk
