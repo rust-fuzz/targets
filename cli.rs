@@ -272,26 +272,21 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
          -C opt-level=3 ",
     );
 
-    let libfuzzer_args = if let Some(timeout) = timeout {
-        format!(
-            "{} -max_total_time={}",
-            env::var("LIBFUZZER_ARGS").unwrap_or_default(),
-            timeout
-        )
-    } else {
-        env::var("LIBFUZZER_ARGS").unwrap_or_default()
-    };
-
     let mut asan_options = env::var("ASAN_OPTIONS").unwrap_or_default();
     asan_options.push_str(" detect_odr_violation=0 ");
 
+    let max_time = if let Some(timeout) = timeout {
+        format!("-max_total_time={}", timeout)
+    } else {
+        "".into()
+    };
+
     let fuzzer_bin = Command::new("cargo")
-        .args(&["run", "--target", &target_platform, "--bin", &target, "--"])
+        .args(&["run", "--target", &target_platform, "--bin", &target, "--", &max_time])
         .arg(&corpus_dir)
         .arg(&seed_dir)
         .env("RUSTFLAGS", &rust_flags)
         .env("ASAN_OPTIONS", &asan_options)
-        .env("LIBFUZZER_ARGS", &libfuzzer_args)
         .current_dir(&dir)
         .spawn()
         .context(format!("error starting {:?} to runn {}", fuzzer, target))?
