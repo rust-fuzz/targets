@@ -42,3 +42,4 @@ uuid = { git = "https://github.com/rust-lang-nursery/uuid" }
 xml-rs = { git = "https://github.com/netvl/xml-rs.git" }
 zip = { git = "https://github.com/mvdnes/zip-rs" }
 zopfli = { git = "https://github.com/carols10cents/zopfli" }
+svgtypes = { git = "https://github.com/RazrFalcon/svgtypes" }
