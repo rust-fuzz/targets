@@ -304,7 +304,12 @@ fn write_fuzzer_target(fuzzer: Fuzzer, target: &str) -> Result<(), Error> {
         "error reading template file {}",
         template_path.display()
     ))?;
+
     let target_dir = fuzzer.dir()?.join("src").join("bin");
+    fs::create_dir_all(&target_dir).context(format!(
+        "error creating fuzz target dir {}",
+        target_dir.display()
+    ))?;
     let path = target_dir.join(&format!("{}.rs", target));
 
     let mut file = fs::OpenOptions::new()
