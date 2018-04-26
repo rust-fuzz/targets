@@ -13,7 +13,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-use failure::Error;
+use failure::{Error, ResultExt};
 use regex::Regex;
 use structopt::StructOpt;
 
@@ -61,6 +61,9 @@ enum Cli {
 fn main() {
     if let Err(e) = run() {
         eprintln!("{}", e);
+        for cause in e.causes().skip(1) {
+            eprintln!("caused by: {}", cause);
+        }
     }
 }
 
@@ -99,13 +102,18 @@ fn run() -> Result<(), Error> {
             };
 
             let targets = get_targets()?;
-            let targets = targets.iter()
+            let targets = targets
+                .iter()
                 .filter(|x| filter.as_ref().map(|f| x.contains(f)).unwrap_or(true));
 
             if infinite {
-                for target in targets.cycle() { run(target)?; }
+                for target in targets.cycle() {
+                    run(target)?;
+                }
             } else {
-                for target in targets { run(target)?; }
+                for target in targets {
+                    run(target)?;
+                }
             }
         }
     }
@@ -123,18 +131,23 @@ fn common_dir() -> Result<PathBuf, Error> {
 
 fn create_seed_dir(target: &str) -> Result<PathBuf, Error> {
     let seed_dir = common_dir()?.join("seeds").join(&target);
-    fs::create_dir_all(&seed_dir)?;
+    fs::create_dir_all(&seed_dir).context(format!("unable to create seed dir for {}", target))?;
     Ok(seed_dir)
 }
 
 fn create_corpus_dir(base: &Path, target: &str) -> Result<PathBuf, Error> {
     let corpus_dir = base.join(&format!("corpus-{}", target));
-    fs::create_dir_all(&corpus_dir)?;
+    fs::create_dir_all(&corpus_dir).context(format!(
+        "unable to create corpus dir for {}{}",
+        base.display(),
+        target
+    ))?;
     Ok(corpus_dir)
 }
 
 fn get_targets() -> Result<Vec<String>, Error> {
-    let targets_rs = fs::read_to_string(&common_dir()?.join("src/lib.rs"))?;
+    let source = common_dir()?.join("src/lib.rs");
+    let targets_rs = fs::read_to_string(&source).context(format!("unable to read {:?}", source))?;
     let match_fuzz_fs = Regex::new(r"pub fn fuzz_(\w+)\(")?;
     let target_names = match_fuzz_fs
         .captures_iter(&targets_rs)
@@ -168,10 +181,20 @@ fn run_honggfuzz(target: &str, timeout: Option<i32>) -> Result<(), Error> {
         .args(&["hfuzz", "run", &target])
         .env("HFUZZ_RUN_ARGS", &args)
         .current_dir(&dir)
-        .spawn()?
-        .wait()?;
+        .spawn()
+        .context(format!("error starting {:?} to runn {}", fuzzer, target))?
+        .wait()
+        .context(format!(
+            "error while waiting for {:?} running {}",
+            fuzzer, target
+        ))?;
 
-    ensure!(fuzzer_bin.success(), "{} quit with code {}", fuzzer, fuzzer_bin);
+    ensure!(
+        fuzzer_bin.success(),
+        "{} quit with code {}",
+        fuzzer,
+        fuzzer_bin
+    );
     Ok(())
 }
 
@@ -191,10 +214,20 @@ fn run_afl(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
         .arg(&corpus_dir)
         .args(&["--", &format!("target/release/{}", target)])
         .current_dir(&dir)
-        .spawn()?
-        .wait()?;
+        .spawn()
+        .context(format!("error starting {:?} to runn {}", fuzzer, target))?
+        .wait()
+        .context(format!(
+            "error while waiting for {:?} running {}",
+            fuzzer, target
+        ))?;
 
-    ensure!(fuzzer_bin.success(), "{} quit with code {}", fuzzer, fuzzer_bin);
+    ensure!(
+        fuzzer_bin.success(),
+        "{} quit with code {}",
+        fuzzer,
+        fuzzer_bin
+    );
     Ok(())
 }
 
@@ -226,7 +259,11 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
     );
 
     let libfuzzer_args = if let Some(timeout) = timeout {
-        format!("{} -max_total_time={}", env::var("LIBFUZZER_ARGS").unwrap_or_default(), timeout)
+        format!(
+            "{} -max_total_time={}",
+            env::var("LIBFUZZER_ARGS").unwrap_or_default(),
+            timeout
+        )
     } else {
         env::var("LIBFUZZER_ARGS").unwrap_or_default()
     };
@@ -242,24 +279,43 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
         .env("ASAN_OPTIONS", &asan_options)
         .env("LIBFUZZER_ARGS", &libfuzzer_args)
         .current_dir(&dir)
-        .spawn()?
-        .wait()?;
+        .spawn()
+        .context(format!("error starting {:?} to runn {}", fuzzer, target))?
+        .wait()
+        .context(format!(
+            "error while waiting for {:?} running {}",
+            fuzzer, target
+        ))?;
 
-    ensure!(fuzzer_bin.success(), "{} quit with code {}", fuzzer, fuzzer_bin);
+    ensure!(
+        fuzzer_bin.success(),
+        "{} quit with code {}",
+        fuzzer,
+        fuzzer_bin
+    );
     Ok(())
 }
 
 fn write_fuzzer_target(fuzzer: Fuzzer, target: &str) -> Result<(), Error> {
     use std::io::Write;
 
-    let template = fs::read_to_string(&fuzzer.dir()?.join("template.rs"))?;
-    let path = fuzzer.dir()?.join("src").join("bin").join(&format!("{}.rs", target));
+    let template_path = fuzzer.dir()?.join("template.rs");
+    let template = fs::read_to_string(&template_path).context(format!(
+        "error reading template file {}",
+        template_path.display()
+    ))?;
+    let target_dir = fuzzer.dir()?.join("src").join("bin");
+    let path = target_dir.join(&format!("{}.rs", target));
 
     let mut file = fs::OpenOptions::new()
         .write(true)
         .create(true)
         .truncate(true)
-        .open(&path)?;
+        .open(&path)
+        .context(format!(
+            "error writing fuzz target binary {}",
+            path.display()
+        ))?;
 
     let source = template.replace("###TARGET###", &target);
     file.write_all(source.as_bytes())?;
@@ -277,11 +333,13 @@ arg_enum!{
 
 impl Fuzzer {
     fn dir(&self) -> Result<PathBuf, Error> {
+        let cwd = env::current_dir().context("error getting current directory")?;
+
         use Fuzzer::*;
         let p = match self {
-            Afl => env::current_dir()?.join("fuzzer-afl"),
-            Honggfuzz => env::current_dir()?.join("fuzzer-honggfuzz"),
-            Libfuzzer => env::current_dir()?.join("fuzzer-libfuzzer"),
+            Afl => cwd.join("fuzzer-afl"),
+            Honggfuzz => cwd.join("fuzzer-honggfuzz"),
+            Libfuzzer => cwd.join("fuzzer-libfuzzer"),
         };
 
         Ok(p)
