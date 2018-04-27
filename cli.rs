@@ -120,13 +120,22 @@ fn run() -> Result<(), Error> {
                 .iter()
                 .filter(|x| filter.as_ref().map(|f| x.contains(f)).unwrap_or(true));
 
-            if infinite {
-                for target in targets.cycle() {
-                    run(target)?;
+            'until_the_end_of_time: loop {
+                'all_the_fuzz: for target in targets.clone() {
+                    if let Err(e) = run(target) {
+                        match e.downcast::<FuzzerQuit>() {
+                            Ok(_) => {
+                                println!("Fuzzer failed so we'll continue with the next one");
+                                continue 'all_the_fuzz;
+                            },
+                            Err(other_error) => Err(other_error)?,
+                        }
+                    }
                 }
             } else {
-                for target in targets {
-                    run(target)?;
+                if infinite {
+                } else {
+                    break 'until_the_end_of_time;
                 }
             }
         }
