@@ -132,8 +132,8 @@ fn run() -> Result<(), Error> {
                         }
                     }
                 }
-            } else {
                 if infinite {
+                    run_cargo_update()?;
                 } else {
                     break 'until_the_end_of_time;
                 }
@@ -176,6 +176,11 @@ fn get_targets() -> Result<Vec<String>, Error> {
         .captures_iter(&targets_rs)
         .map(|x| x[1].to_string());
     Ok(target_names.collect())
+}
+
+fn run_cargo_update() -> Result<(), Error> {
+    // TODO: https://github.com/rust-fuzz/targets/issues/106
+    Ok(())
 }
 
 #[derive(Fail, Debug)]
