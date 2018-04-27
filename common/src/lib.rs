@@ -25,6 +25,7 @@ extern crate proc_macro2;
 extern crate pulldown_cmark;
 extern crate quick_xml;
 extern crate regex;
+extern crate regex_syntax;
 extern crate ring;
 extern crate semver;
 extern crate serde_json;
@@ -472,6 +473,13 @@ pub fn fuzz_quick_xml_read(data: &[u8]) {
             Ok(quick_xml::events::Event::Eof) | Err(..) => break,
             _ => buf.clear(),
         }
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_regex_syntax(data: &[u8]) {
+    if let Ok(data) = std::str::from_utf8(data) {
+        let _ = regex_syntax::Parser::new().parse(data);
     }
 }
 
