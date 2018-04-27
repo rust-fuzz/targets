@@ -120,13 +120,22 @@ fn run() -> Result<(), Error> {
                 .iter()
                 .filter(|x| filter.as_ref().map(|f| x.contains(f)).unwrap_or(true));
 
-            if infinite {
-                for target in targets.cycle() {
-                    run(target)?;
+            'cycle: loop {
+                'targets_pass: for target in targets.clone() {
+                    if let Err(e) = run(target) {
+                        match e.downcast::<FuzzerQuit>() {
+                            Ok(_) => {
+                                println!("Fuzzer failed so we'll continue with the next one");
+                                continue 'targets_pass;
+                            },
+                            Err(other_error) => Err(other_error)?,
+                        }
+                    }
                 }
-            } else {
-                for target in targets {
-                    run(target)?;
+                if infinite {
+                    run_cargo_update()?;
+                } else {
+                    break 'cycle;
                 }
             }
         }
@@ -169,6 +178,15 @@ fn get_targets() -> Result<Vec<String>, Error> {
     Ok(target_names.collect())
 }
 
+fn run_cargo_update() -> Result<(), Error> {
+    // TODO: https://github.com/rust-fuzz/targets/issues/106
+    Ok(())
+}
+
+#[derive(Fail, Debug)]
+#[fail(display = "Fuzzer quit")]
+pub struct FuzzerQuit;
+
 fn run_honggfuzz(target: &str, timeout: Option<i32>) -> Result<(), Error> {
     let fuzzer = Fuzzer::Honggfuzz;
     write_fuzzer_target(fuzzer, target)?;
@@ -203,12 +221,9 @@ fn run_honggfuzz(target: &str, timeout: Option<i32>) -> Result<(), Error> {
             fuzzer, target
         ))?;
 
-    ensure!(
-        fuzzer_bin.success(),
-        "{} quit with code {}",
-        fuzzer,
-        fuzzer_bin
-    );
+    if !fuzzer_bin.success() {
+        Err(FuzzerQuit)?;
+    }
     Ok(())
 }
 
@@ -236,12 +251,9 @@ fn run_afl(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
             fuzzer, target
         ))?;
 
-    ensure!(
-        fuzzer_bin.success(),
-        "{} quit with code {}",
-        fuzzer,
-        fuzzer_bin
-    );
+    if !fuzzer_bin.success() {
+        Err(FuzzerQuit)?;
+    }
     Ok(())
 }
 
@@ -296,12 +308,9 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
             fuzzer, target
         ))?;
 
-    ensure!(
-        fuzzer_bin.success(),
-        "{} quit with code {}",
-        fuzzer,
-        fuzzer_bin
-    );
+    if !fuzzer_bin.success() {
+        Err(FuzzerQuit)?;
+    }
     Ok(())
 }
 
