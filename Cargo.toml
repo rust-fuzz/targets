@@ -1,0 +1,23 @@
+[package]
+name = "fuzz-targets"
+version = "0.1.0"
+authors = ["Pascal Hertleif <killercup@gmail.com>"]
+
+[[bin]]
+name = "cli"
+path = "cli.rs"
+
+[dependencies]
+structopt = "0.2.7"
+clap = "2.31.2"
+regex = "0.2.10"
+failure = "0.1.1"
+strsim = "0.7.0"
+
+[workspace]
+members = [
+  "common",
+  "fuzzer-afl",
+  "fuzzer-honggfuzz",
+  "fuzzer-libfuzzer",
+]
