@@ -45,3 +45,4 @@ zopfli = { git = "https://github.com/carols10cents/zopfli" }
 svgtypes = { git = "https://github.com/RazrFalcon/svgtypes" }
 xmlparser = { git = "https://github.com/RazrFalcon/xmlparser" }
 usvg = { git = "https://github.com/RazrFalcon/usvg" }
+http = { git = "https://github.com/hyperium/http" }
