@@ -39,6 +39,7 @@ extern crate zopfli;
 extern crate svgtypes;
 extern crate xmlparser;
 extern crate usvg;
+extern crate http;
 
 #[inline(always)]
 pub fn fuzz_brotli_read(data: &[u8]) {
@@ -893,3 +894,57 @@ pub fn fuzz_usvg_parse_tree(data: &[u8]) {
         let _ = usvg::parse_tree_from_data(text, &usvg::Options::default());
     }
 }
+
+#[inline(always)]
+pub fn fuzz_http_status_code(data: &[u8]) {
+    if let Ok(status_code) = http::status::StatusCode::from_bytes(data) {
+        status_code.is_informational();
+        status_code.is_success();
+        status_code.is_redirection();
+        status_code.is_client_error();
+        status_code.is_server_error();
+        status_code.to_string();
+        let s = status_code.as_str();
+        format!("{:?}", status_code);
+        assert_eq!(
+            status_code,
+            http::status::StatusCode::from_bytes(s.as_bytes()).unwrap()
+        );
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_http_header_name(data: &[u8]) {
+    if let Ok(header_name) = http::header::HeaderName::from_bytes(data) {
+        http::header::HeaderName::from_lowercase(header_name.as_str().as_bytes()).unwrap();
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_http_header_value(data: &[u8]) {
+    if let Ok(header_value) = http::header::HeaderValue::from_bytes(data) {
+        if let Ok(val_str) = header_value.to_str() {
+            http::header::HeaderValue::from_str(val_str).unwrap();
+        }
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_http_method(data: &[u8]) {
+    if let Ok(method) = http::method::Method::from_bytes(data) {
+        http::method::Method::from_bytes(method.as_str().as_bytes()).unwrap();
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_http_uri(data: &[u8]) {
+    use std::str;
+    use std::str::FromStr;
+
+    if let Ok(text) = str::from_utf8(data) {
+        if let Ok(uri) = http::uri::Uri::from_str(text) {
+            http::uri::Uri::from_str(&uri.to_string()).unwrap();
+        }
+    }
+}
+
