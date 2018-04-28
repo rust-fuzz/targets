@@ -41,6 +41,7 @@ extern crate svgtypes;
 extern crate xmlparser;
 extern crate usvg;
 extern crate http;
+extern crate sleep_parser;
 
 #[inline(always)]
 pub fn fuzz_brotli_read(data: &[u8]) {
@@ -956,3 +957,9 @@ pub fn fuzz_http_uri(data: &[u8]) {
     }
 }
 
+#[inline(always)]
+pub fn fuzz_sleep_parser_header(data: &[u8]) {
+    if let Ok(header) = sleep_parser::Header::from_vec(data) {
+        sleep_parser::Header::from_vec(&header.to_vec()).unwrap();
+    }
+}
