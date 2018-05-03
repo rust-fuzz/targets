@@ -331,9 +331,29 @@ pub fn fuzz_httparse_response(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_humantime_read(data: &[u8]) {
+pub fn fuzz_humantime_read_duration(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
-        let _ = humantime::parse_duration(data);
+        if let Ok(d) = humantime::parse_duration(data) {
+            let _ = humantime::format_duration(d).to_string();
+        }
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_humantime_read_rfc3339(data: &[u8]) {
+    if let Ok(data) = std::str::from_utf8(data) {
+        if let Ok(d) = humantime::parse_rfc3339(data) {
+            let _ = humantime::format_rfc3339(d).to_string();
+        }
+    }
+}
+
+#[inline(always)]
+pub fn fuzz_humantime_read_rfc3339_weak(data: &[u8]) {
+    if let Ok(data) = std::str::from_utf8(data) {
+        if let Ok(d) = humantime::parse_rfc3339_weak(data) {
+            let _ = humantime::format_rfc3339(d).to_string();
+        }
     }
 }
 
