@@ -48,3 +48,4 @@ xmlparser = { git = "https://github.com/RazrFalcon/xmlparser" }
 usvg = { git = "https://github.com/RazrFalcon/usvg" }
 http = { git = "https://github.com/hyperium/http" }
 sleep-parser = { git = "https://github.com/datrs/sleep-parser" }
+rsass = { git = "https://github.com/kaj/rsass" }
