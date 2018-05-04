@@ -897,11 +897,7 @@ pub fn fuzz_xmlparser_xml(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_usvg_parse_tree(data: &[u8]) {
-    use std::str;
-
-    if let Ok(text) = str::from_utf8(data) {
-        let _ = usvg::parse_tree_from_data(text, &usvg::Options::default());
-    }
+    let _ = usvg::parse_tree_from_data(data, &usvg::Options::default());
 }
 
 #[inline(always)]
