@@ -39,6 +39,9 @@ enum Cli {
             raw(possible_values = "&Fuzzer::variants()", case_insensitive = "true")
         )]
         fuzzer: Fuzzer,
+        // Run `cargo update` between cycles
+        #[structopt(long = "cargo-update")]
+        cargo_update: bool,
     },
     /// Run one target with specific fuzzer
     #[structopt(name = "target")]
@@ -104,6 +107,7 @@ fn run() -> Result<(), Error> {
             timeout,
             infinite,
             fuzzer,
+            cargo_update,
         } => {
             let run = |target: &str| -> Result<(), Error> {
                 use Fuzzer::*;
@@ -127,15 +131,18 @@ fn run() -> Result<(), Error> {
                             Ok(_) => {
                                 println!("Fuzzer failed so we'll continue with the next one");
                                 continue 'targets_pass;
-                            },
+                            }
                             Err(other_error) => Err(other_error)?,
                         }
                     }
                 }
-                if infinite {
-                    run_cargo_update()?;
-                } else {
+
+                if !infinite {
                     break 'cycle;
+                }
+
+                if cargo_update {
+                    run_cargo_update()?;
                 }
             }
         }
@@ -179,7 +186,18 @@ fn get_targets() -> Result<Vec<String>, Error> {
 }
 
 fn run_cargo_update() -> Result<(), Error> {
-    // TODO: https://github.com/rust-fuzz/targets/issues/106
+    let run = Command::new("cargo")
+        .arg("update")
+        .spawn()
+        .context("error starting `cargo update`")?
+        .wait()
+        .context("error running `cargo update`")?;
+
+    ensure!(
+        run.success(),
+        "error running `cargo update`: Exited with {:?}",
+        run.code()
+    );
     Ok(())
 }
 
@@ -294,7 +312,15 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
     };
 
     let fuzzer_bin = Command::new("cargo")
-        .args(&["run", "--target", &target_platform, "--bin", &target, "--", &max_time])
+        .args(&[
+            "run",
+            "--target",
+            &target_platform,
+            "--bin",
+            &target,
+            "--",
+            &max_time,
+        ])
         .arg(&corpus_dir)
         .arg(&seed_dir)
         .env("RUSTFLAGS", &rust_flags)
