@@ -24,6 +24,7 @@ iso8601 = { git = "https://github.com/badboy/iso8601" }
 jpeg-decoder = { git = "https://github.com/kaksmet/jpeg-decoder" }
 minidump = { git = "https://github.com/luser/rust-minidump.git" }
 mp4parse = { git = "https://github.com/mozilla/mp4parse-rust" }
+ogg = { git = "https://github.com/RustAudio/ogg" }
 patch = { git = "https://github.com/uniphil/patch-rs" }
 pikkr = { git = "https://github.com/pikkr/pikkr" }
 png = { git = "https://github.com/PistonDevelopers/image-png" }
