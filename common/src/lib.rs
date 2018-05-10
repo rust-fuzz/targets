@@ -18,6 +18,7 @@ extern crate iso8601;
 extern crate jpeg_decoder;
 extern crate minidump;
 extern crate mp4parse;
+extern crate obj;
 extern crate patch;
 extern crate pikkr;
 extern crate png;
@@ -376,6 +377,15 @@ pub fn fuzz_jpeg_decoder_read(data: &[u8]) {
     let mut decoder = jpeg_decoder::Decoder::new(data);
     let _pixels = decoder.decode();
     let _metadata = decoder.info();
+}
+
+#[inline(always)]
+pub fn fuzz_obj_load(data: &[u8]) {
+    use std::io::Cursor;
+
+    let cursor = Cursor::new(data);
+
+    let _: obj::Obj = obj::load_obj(cursor).unwrap();
 }
 
 #[inline(always)]
