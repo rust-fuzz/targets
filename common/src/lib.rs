@@ -917,7 +917,7 @@ pub fn fuzz_xmlparser_xml(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_usvg_parse_tree(data: &[u8]) {
-    let _ = usvg::parse_tree_from_data(data, &usvg::Options::default());
+    let _ = usvg::Tree::from_data(data, &usvg::Options::default());
 }
 
 #[inline(always)]
