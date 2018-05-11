@@ -16,6 +16,7 @@ extern crate humantime;
 extern crate image;
 extern crate iso8601;
 extern crate jpeg_decoder;
+extern crate lewton;
 extern crate minidump;
 extern crate mp4parse;
 extern crate patch;
@@ -376,6 +377,17 @@ pub fn fuzz_jpeg_decoder_read(data: &[u8]) {
     let mut decoder = jpeg_decoder::Decoder::new(data);
     let _pixels = decoder.decode();
     let _metadata = decoder.info();
+}
+
+#[inline(always)]
+pub fn fuzz_lewton_read(data: &[u8]) {
+    use std::io::Cursor;
+
+    let cursor = Cursor::new(data);
+
+    let mut reader = lewton::inside_ogg::OggStreamReader::new(cursor).unwrap();
+
+    while let Some(_) = reader.read_dec_packet().unwrap() {}
 }
 
 #[inline(always)]
