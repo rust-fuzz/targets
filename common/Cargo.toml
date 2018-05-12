@@ -22,8 +22,10 @@ humantime = { git = "https://github.com/tailhook/humantime" }
 image = { git = "https://github.com/PistonDevelopers/image" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
 jpeg-decoder = { git = "https://github.com/kaksmet/jpeg-decoder" }
+lewton = { git = "https://github.com/RustAudio/lewton" }
 minidump = { git = "https://github.com/luser/rust-minidump.git" }
 mp4parse = { git = "https://github.com/mozilla/mp4parse-rust" }
+obj-rs = { git = "https://github.com/simnalamburt/obj-rs" }
 ogg = { git = "https://github.com/RustAudio/ogg" }
 patch = { git = "https://github.com/uniphil/patch-rs" }
 pikkr = { git = "https://github.com/pikkr/pikkr" }

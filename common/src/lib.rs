@@ -16,8 +16,10 @@ extern crate humantime;
 extern crate image;
 extern crate iso8601;
 extern crate jpeg_decoder;
+extern crate lewton;
 extern crate minidump;
 extern crate mp4parse;
+extern crate obj;
 extern crate ogg;
 extern crate patch;
 extern crate pikkr;
@@ -377,6 +379,26 @@ pub fn fuzz_jpeg_decoder_read(data: &[u8]) {
     let mut decoder = jpeg_decoder::Decoder::new(data);
     let _pixels = decoder.decode();
     let _metadata = decoder.info();
+}
+
+#[inline(always)]
+pub fn fuzz_obj_load(data: &[u8]) {
+    use std::io::Cursor;
+
+    let cursor = Cursor::new(data);
+
+    let _: obj::Obj = obj::load_obj(cursor).unwrap();
+}
+  
+#[inline(always)]
+pub fn fuzz_lewton_read(data: &[u8]) {
+    use std::io::Cursor;
+
+    let cursor = Cursor::new(data);
+
+    let mut reader = lewton::inside_ogg::OggStreamReader::new(cursor).unwrap();
+
+    while let Some(_) = reader.read_dec_packet().unwrap() {}
 }
 
 #[inline(always)]
@@ -928,7 +950,7 @@ pub fn fuzz_xmlparser_xml(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_usvg_parse_tree(data: &[u8]) {
-    let _ = usvg::parse_tree_from_data(data, &usvg::Options::default());
+    let _ = usvg::Tree::from_data(data, &usvg::Options::default());
 }
 
 #[inline(always)]

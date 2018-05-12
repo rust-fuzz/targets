@@ -1,5 +1,5 @@
 **/target
-**/Cargo.lock
+*/**/Cargo.lock
 **/*.rs.bk
 fuzzer-*/corpus-*
 fuzzer-*/src/bin
