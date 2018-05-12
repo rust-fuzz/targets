@@ -45,6 +45,7 @@ extern crate xmlparser;
 extern crate usvg;
 extern crate http;
 extern crate sleep_parser;
+extern crate rsass;
 
 #[inline(always)]
 pub fn fuzz_brotli_read(data: &[u8]) {
@@ -1011,4 +1012,15 @@ pub fn fuzz_sleep_parser_header(data: &[u8]) {
     if let Ok(header) = sleep_parser::Header::from_vec(data) {
         sleep_parser::Header::from_vec(&header.to_vec()).unwrap();
     }
+}
+
+#[inline(always)]
+pub fn fuzz_rsass_sass(data: &[u8]) {
+    use rsass::{OutputStyle, compile_scss};
+    let _ = compile_scss(data, OutputStyle::Compressed);
+}
+
+#[inline(always)]
+pub fn fuzz_rsass_value(data: &[u8]) {
+    let _ = rsass::compile_value(data);
 }
