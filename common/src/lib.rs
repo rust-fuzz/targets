@@ -20,6 +20,7 @@ extern crate lewton;
 extern crate minidump;
 extern crate mp4parse;
 extern crate obj;
+extern crate ogg;
 extern crate patch;
 extern crate pikkr;
 extern crate png;
@@ -416,6 +417,16 @@ pub fn fuzz_mp4parse_read(data: &[u8]) {
 
     let mut context = mp4parse::MediaContext::new();
     let _ = mp4parse::read_mp4(&mut reader, &mut context);
+}
+
+#[inline(always)]
+pub fn fuzz_ogg_read(data: &[u8]) {
+    use std::io::Cursor;
+
+    let reader = Cursor::new(data);
+
+    let mut packet_reader = ogg::reading::PacketReader::new(reader);
+    let _ = packet_reader.read_packet();
 }
 
 #[inline(always)]

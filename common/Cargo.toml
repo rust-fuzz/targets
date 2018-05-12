@@ -26,6 +26,7 @@ lewton = { git = "https://github.com/RustAudio/lewton" }
 minidump = { git = "https://github.com/luser/rust-minidump.git" }
 mp4parse = { git = "https://github.com/mozilla/mp4parse-rust" }
 obj-rs = { git = "https://github.com/simnalamburt/obj-rs" }
+ogg = { git = "https://github.com/RustAudio/ogg" }
 patch = { git = "https://github.com/uniphil/patch-rs" }
 pikkr = { git = "https://github.com/pikkr/pikkr" }
 png = { git = "https://github.com/PistonDevelopers/image-png" }
