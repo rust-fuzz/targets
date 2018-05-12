@@ -19,6 +19,7 @@ extern crate jpeg_decoder;
 extern crate lewton;
 extern crate minidump;
 extern crate mp4parse;
+extern crate obj;
 extern crate patch;
 extern crate pikkr;
 extern crate png;
@@ -379,6 +380,15 @@ pub fn fuzz_jpeg_decoder_read(data: &[u8]) {
     let _metadata = decoder.info();
 }
 
+#[inline(always)]
+pub fn fuzz_obj_load(data: &[u8]) {
+    use std::io::Cursor;
+
+    let cursor = Cursor::new(data);
+
+    let _: obj::Obj = obj::load_obj(cursor).unwrap();
+}
+  
 #[inline(always)]
 pub fn fuzz_lewton_read(data: &[u8]) {
     use std::io::Cursor;
