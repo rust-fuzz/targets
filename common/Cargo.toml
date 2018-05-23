@@ -46,6 +46,7 @@ uuid = { git = "https://github.com/rust-lang-nursery/uuid" }
 xml-rs = { git = "https://github.com/netvl/xml-rs.git" }
 zip = { git = "https://github.com/mvdnes/zip-rs" }
 zopfli = { git = "https://github.com/carols10cents/zopfli" }
+svgdom = { git = "https://github.com/RazrFalcon/svgdom" }
 svgtypes = { git = "https://github.com/RazrFalcon/svgtypes" }
 xmlparser = { git = "https://github.com/RazrFalcon/xmlparser" }
 usvg = { git = "https://github.com/RazrFalcon/usvg" }

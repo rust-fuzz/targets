@@ -40,6 +40,7 @@ extern crate uuid;
 extern crate xml;
 extern crate zip;
 extern crate zopfli;
+extern crate svgdom;
 extern crate svgtypes;
 extern crate xmlparser;
 extern crate usvg;
@@ -390,7 +391,7 @@ pub fn fuzz_obj_load(data: &[u8]) {
 
     let _: obj::Obj = obj::load_obj(cursor).unwrap();
 }
-  
+
 #[inline(always)]
 pub fn fuzz_lewton_read(data: &[u8]) {
     use std::io::Cursor;
@@ -952,6 +953,28 @@ pub fn fuzz_xmlparser_xml(data: &[u8]) {
 #[inline(always)]
 pub fn fuzz_usvg_parse_tree(data: &[u8]) {
     let _ = usvg::Tree::from_data(data, &usvg::Options::default());
+}
+
+#[inline(always)]
+pub fn fuzz_svgdom_parse_roundtrip(data: &[u8]) {
+    use std::str;
+    use svgdom::{Document, WriteBuffer};
+
+    let data = if let Ok(d) = str::from_utf8(data) { d } else { return };
+
+    let doc = Document::from_str(&data);
+    let doc = if let Ok(d) = doc { d } else { return };
+
+    let mut save_doc = Vec::with_capacity(data.len());
+    doc.write_buf(&mut save_doc);
+
+    // We just wrote this -- we need to be able to parse it
+    let re_doc = Document::from_str(&String::from_utf8_lossy(&save_doc)).unwrap();
+
+    let mut re_save_doc = Vec::with_capacity(data.len());
+    re_doc.write_buf(&mut re_save_doc);
+
+    assert_eq!(save_doc, re_save_doc);
 }
 
 #[inline(always)]
