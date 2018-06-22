@@ -388,8 +388,7 @@ pub fn fuzz_obj_load(data: &[u8]) {
     use std::io::Cursor;
 
     let cursor = Cursor::new(data);
-
-    let _: obj::Obj = obj::load_obj(cursor).unwrap();
+    let _: Result<obj::Obj, obj::ObjError> = obj::load_obj(cursor);
 }
 
 #[inline(always)]
@@ -398,9 +397,9 @@ pub fn fuzz_lewton_read(data: &[u8]) {
 
     let cursor = Cursor::new(data);
 
-    let mut reader = lewton::inside_ogg::OggStreamReader::new(cursor).unwrap();
-
-    while let Some(_) = reader.read_dec_packet().unwrap() {}
+    if let Ok(mut reader) = lewton::inside_ogg::OggStreamReader::new(cursor) {
+        while let Ok(Some(_)) = reader.read_dec_packet() {}
+    }
 }
 
 #[inline(always)]
