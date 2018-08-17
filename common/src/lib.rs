@@ -1,5 +1,5 @@
-extern crate tendril;
 extern crate openssl;
+extern crate tendril;
 
 extern crate brotli;
 extern crate bson;
@@ -11,6 +11,7 @@ extern crate dns_parser;
 extern crate flac;
 extern crate gif;
 extern crate html5ever;
+extern crate http;
 extern crate httparse;
 extern crate humantime;
 extern crate image;
@@ -30,23 +31,22 @@ extern crate quick_xml;
 extern crate regex;
 extern crate regex_syntax;
 extern crate ring;
+extern crate rsass;
 extern crate semver;
 extern crate serde_json;
 extern crate serde_yaml;
+extern crate sleep_parser;
+extern crate svgdom;
+extern crate svgtypes;
 extern crate tar;
 extern crate toml;
 extern crate url;
+extern crate usvg;
 extern crate uuid;
 extern crate xml;
+extern crate xmlparser;
 extern crate zip;
 extern crate zopfli;
-extern crate svgdom;
-extern crate svgtypes;
-extern crate xmlparser;
-extern crate usvg;
-extern crate http;
-extern crate sleep_parser;
-extern crate rsass;
 
 #[inline(always)]
 pub fn fuzz_brotli_read(data: &[u8]) {
@@ -181,7 +181,7 @@ pub fn fuzz_crypto_hashes_sha3_keccak512(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha3_shake256(data: &[u8]) {
-    use crypto_hashes::digest::{Input, ExtendableOutput};
+    use crypto_hashes::digest::{ExtendableOutput, Input};
 
     let mut hasher = crypto_hashes::sha3::Shake256::default();
     hasher.process(data);
@@ -222,7 +222,7 @@ pub fn fuzz_css_parser_read(data: &[u8]) {
     if let Ok(str_) = std::str::from_utf8(data) {
         let mut parser_input = ParserInput::new(str_);
         let mut parser = Parser::new(&mut parser_input);
-        while parser.next_including_whitespace_and_comments().is_ok() { }
+        while parser.next_including_whitespace_and_comments().is_ok() {}
     }
 }
 
@@ -246,7 +246,10 @@ pub fn fuzz_css_parser_read_write_read(data: &[u8]) {
     };
 
     // dump the tokens into a string and parse again into tokens
-    let str2 = tokens1.iter().map(|t| t.to_css_string()).collect::<String>();
+    let str2 = tokens1
+        .iter()
+        .map(|t| t.to_css_string())
+        .collect::<String>();
     let tokens2: Vec<Token> = {
         let mut parser_input = ParserInput::new(&str2);
         let mut parser = Parser::new(&mut parser_input);
@@ -279,7 +282,7 @@ pub fn fuzz_flac_read(data: &[u8]) {
         let _ = stream.info();
         let _ = stream.metadata();
         let mut iter = stream.iter::<i8>();
-        while iter.next().is_some() { }
+        while iter.next().is_some() {}
     }
 }
 
@@ -288,7 +291,7 @@ pub fn fuzz_gif_read(data: &[u8]) {
     let decoder = gif::Decoder::new(std::io::Cursor::new(data));
 
     if let Ok(mut decoder) = decoder.read_info() {
-        while let Ok(Some(_frame)) = decoder.read_next_frame() { }
+        while let Ok(Some(_frame)) = decoder.read_next_frame() {}
     }
 }
 
@@ -298,10 +301,10 @@ pub fn fuzz_html5ever_read(data: &[u8]) {
     use std::io::BufReader;
 
     use html5ever::driver::ParseOpts;
+    use html5ever::rcdom::RcDom;
+    use html5ever::tendril::TendrilSink;
     use html5ever::tree_builder::TreeBuilderOpts;
     use html5ever::{parse_document, serialize};
-    use html5ever::tendril::TendrilSink;
-    use html5ever::rcdom::RcDom;
 
     let opts = ParseOpts {
         tree_builder: TreeBuilderOpts {
@@ -315,7 +318,11 @@ pub fn fuzz_html5ever_read(data: &[u8]) {
         .from_utf8()
         .read_from(&mut BufReader::new(data));
 
-    let dom = if let Ok(dom) = dom { dom } else { return; };
+    let dom = if let Ok(dom) = dom {
+        dom
+    } else {
+        return;
+    };
 
     let mut out = Vec::with_capacity(data.len());
     let _ = serialize(&mut out, &dom.document, Default::default());
@@ -323,14 +330,14 @@ pub fn fuzz_html5ever_read(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_httparse_request(data: &[u8]) {
-	let mut headers = [httparse::EMPTY_HEADER; 16];
+    let mut headers = [httparse::EMPTY_HEADER; 16];
     let mut req = httparse::Request::new(&mut headers);
     let _ = req.parse(data);
 }
 
 #[inline(always)]
 pub fn fuzz_httparse_response(data: &[u8]) {
-	let mut headers = [httparse::EMPTY_HEADER; 16];
+    let mut headers = [httparse::EMPTY_HEADER; 16];
     let mut res = httparse::Response::new(&mut headers);
     let _ = res.parse(data);
 }
@@ -488,7 +495,7 @@ pub fn fuzz_png_read_write_read(data: &[u8]) {
     let decoder = png::Decoder::new(data);
     let (info, mut reader) = match decoder.read_info() {
         Ok(r) => r,
-        Err(_) => return
+        Err(_) => return,
     };
 
     if info.buffer_size() > 50_000_000 {
@@ -503,7 +510,7 @@ pub fn fuzz_png_read_write_read(data: &[u8]) {
 pub fn fuzz_proc_macro2_read(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
         if let Ok(token_stream) = data.parse::<proc_macro2::TokenStream>() {
-            for _ in token_stream { }
+            for _ in token_stream {}
         }
     }
 }
@@ -512,7 +519,7 @@ pub fn fuzz_proc_macro2_read(data: &[u8]) {
 pub fn fuzz_pulldown_cmark_read(data: &[u8]) {
     if let Ok(s) = std::str::from_utf8(data) {
         let parser = pulldown_cmark::Parser::new(s);
-        for _ in parser { }
+        for _ in parser {}
     }
 }
 
@@ -560,56 +567,32 @@ pub fn fuzz_regex_is_match(data: &[u8]) {
 #[inline(always)]
 pub fn fuzz_ring_digest_sha1(data: &[u8]) {
     assert_eq!(
-        ring::digest::digest(
-            &ring::digest::SHA1,
-            data
-        ).as_ref(),
-        &*openssl::hash::hash2(
-            openssl::hash::MessageDigest::sha1(),
-            data
-        ).unwrap()
+        ring::digest::digest(&ring::digest::SHA1, data).as_ref(),
+        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha1(), data).unwrap()
     )
 }
 
 #[inline(always)]
 pub fn fuzz_ring_digest_sha256(data: &[u8]) {
     assert_eq!(
-        ring::digest::digest(
-            &ring::digest::SHA256,
-            data
-        ).as_ref(),
-        &*openssl::hash::hash2(
-            openssl::hash::MessageDigest::sha256(),
-            data
-        ).unwrap()
+        ring::digest::digest(&ring::digest::SHA256, data).as_ref(),
+        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha256(), data).unwrap()
     )
 }
 
 #[inline(always)]
 pub fn fuzz_ring_digest_sha384(data: &[u8]) {
     assert_eq!(
-        ring::digest::digest(
-            &ring::digest::SHA384,
-            data
-        ).as_ref(),
-        &*openssl::hash::hash2(
-            openssl::hash::MessageDigest::sha384(),
-            data
-        ).unwrap()
+        ring::digest::digest(&ring::digest::SHA384, data).as_ref(),
+        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha384(), data).unwrap()
     )
 }
 
 #[inline(always)]
 pub fn fuzz_ring_digest_sha512(data: &[u8]) {
     assert_eq!(
-        ring::digest::digest(
-            &ring::digest::SHA512,
-            data
-        ).as_ref(),
-        &*openssl::hash::hash2(
-            openssl::hash::MessageDigest::sha512(),
-            data
-        ).unwrap()
+        ring::digest::digest(&ring::digest::SHA512, data).as_ref(),
+        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha512(), data).unwrap()
     )
 }
 
@@ -638,7 +621,10 @@ pub fn fuzz_semver_req_read_write_read(data: &[u8]) {
         Err(..) => return,
     };
     let version_req_s = version_req.to_string();
-    assert_eq!(version_req, semver::VersionReq::parse(&version_req_s).unwrap());
+    assert_eq!(
+        version_req,
+        semver::VersionReq::parse(&version_req_s).unwrap()
+    );
 }
 
 #[inline(always)]
@@ -731,7 +717,7 @@ pub fn fuzz_tar_read(data: &[u8]) {
 }
 
 fn tar_roundtrip(data: &[u8]) -> std::io::Result<()> {
-    use std::io::{Read, Cursor};
+    use std::io::{Cursor, Read};
 
     let mut output = Vec::with_capacity(data.len());
     {
@@ -747,15 +733,11 @@ fn tar_roundtrip(data: &[u8]) -> std::io::Result<()> {
         builder.finish().unwrap();
     }
 
-
     {
         let mut original = tar::Archive::new(Cursor::new(data));
         let mut output = tar::Archive::new(Cursor::new(&output));
 
-        let iter = original
-            .entries()
-            .unwrap()
-            .zip(output.entries().unwrap());
+        let iter = original.entries().unwrap().zip(output.entries().unwrap());
 
         for (e1, e2) in iter {
             let mut e1 = e1.unwrap();
@@ -771,9 +753,7 @@ fn tar_roundtrip(data: &[u8]) -> std::io::Result<()> {
             // headers are the same
             let h1 = e1.header().as_bytes();
             let h2 = e2.header().as_bytes();
-            assert!(h1.iter()
-                .zip(h2.iter())
-                .all(|(a, b)| a == b));
+            assert!(h1.iter().zip(h2.iter()).all(|(a, b)| a == b));
         }
     }
     Ok(())
@@ -814,13 +794,17 @@ pub fn fuzz_uuid_read(data: &[u8]) {
 #[inline(always)]
 pub fn fuzz_xml_read(data: &[u8]) {
     let reader = xml::reader::EventReader::new(data);
-    for _ in reader.into_iter() { }
+    for _ in reader.into_iter() {}
 }
 
 #[inline(always)]
 pub fn fuzz_zip_read(data: &[u8]) {
     let reader = std::io::Cursor::new(data);
-    let mut archive = if let Ok(x) = zip::ZipArchive::new(reader) { x } else { return; };
+    let mut archive = if let Ok(x) = zip::ZipArchive::new(reader) {
+        x
+    } else {
+        return;
+    };
 
     for i in 0..archive.len() {
         use std::io::prelude::*;
@@ -859,7 +843,7 @@ pub fn fuzz_svgtypes_color(data: &[u8]) {
 pub fn fuzz_svgtypes_length(data: &[u8]) {
     use std::str;
     use std::str::FromStr;
-    use svgtypes::{Length, Error};
+    use svgtypes::{Error, Length};
 
     if let Ok(s) = str::from_utf8(data) {
         if let Err(e) = Length::from_str(s) {
@@ -959,7 +943,11 @@ pub fn fuzz_svgdom_parse_roundtrip(data: &[u8]) {
     use std::str;
     use svgdom::{Document, WriteBuffer};
 
-    let data = if let Ok(d) = str::from_utf8(data) { d } else { return };
+    let data = if let Ok(d) = str::from_utf8(data) {
+        d
+    } else {
+        return;
+    };
 
     let doc = Document::from_str(&data);
     let doc = if let Ok(d) = doc { d } else { return };
@@ -1038,7 +1026,7 @@ pub fn fuzz_sleep_parser_header(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_rsass_sass(data: &[u8]) {
-    use rsass::{OutputStyle, compile_scss};
+    use rsass::{compile_scss, OutputStyle};
     let _ = compile_scss(data, OutputStyle::Compressed);
 }
 

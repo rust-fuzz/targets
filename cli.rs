@@ -36,7 +36,10 @@ enum Cli {
         #[structopt(
             long = "fuzzer",
             default_value = "Honggfuzz",
-            raw(possible_values = "&Fuzzer::variants()", case_insensitive = "true")
+            raw(
+                possible_values = "&Fuzzer::variants()",
+                case_insensitive = "true"
+            )
         )]
         fuzzer: Fuzzer,
         // Run `cargo update` between cycles
@@ -52,7 +55,10 @@ enum Cli {
         #[structopt(
             long = "fuzzer",
             default_value = "Honggfuzz",
-            raw(possible_values = "&Fuzzer::variants()", case_insensitive = "true")
+            raw(
+                possible_values = "&Fuzzer::variants()",
+                case_insensitive = "true"
+            )
         )]
         fuzzer: Fuzzer,
     },
@@ -320,8 +326,7 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
             &target,
             "--",
             &max_time,
-        ])
-        .arg(&corpus_dir)
+        ]).arg(&corpus_dir)
         .arg(&seed_dir)
         .env("RUSTFLAGS", &rust_flags)
         .env("ASAN_OPTIONS", &asan_options)
