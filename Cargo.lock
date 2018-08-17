@@ -717,7 +717,7 @@ name = "fuzz-targets-honggfuzz"
 version = "0.1.0"
 dependencies = [
  "fuzz-targets-common 0.1.0",
- "honggfuzz 0.5.20 (registry+https://github.com/rust-lang/crates.io-index)",
+ "honggfuzz 0.5.24 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -791,7 +791,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "honggfuzz"
-version = "0.5.20"
+version = "0.5.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "lazy_static 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -2404,7 +2404,7 @@ dependencies = [
 "checksum gost94 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)" = "28a479e5af8bff6770b86b5dc41a5ed2e232bcd0a52fcf1af5546ed487f3b89b"
 "checksum groestl 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)" = "1dfb9f0d57d3604c0883a82e8dc2a983d2c2f93904c9d2972f24171defedda03"
 "checksum hex 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "d6a22814455d41612f41161581c2883c0c6a1c41852729b17d5ed88f01e153aa"
-"checksum honggfuzz 0.5.20 (registry+https://github.com/rust-lang/crates.io-index)" = "eb648844da82627a2300ae120173c9bbeff59c957cf94b0287f630ffd49f8c50"
+"checksum honggfuzz 0.5.24 (registry+https://github.com/rust-lang/crates.io-index)" = "1153f74b0181f14741f1a4654c75b4c4e36135951934573f0f26bcdf098759ea"
 "checksum hostname 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)" = "58fab6e177434b0bb4cd344a4dabaa5bd6d7a8d792b1885aebcae7af1091d1cb"
 "checksum hound 1.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "7cb2af8cad251a1869dbc6ae1ae744b849a32458be4aee82cba93481847656a8"
 "checksum html5ever 0.22.3 (git+https://github.com/servo/html5ever)" = "<none>"
