@@ -41,7 +41,7 @@ extern crate svgtypes;
 extern crate tar;
 extern crate toml;
 extern crate url;
-extern crate usvg;
+extern crate resvg;
 extern crate uuid;
 extern crate xml;
 extern crate xmlparser;
@@ -297,7 +297,6 @@ pub fn fuzz_gif_read(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_html5ever_read(data: &[u8]) {
-    use std::default::Default;
     use std::io::BufReader;
 
     use html5ever::driver::ParseOpts;
@@ -934,14 +933,14 @@ pub fn fuzz_xmlparser_xml(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_usvg_parse_tree(data: &[u8]) {
-    let _ = usvg::Tree::from_data(data, &usvg::Options::default());
+pub fn fuzz_resvg_parse_tree(data: &[u8]) {
+    let _ = resvg::usvg::Tree::from_data(data, &resvg::usvg::Options::default());
 }
 
 #[inline(always)]
 pub fn fuzz_svgdom_parse_roundtrip(data: &[u8]) {
     use std::str;
-    use svgdom::{Document, WriteBuffer};
+    use svgdom::Document;
 
     let data = if let Ok(d) = str::from_utf8(data) {
         d
@@ -952,14 +951,12 @@ pub fn fuzz_svgdom_parse_roundtrip(data: &[u8]) {
     let doc = Document::from_str(&data);
     let doc = if let Ok(d) = doc { d } else { return };
 
-    let mut save_doc = Vec::with_capacity(data.len());
-    doc.write_buf(&mut save_doc);
+    let save_doc = doc.to_string();
 
     // We just wrote this -- we need to be able to parse it
-    let re_doc = Document::from_str(&String::from_utf8_lossy(&save_doc)).unwrap();
+    let re_doc = Document::from_str(&save_doc).unwrap();
 
-    let mut re_save_doc = Vec::with_capacity(data.len());
-    re_doc.write_buf(&mut re_save_doc);
+    let re_save_doc = re_doc.to_string();
 
     assert_eq!(save_doc, re_save_doc);
 }
