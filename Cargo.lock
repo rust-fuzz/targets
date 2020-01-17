@@ -782,7 +782,7 @@ dependencies = [
  "tar 0.4.15 (git+https://github.com/alexcrichton/tar-rs)",
  "tendril 0.2.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "toml 0.4.5 (git+https://github.com/alexcrichton/toml-rs)",
- "url 1.7.0 (git+https://github.com/servo/rust-url)",
+ "url 2.1.1 (git+https://github.com/servo/rust-url)",
  "uuid 0.6.4 (git+https://github.com/rust-lang-nursery/uuid)",
  "xml-rs 0.8.0 (git+https://github.com/netvl/xml-rs.git)",
  "xmlparser 0.4.1 (git+https://github.com/RazrFalcon/xmlparser)",
@@ -950,8 +950,8 @@ dependencies = [
 
 [[package]]
 name = "idna"
-version = "0.1.4"
-source = "git+https://github.com/servo/rust-url#04d5ec1e7f3e70c850ff2e7ba7d83d446926defe"
+version = "0.2.0"
+source = "git+https://github.com/servo/rust-url#f091d2b45b79958f9a40e2b98b844f75df6723de"
 dependencies = [
  "matches 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "unicode-bidi 0.3.4 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1425,8 +1425,8 @@ dependencies = [
 
 [[package]]
 name = "percent-encoding"
-version = "1.0.1"
-source = "git+https://github.com/servo/rust-url#04d5ec1e7f3e70c850ff2e7ba7d83d446926defe"
+version = "2.1.0"
+source = "git+https://github.com/servo/rust-url#f091d2b45b79958f9a40e2b98b844f75df6723de"
 
 [[package]]
 name = "phf"
@@ -2349,12 +2349,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "url"
-version = "1.7.0"
-source = "git+https://github.com/servo/rust-url#04d5ec1e7f3e70c850ff2e7ba7d83d446926defe"
+version = "2.1.1"
+source = "git+https://github.com/servo/rust-url#f091d2b45b79958f9a40e2b98b844f75df6723de"
 dependencies = [
- "idna 0.1.4 (git+https://github.com/servo/rust-url)",
+ "idna 0.2.0 (git+https://github.com/servo/rust-url)",
  "matches 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "percent-encoding 1.0.1 (git+https://github.com/servo/rust-url)",
+ "percent-encoding 2.1.0 (git+https://github.com/servo/rust-url)",
 ]
 
 [[package]]
@@ -2666,7 +2666,7 @@ dependencies = [
 "checksum http 0.1.5 (git+https://github.com/hyperium/http)" = "<none>"
 "checksum httparse 1.2.4 (git+https://github.com/seanmonstar/httparse)" = "<none>"
 "checksum humantime 1.1.1 (git+https://github.com/tailhook/humantime)" = "<none>"
-"checksum idna 0.1.4 (git+https://github.com/servo/rust-url)" = "<none>"
+"checksum idna 0.2.0 (git+https://github.com/servo/rust-url)" = "<none>"
 "checksum image 0.22.1 (git+https://github.com/PistonDevelopers/image)" = "<none>"
 "checksum inflate 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)" = "4ec18d981200fd14e65ee8e35fb60ed1ce55227a02407303f3a72517c6146dcc"
 "checksum iovec 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)" = "dbe6e417e7d0975db6512b90796e8ce223145ac4e33c377e4a42882a0e88bb08"
@@ -2722,7 +2722,7 @@ dependencies = [
 "checksum openssl 0.9.23 (git+https://github.com/sfackler/rust-openssl.git?tag=v0.9.23)" = "<none>"
 "checksum openssl-sys 0.9.23 (git+https://github.com/sfackler/rust-openssl.git?tag=v0.9.23)" = "<none>"
 "checksum patch 0.4.2 (git+https://github.com/uniphil/patch-rs)" = "<none>"
-"checksum percent-encoding 1.0.1 (git+https://github.com/servo/rust-url)" = "<none>"
+"checksum percent-encoding 2.1.0 (git+https://github.com/servo/rust-url)" = "<none>"
 "checksum phf 0.7.22 (registry+https://github.com/rust-lang/crates.io-index)" = "7d37a244c75a9748e049225155f56dbcb98fe71b192fd25fd23cb914b5ad62f2"
 "checksum phf_codegen 0.7.22 (registry+https://github.com/rust-lang/crates.io-index)" = "4e4048fe7dd7a06b8127ecd6d3803149126e9b33c7558879846da3a63f734f2b"
 "checksum phf_generator 0.7.22 (registry+https://github.com/rust-lang/crates.io-index)" = "05a079dd052e7b674d21cb31cbb6c05efd56a2cd2827db7692e2f1a507ebd998"
@@ -2836,7 +2836,7 @@ dependencies = [
 "checksum unreachable 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "1f2ae5ddb18e1c92664717616dd9549dde73f539f01bd7b77c2edb2446bdff91"
 "checksum unreachable 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)" = "382810877fe448991dfc7f0dd6e3ae5d58088fd0ea5e35189655f84e6814fa56"
 "checksum untrusted 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)" = "70afa43c8c5d23a53a3c39ec9b56232c5badc19f6bb5ad529c1d6448a7241365"
-"checksum url 1.7.0 (git+https://github.com/servo/rust-url)" = "<none>"
+"checksum url 2.1.1 (git+https://github.com/servo/rust-url)" = "<none>"
 "checksum usvg 0.8.0 (git+https://github.com/RazrFalcon/resvg)" = "<none>"
 "checksum utf-8 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)" = "a9aee9ba280438b56d1ebc5329f2094f0ff457f811eeeff0b278d75aa99db400"
 "checksum utf-8 0.7.2 (registry+https://github.com/rust-lang/crates.io-index)" = "f1262dfab4c30d5cb7c07026be00ee343a6cf5027fdc0104a9160f354e5db75c"
