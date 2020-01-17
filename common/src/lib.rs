@@ -581,7 +581,7 @@ pub fn fuzz_regex_is_match(data: &[u8]) {
 #[inline(always)]
 pub fn fuzz_ring_digest_sha1(data: &[u8]) {
     assert_eq!(
-        ring::digest::digest(&ring::digest::SHA1, data).as_ref(),
+        ring::digest::digest(&ring::digest::SHA1_FOR_LEGACY_USE_ONLY, data).as_ref(),
         &*openssl::hash::hash(openssl::hash::MessageDigest::sha1(), data).unwrap()
     )
 }
