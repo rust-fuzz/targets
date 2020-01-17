@@ -784,7 +784,7 @@ dependencies = [
  "uuid 0.6.4 (git+https://github.com/rust-lang-nursery/uuid)",
  "whirlpool 0.8.1 (git+https://github.com/RustCrypto/hashes)",
  "xml-rs 0.8.0 (git+https://github.com/netvl/xml-rs.git)",
- "xmlparser 0.4.1 (git+https://github.com/RazrFalcon/xmlparser)",
+ "xmlparser 0.13.0 (git+https://github.com/RazrFalcon/xmlparser)",
  "zip 0.3.3 (git+https://github.com/mvdnes/zip-rs)",
  "zopfli 0.4.0 (git+https://github.com/carols10cents/zopfli)",
 ]
@@ -2591,15 +2591,6 @@ dependencies = [
 [[package]]
 name = "xmlparser"
 version = "0.4.1"
-source = "git+https://github.com/RazrFalcon/xmlparser#ac88be9164fda917eba165dd4b76d51b0b02932b"
-dependencies = [
- "failure 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "log 0.4.8 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "xmlparser"
-version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "failure 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -2610,6 +2601,11 @@ dependencies = [
 name = "xmlparser"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "xmlparser"
+version = "0.13.0"
+source = "git+https://github.com/RazrFalcon/xmlparser#9f23c207b22306f932ad3b392ebae650f31bac0e"
 
 [[package]]
 name = "xmlwriter"
@@ -2958,7 +2954,7 @@ dependencies = [
 "checksum xdg 2.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "a66b7c2281ebde13cf4391d70d4c7e5946c3c25e72a7b859ca8f677dcd0b0c61"
 "checksum xml-rs 0.8.0 (git+https://github.com/netvl/xml-rs.git)" = "<none>"
 "checksum xml5ever 0.16.1 (git+https://github.com/servo/html5ever)" = "<none>"
-"checksum xmlparser 0.4.1 (git+https://github.com/RazrFalcon/xmlparser)" = "<none>"
+"checksum xmlparser 0.13.0 (git+https://github.com/RazrFalcon/xmlparser)" = "<none>"
 "checksum xmlparser 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)" = "a80a4b15edbd711250ac6fb4b4c519f2d40d2531ed9f506c80db572d8a9baaaa"
 "checksum xmlparser 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ecec95f00fb0ff019153e64ea520f87d1409769db3e8f4db3ea588638a3e1cee"
 "checksum xmlwriter 0.1.0 (git+https://github.com/RazrFalcon/xmlwriter?rev=dac292c)" = "<none>"

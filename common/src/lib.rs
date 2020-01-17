@@ -921,17 +921,6 @@ pub fn fuzz_svgtypes_transforms(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_xmlparser_unescape(data: &[u8]) {
-    use std::str;
-    use xmlparser::{TextUnescape, XmlSpace};
-
-    if let Ok(s) = str::from_utf8(data) {
-        let _ = TextUnescape::unescape(s, XmlSpace::Default);
-        let _ = TextUnescape::unescape(s, XmlSpace::Preserve);
-    }
-}
-
-#[inline(always)]
 pub fn fuzz_xmlparser_xml(data: &[u8]) {
     use std::str;
 
