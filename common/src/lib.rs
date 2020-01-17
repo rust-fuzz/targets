@@ -567,7 +567,7 @@ pub fn fuzz_regex_is_match(data: &[u8]) {
 pub fn fuzz_ring_digest_sha1(data: &[u8]) {
     assert_eq!(
         ring::digest::digest(&ring::digest::SHA1, data).as_ref(),
-        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha1(), data).unwrap()
+        &*openssl::hash::hash(openssl::hash::MessageDigest::sha1(), data).unwrap()
     )
 }
 
@@ -575,7 +575,7 @@ pub fn fuzz_ring_digest_sha1(data: &[u8]) {
 pub fn fuzz_ring_digest_sha256(data: &[u8]) {
     assert_eq!(
         ring::digest::digest(&ring::digest::SHA256, data).as_ref(),
-        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha256(), data).unwrap()
+        &*openssl::hash::hash(openssl::hash::MessageDigest::sha256(), data).unwrap()
     )
 }
 
@@ -583,7 +583,7 @@ pub fn fuzz_ring_digest_sha256(data: &[u8]) {
 pub fn fuzz_ring_digest_sha384(data: &[u8]) {
     assert_eq!(
         ring::digest::digest(&ring::digest::SHA384, data).as_ref(),
-        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha384(), data).unwrap()
+        &*openssl::hash::hash(openssl::hash::MessageDigest::sha384(), data).unwrap()
     )
 }
 
@@ -591,7 +591,7 @@ pub fn fuzz_ring_digest_sha384(data: &[u8]) {
 pub fn fuzz_ring_digest_sha512(data: &[u8]) {
     assert_eq!(
         ring::digest::digest(&ring::digest::SHA512, data).as_ref(),
-        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha512(), data).unwrap()
+        &*openssl::hash::hash(openssl::hash::MessageDigest::sha512(), data).unwrap()
     )
 }
 

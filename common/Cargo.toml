@@ -5,7 +5,7 @@ authors = ["The rust-fuzz Project Developers"]
 
 [dependencies]
 tendril = "0.2.2"
-openssl = { git = "https://github.com/sfackler/rust-openssl.git", tag = "v0.9.23" }
+openssl = "0.10.26"
 
 brotli = { git = "https://github.com/dropbox/rust-brotli" }
 bson = { git = "https://github.com/zonyitoo/bson-rs" }
