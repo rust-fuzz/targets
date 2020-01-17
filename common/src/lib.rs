@@ -797,8 +797,6 @@ pub fn fuzz_uuid_read(data: &[u8]) {
 
     if let Ok(data) = std::str::from_utf8(data) {
         let _ = Uuid::parse_str(data);
-    } else {
-        let _ = Uuid::from_bytes(data);
     }
 }
 
