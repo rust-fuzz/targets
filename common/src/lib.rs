@@ -479,13 +479,12 @@ fn png_decode(data: &[u8]) -> Result<(png::OutputInfo, Vec<u8>), ()> {
 }
 
 fn png_encode(info: &png::OutputInfo, data: &[u8]) -> Result<Vec<u8>, ()> {
-    use png::HasParameters;
-
     let mut out = Vec::with_capacity(data.len());
 
     {
         let mut encoder = png::Encoder::new(&mut out, info.width, info.height);
-        encoder.set(info.color_type).set(info.bit_depth);
+        encoder.set_color(info.color_type);
+        encoder.set_depth(info.bit_depth);
         let mut writer = encoder.write_header().map_err(|_| ())?;
         writer.write_image_data(&data).map_err(|_| ())?;
     }

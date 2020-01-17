@@ -476,6 +476,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "deflate"
+version = "0.8.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "adler32 1.0.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "byteorder 1.3.2 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "digest"
 version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -726,14 +735,14 @@ dependencies = [
  "deflate 0.8.2 (git+https://github.com/oyvindln/deflate-rs?branch=dev)",
  "dns-parser 0.7.1 (git+https://github.com/tailhook/dns-parser)",
  "flac 0.5.0 (git+https://github.com/sourrust/flac.git)",
- "gif 0.10.0 (git+https://github.com/PistonDevelopers/image-gif)",
+ "gif 0.10.3 (git+https://github.com/image-rs/image-gif)",
  "gost94 0.8.0 (git+https://github.com/RustCrypto/hashes)",
  "groestl 0.8.0 (git+https://github.com/RustCrypto/hashes)",
  "html5ever 0.22.3 (git+https://github.com/servo/html5ever)",
  "http 0.1.5 (git+https://github.com/hyperium/http)",
  "httparse 1.2.4 (git+https://github.com/seanmonstar/httparse)",
  "humantime 1.1.1 (git+https://github.com/tailhook/humantime)",
- "image 0.22.1 (git+https://github.com/PistonDevelopers/image)",
+ "image 0.22.4 (git+https://github.com/image-rs/image)",
  "iso8601 0.2.0 (git+https://github.com/badboy/iso8601)",
  "jpeg-decoder 0.1.14 (git+https://github.com/kaksmet/jpeg-decoder)",
  "lewton 0.8.0 (git+https://github.com/RustAudio/lewton)",
@@ -747,7 +756,7 @@ dependencies = [
  "openssl 0.10.26 (registry+https://github.com/rust-lang/crates.io-index)",
  "patch 0.4.2 (git+https://github.com/uniphil/patch-rs)",
  "pikkr 0.16.1 (git+https://github.com/pikkr/pikkr)",
- "png 0.12.0 (git+https://github.com/PistonDevelopers/image-png)",
+ "png 0.15.2 (git+https://github.com/image-rs/image-png)",
  "proc-macro2 0.4.3 (git+https://github.com/alexcrichton/proc-macro2.git)",
  "pulldown-cmark 0.1.2 (git+https://github.com/google/pulldown-cmark.git)",
  "quick-xml 0.12.1 (git+https://github.com/tafia/quick-xml)",
@@ -822,7 +831,7 @@ dependencies = [
 [[package]]
 name = "gif"
 version = "0.10.0"
-source = "git+https://github.com/PistonDevelopers/image-gif#c814b40079a36af0b26adc36237f2c742d69c994"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "color_quant 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "lzw 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -830,8 +839,8 @@ dependencies = [
 
 [[package]]
 name = "gif"
-version = "0.10.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
+version = "0.10.3"
+source = "git+https://github.com/image-rs/image-gif#9c0e0965afb8186492ef6a3a73215d40f7ab8a96"
 dependencies = [
  "color_quant 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "lzw 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -946,13 +955,12 @@ dependencies = [
 
 [[package]]
 name = "image"
-version = "0.22.1"
-source = "git+https://github.com/PistonDevelopers/image#43eeae7fee304c0a57dba06e717707b00f1e29fe"
+version = "0.22.4"
+source = "git+https://github.com/image-rs/image#cf0cb54ef4d12526091e5c61768da0624615b446"
 dependencies = [
  "byteorder 1.3.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "gif 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "jpeg-decoder 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
- "lzw 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-iter 0.1.37 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-rational 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-traits 0.2.8 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1523,23 +1531,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "png"
-version = "0.12.0"
-source = "git+https://github.com/PistonDevelopers/image-png#1266ec2967b49a4c5c0a80605e19e3268a7b7bef"
-dependencies = [
- "bitflags 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
- "deflate 0.7.20 (registry+https://github.com/rust-lang/crates.io-index)",
- "inflate 0.4.5 (registry+https://github.com/rust-lang/crates.io-index)",
- "num-iter 0.1.37 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "png"
 version = "0.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "bitflags 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "crc32fast 1.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "deflate 0.7.20 (registry+https://github.com/rust-lang/crates.io-index)",
+ "inflate 0.4.5 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "png"
+version = "0.15.2"
+source = "git+https://github.com/image-rs/image-png#f9261e7d6d13607e14d0071c500ada3b027af55d"
+dependencies = [
+ "bitflags 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "crc32fast 1.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "deflate 0.8.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "inflate 0.4.5 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -2693,6 +2701,7 @@ dependencies = [
 "checksum debug_unreachable 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "9a032eac705ca39214d169f83e3d3da290af06d8d1d344d1baad2fd002dca4b3"
 "checksum deflate 0.7.20 (registry+https://github.com/rust-lang/crates.io-index)" = "707b6a7b384888a70c8d2e8650b3e60170dfc6a67bb4aa67b6dfca57af4bedb4"
 "checksum deflate 0.8.2 (git+https://github.com/oyvindln/deflate-rs?branch=dev)" = "<none>"
+"checksum deflate 0.8.2 (registry+https://github.com/rust-lang/crates.io-index)" = "f5f3e14a3476e8360a1bb56f2311549cfe458418c4e1e6a333b104123df078d2"
 "checksum digest 0.8.1 (registry+https://github.com/rust-lang/crates.io-index)" = "f3d0c8c8752312f9713efd397ff63acb9f85585afbf179282e720e7704954dd5"
 "checksum dns-parser 0.7.1 (git+https://github.com/tailhook/dns-parser)" = "<none>"
 "checksum docopt 0.6.86 (registry+https://github.com/rust-lang/crates.io-index)" = "4a7ef30445607f6fc8720f0a0a2c7442284b629cf0d049286860fae23e71c4d9"
@@ -2724,8 +2733,8 @@ dependencies = [
 "checksum generic-array 0.12.3 (registry+https://github.com/rust-lang/crates.io-index)" = "c68f0274ae0e023facc3c97b2e00f076be70e254bc851d972503b328db79b2ec"
 "checksum getopts 0.2.17 (registry+https://github.com/rust-lang/crates.io-index)" = "b900c08c1939860ce8b54dc6a89e26e00c04c380fd0e09796799bd7f12861e05"
 "checksum getrandom 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "e738b1f02e4d17217cae7648e774c03a19cd9de18bc294c538cc3e780f8c3bbd"
-"checksum gif 0.10.0 (git+https://github.com/PistonDevelopers/image-gif)" = "<none>"
 "checksum gif 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ff3414b424657317e708489d2857d9575f4403698428b040b609b9d1c1a84a2c"
+"checksum gif 0.10.3 (git+https://github.com/image-rs/image-gif)" = "<none>"
 "checksum gost94 0.8.0 (git+https://github.com/RustCrypto/hashes)" = "<none>"
 "checksum groestl 0.8.0 (git+https://github.com/RustCrypto/hashes)" = "<none>"
 "checksum harfbuzz-sys 0.3.2 (registry+https://github.com/rust-lang/crates.io-index)" = "e1042ab0b3e7bc1ff64f7f5935778b644ff2194a1cae5ec52167127d3fd23961"
@@ -2738,7 +2747,7 @@ dependencies = [
 "checksum httparse 1.2.4 (git+https://github.com/seanmonstar/httparse)" = "<none>"
 "checksum humantime 1.1.1 (git+https://github.com/tailhook/humantime)" = "<none>"
 "checksum idna 0.2.0 (git+https://github.com/servo/rust-url)" = "<none>"
-"checksum image 0.22.1 (git+https://github.com/PistonDevelopers/image)" = "<none>"
+"checksum image 0.22.4 (git+https://github.com/image-rs/image)" = "<none>"
 "checksum indexmap 1.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "0b54058f0a6ff80b6803da8faf8997cde53872b38f4023728f6830b06cd3c0dc"
 "checksum inflate 0.4.5 (registry+https://github.com/rust-lang/crates.io-index)" = "1cdb29978cc5797bd8dcc8e5bf7de604891df2a8dc576973d71a281e916db2ff"
 "checksum iovec 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)" = "b2b3ea6ff95e175473f8ffe6a7eb7c00d054240321b84c57051175fe3c1e075e"
@@ -2807,8 +2816,8 @@ dependencies = [
 "checksum phf_shared 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = "c00cf8b9eafe68dde5e9eaa2cef8ee84a9336a47d566ec55ca16589633b65af7"
 "checksum pikkr 0.16.1 (git+https://github.com/pikkr/pikkr)" = "<none>"
 "checksum pkg-config 0.3.11 (registry+https://github.com/rust-lang/crates.io-index)" = "110d5ee3593dbb73f56294327fe5668bcc997897097cbc76b51e7aed3f52452f"
-"checksum png 0.12.0 (git+https://github.com/PistonDevelopers/image-png)" = "<none>"
 "checksum png 0.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = "8422b27bb2c013dd97b9aef69e161ce262236f49aaf46a0489011c8ff0264602"
+"checksum png 0.15.2 (git+https://github.com/image-rs/image-png)" = "<none>"
 "checksum podio 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)" = "780fb4b6698bbf9cf2444ea5d22411cef2953f0824b98f33cf454ec5615645bd"
 "checksum ppv-lite86 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)" = "74490b50b9fbe561ac330df47c08f3f33073d2d00c150f719147d7c54522fa1b"
 "checksum precomputed-hash 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "925383efa346730478fb4838dbe9137d2a47675ad789c546d150a6e1dd4ab31c"

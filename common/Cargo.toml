@@ -15,14 +15,14 @@ cssparser = { git = "https://github.com/servo/rust-cssparser.git" }
 deflate = { git = "https://github.com/oyvindln/deflate-rs", branch = "dev" }
 dns-parser = { git = "https://github.com/tailhook/dns-parser" }
 flac = { git = "https://github.com/sourrust/flac.git" }
-gif = { git = "https://github.com/PistonDevelopers/image-gif" }
+gif = { git = "https://github.com/image-rs/image-gif" }
 gost94 = { git = "https://github.com/RustCrypto/hashes" }
 groestl = { git = "https://github.com/RustCrypto/hashes" }
 html5ever = { git = "https://github.com/servo/html5ever" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
 http = { git = "https://github.com/hyperium/http" }
 humantime = { git = "https://github.com/tailhook/humantime" }
-image = { git = "https://github.com/PistonDevelopers/image" }
+image = { git = "https://github.com/image-rs/image" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
 jpeg-decoder = { git = "https://github.com/kaksmet/jpeg-decoder" }
 lewton = { git = "https://github.com/RustAudio/lewton" }
@@ -35,7 +35,7 @@ obj-rs = { git = "https://github.com/simnalamburt/obj-rs" }
 ogg = { git = "https://github.com/RustAudio/ogg" }
 patch = { git = "https://github.com/uniphil/patch-rs" }
 pikkr = { git = "https://github.com/pikkr/pikkr" }
-png = { git = "https://github.com/PistonDevelopers/image-png" }
+png = { git = "https://github.com/image-rs/image-png" }
 proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2.git" }
 pulldown-cmark = { git = "https://github.com/google/pulldown-cmark.git" }
 quick-xml = { git = "https://github.com/tafia/quick-xml" }
