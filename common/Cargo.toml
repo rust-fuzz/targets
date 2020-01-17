@@ -26,6 +26,7 @@ image = { git = "https://github.com/image-rs/image" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
 jpeg-decoder = { git = "https://github.com/kaksmet/jpeg-decoder" }
 lewton = { git = "https://github.com/RustAudio/lewton" }
+markup5ever_rcdom = { git = "https://github.com/servo/html5ever" }
 md2 = { git = "https://github.com/RustCrypto/hashes" }
 md4 = { git = "https://github.com/RustCrypto/hashes" }
 md-5 = { git = "https://github.com/RustCrypto/hashes" }

@@ -20,6 +20,7 @@ extern crate image;
 extern crate iso8601;
 extern crate jpeg_decoder;
 extern crate lewton;
+extern crate markup5ever_rcdom;
 extern crate md2;
 extern crate md4;
 extern crate md5;
@@ -314,7 +315,7 @@ pub fn fuzz_html5ever_read(data: &[u8]) {
     use std::io::BufReader;
 
     use html5ever::driver::ParseOpts;
-    use html5ever::rcdom::RcDom;
+    use markup5ever_rcdom::{RcDom, SerializableHandle};
     use html5ever::tendril::TendrilSink;
     use html5ever::tree_builder::TreeBuilderOpts;
     use html5ever::{parse_document, serialize};
@@ -338,7 +339,8 @@ pub fn fuzz_html5ever_read(data: &[u8]) {
     };
 
     let mut out = Vec::with_capacity(data.len());
-    let _ = serialize(&mut out, &dom.document, Default::default());
+    let document: SerializableHandle = dom.document.into();
+    let _ = serialize(&mut out, &document, Default::default());
 }
 
 #[inline(always)]
