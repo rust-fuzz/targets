@@ -652,14 +652,6 @@ dependencies = [
 
 [[package]]
 name = "float-cmp"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-dependencies = [
- "num-traits 0.2.8 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "float-cmp"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
@@ -776,7 +768,7 @@ dependencies = [
  "sleep-parser 0.4.0 (git+https://github.com/datrs/sleep-parser)",
  "streebog 0.8.0 (git+https://github.com/RustCrypto/hashes)",
  "svgdom 0.17.0 (git+https://github.com/RazrFalcon/svgdom)",
- "svgtypes 0.1.1 (git+https://github.com/RazrFalcon/svgtypes)",
+ "svgtypes 0.5.0 (git+https://github.com/RazrFalcon/svgtypes)",
  "tar 0.4.15 (git+https://github.com/alexcrichton/tar-rs)",
  "tendril 0.2.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "toml 0.4.5 (git+https://github.com/alexcrichton/toml-rs)",
@@ -1459,14 +1451,6 @@ source = "git+https://github.com/servo/rust-url#f091d2b45b79958f9a40e2b98b844f75
 
 [[package]]
 name = "phf"
-version = "0.7.22"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-dependencies = [
- "phf_shared 0.7.22 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "phf"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
@@ -1504,14 +1488,6 @@ dependencies = [
  "proc-macro2 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "quote 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "syn 1.0.11 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "phf_shared"
-version = "0.7.22"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-dependencies = [
- "siphasher 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -2186,20 +2162,17 @@ dependencies = [
 
 [[package]]
 name = "svgtypes"
-version = "0.1.1"
-source = "git+https://github.com/RazrFalcon/svgtypes#1f13ecbb930af5cc0510e6e8c15fdf87b3c80923"
+version = "0.4.4"
+source = "git+https://github.com/RazrFalcon/svgtypes?rev=e2a2a54#e2a2a5455e13f6621c793f9a2ecb2de1390b1d14"
 dependencies = [
- "failure 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "float-cmp 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "log 0.4.8 (registry+https://github.com/rust-lang/crates.io-index)",
- "phf 0.7.22 (registry+https://github.com/rust-lang/crates.io-index)",
- "xmlparser 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "float-cmp 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "siphasher 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "svgtypes"
-version = "0.4.4"
-source = "git+https://github.com/RazrFalcon/svgtypes?rev=e2a2a54#e2a2a5455e13f6621c793f9a2ecb2de1390b1d14"
+version = "0.5.0"
+source = "git+https://github.com/RazrFalcon/svgtypes#9ca4eccac84b8717317f918c30a2404116d5119c"
 dependencies = [
  "float-cmp 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "siphasher 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -2590,15 +2563,6 @@ dependencies = [
 
 [[package]]
 name = "xmlparser"
-version = "0.4.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-dependencies = [
- "failure 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "log 0.4.8 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "xmlparser"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
@@ -2727,7 +2691,6 @@ dependencies = [
 "checksum filetime 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "da4b9849e77b13195302c174324b5ba73eec9b236b24c221a61000daefb95c5f"
 "checksum flac 0.5.0 (git+https://github.com/sourrust/flac.git)" = "<none>"
 "checksum flate2 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)" = "9fac2277e84e5e858483756647a9d0aa8d9a2b7cba517fd84325a0aaa69a0909"
-"checksum float-cmp 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "134a8fa843d80a51a5b77d36d42bc2def9edcb0262c914861d08129fd1926600"
 "checksum float-cmp 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = "7ef4eee449a2818084dad09f4fcd6e6e8932c482d8d94298493226782bb45b5e"
 "checksum fnv 1.0.6 (registry+https://github.com/rust-lang/crates.io-index)" = "2fad85553e09a6f881f739c29f0b00b0f01357c743266d478b68951ce23285f3"
 "checksum foreign-types 0.3.2 (registry+https://github.com/rust-lang/crates.io-index)" = "f6f339eb8adc052cd2ca78910fda869aefa38d22d5cb648e6485e4d3fc06f3b1"
@@ -2813,12 +2776,10 @@ dependencies = [
 "checksum openssl-sys 0.9.53 (registry+https://github.com/rust-lang/crates.io-index)" = "465d16ae7fc0e313318f7de5cecf57b2fbe7511fd213978b457e1c96ff46736f"
 "checksum patch 0.4.2 (git+https://github.com/uniphil/patch-rs)" = "<none>"
 "checksum percent-encoding 2.1.0 (git+https://github.com/servo/rust-url)" = "<none>"
-"checksum phf 0.7.22 (registry+https://github.com/rust-lang/crates.io-index)" = "7d37a244c75a9748e049225155f56dbcb98fe71b192fd25fd23cb914b5ad62f2"
 "checksum phf 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = "3dfb61232e34fcb633f43d12c58f83c1df82962dcdfa565a4e866ffc17dafe12"
 "checksum phf_codegen 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = "cbffee61585b0411840d3ece935cce9cb6321f01c45477d30066498cd5e1a815"
 "checksum phf_generator 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = "17367f0cc86f2d25802b2c26ee58a7b23faeccf78a396094c13dced0d0182526"
 "checksum phf_macros 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = "7f6fde18ff429ffc8fe78e2bf7f8b7a5a5a6e2a8b58bc5a9ac69198bbda9189c"
-"checksum phf_shared 0.7.22 (registry+https://github.com/rust-lang/crates.io-index)" = "c2261d544c2bb6aa3b10022b0be371b9c7c64f762ef28c6f5d4f1ef6d97b5930"
 "checksum phf_shared 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = "c00cf8b9eafe68dde5e9eaa2cef8ee84a9336a47d566ec55ca16589633b65af7"
 "checksum pikkr 0.16.1 (git+https://github.com/pikkr/pikkr)" = "<none>"
 "checksum pkg-config 0.3.11 (registry+https://github.com/rust-lang/crates.io-index)" = "110d5ee3593dbb73f56294327fe5668bcc997897097cbc76b51e7aed3f52452f"
@@ -2901,8 +2862,8 @@ dependencies = [
 "checksum structopt-derive 0.2.8 (registry+https://github.com/rust-lang/crates.io-index)" = "95063e55a45976cfce9f03fcd26dff356ee622f1a14147bfae068ab8bed153a6"
 "checksum subtle 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)" = "2d67a5a62ba6e01cb2192ff309324cb4875d0c451d55fe2319433abe7a05a8ee"
 "checksum svgdom 0.17.0 (git+https://github.com/RazrFalcon/svgdom)" = "<none>"
-"checksum svgtypes 0.1.1 (git+https://github.com/RazrFalcon/svgtypes)" = "<none>"
 "checksum svgtypes 0.4.4 (git+https://github.com/RazrFalcon/svgtypes?rev=e2a2a54)" = "<none>"
+"checksum svgtypes 0.5.0 (git+https://github.com/RazrFalcon/svgtypes)" = "<none>"
 "checksum svgtypes 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = "9c536faaff1a10837cfe373142583f6e27d81e96beba339147e77b67c9f260ff"
 "checksum syn 0.13.11 (registry+https://github.com/rust-lang/crates.io-index)" = "14f9bf6292f3a61d2c716723fdb789a41bbe104168e6f496dc6497e531ea1b9b"
 "checksum syn 0.14.0 (registry+https://github.com/rust-lang/crates.io-index)" = "99d991a9e7c33123925e511baab68f7ec25c3795962fe326a2395e5a42a614f0"
@@ -2955,7 +2916,6 @@ dependencies = [
 "checksum xml-rs 0.8.0 (git+https://github.com/netvl/xml-rs.git)" = "<none>"
 "checksum xml5ever 0.16.1 (git+https://github.com/servo/html5ever)" = "<none>"
 "checksum xmlparser 0.13.0 (git+https://github.com/RazrFalcon/xmlparser)" = "<none>"
-"checksum xmlparser 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)" = "a80a4b15edbd711250ac6fb4b4c519f2d40d2531ed9f506c80db572d8a9baaaa"
 "checksum xmlparser 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ecec95f00fb0ff019153e64ea520f87d1409769db3e8f4db3ea588638a3e1cee"
 "checksum xmlwriter 0.1.0 (git+https://github.com/RazrFalcon/xmlwriter?rev=dac292c)" = "<none>"
 "checksum xmlwriter 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ec7a2a501ed189703dba8b08142f057e887dfc4b2cc4db2d343ac6376ba3e0b9"
