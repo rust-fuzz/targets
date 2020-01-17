@@ -426,10 +426,7 @@ pub fn fuzz_lewton_read(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_minidump_read(data: &[u8]) {
-    use std::io::Cursor;
-
-    let cursor = Cursor::new(data);
-    let _ = minidump::Minidump::read(cursor);
+    let _ = minidump::Minidump::read(data);
 }
 
 #[inline(always)]
