@@ -455,7 +455,7 @@ pub fn fuzz_ogg_read(data: &[u8]) {
 #[inline(always)]
 pub fn fuzz_patch_read(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
-        let _ = patch::parse(data);
+        let _ = patch::Patch::from_multiple(data);
     }
 }
 
