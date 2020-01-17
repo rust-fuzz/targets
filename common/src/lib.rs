@@ -1,5 +1,4 @@
 extern crate openssl;
-extern crate tendril;
 
 extern crate blake2;
 extern crate brotli;

@@ -4,7 +4,6 @@ version = "0.1.0"
 authors = ["The rust-fuzz Project Developers"]
 
 [dependencies]
-tendril = "0.2.2"
 openssl = "0.10.26"
 
 blake2 = { git = "https://github.com/RustCrypto/hashes" }
