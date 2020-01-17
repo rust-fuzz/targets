@@ -7,15 +7,17 @@ authors = ["The rust-fuzz Project Developers"]
 tendril = "0.2.2"
 openssl = "0.10.26"
 
+blake2 = { git = "https://github.com/RustCrypto/hashes" }
 brotli = { git = "https://github.com/dropbox/rust-brotli" }
 bson = { git = "https://github.com/zonyitoo/bson-rs" }
 chrono = { git = "https://github.com/chronotope/chrono" }
-crypto-hashes = { features = ["include_weak"], git = "https://github.com/RustCrypto/meta" }
 cssparser = { git = "https://github.com/servo/rust-cssparser.git" }
 deflate = { git = "https://github.com/oyvindln/deflate-rs", branch = "dev" }
 dns-parser = { git = "https://github.com/tailhook/dns-parser" }
 flac = { git = "https://github.com/sourrust/flac.git" }
 gif = { git = "https://github.com/PistonDevelopers/image-gif" }
+gost94 = { git = "https://github.com/RustCrypto/hashes" }
+groestl = { git = "https://github.com/RustCrypto/hashes" }
 html5ever = { git = "https://github.com/servo/html5ever" }
 httparse = { git = "https://github.com/seanmonstar/httparse" }
 humantime = { git = "https://github.com/tailhook/humantime" }
@@ -23,6 +25,9 @@ image = { git = "https://github.com/PistonDevelopers/image" }
 iso8601 = { git = "https://github.com/badboy/iso8601" }
 jpeg-decoder = { git = "https://github.com/kaksmet/jpeg-decoder" }
 lewton = { git = "https://github.com/RustAudio/lewton" }
+md2 = { git = "https://github.com/RustCrypto/hashes" }
+md4 = { git = "https://github.com/RustCrypto/hashes" }
+md-5 = { git = "https://github.com/RustCrypto/hashes" }
 minidump = { git = "https://github.com/luser/rust-minidump.git" }
 mp4parse = { git = "https://github.com/mozilla/mp4parse-rust" }
 obj-rs = { git = "https://github.com/simnalamburt/obj-rs" }
@@ -36,13 +41,19 @@ quick-xml = { git = "https://github.com/tafia/quick-xml" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
 regex-syntax = { git = "https://github.com/rust-lang-nursery/regex" }
 ring = { git = "https://github.com/briansmith/ring" }
+ripemd160 = { git = "https://github.com/RustCrypto/hashes" }
 semver = { git = "https://github.com/steveklabnik/semver" }
 serde_json = { git = "https://github.com/serde-rs/json", features = ["arbitrary_precision"] }
 serde_yaml = { git = "https://github.com/dtolnay/serde-yaml" }
+sha-1 = { git = "https://github.com/RustCrypto/hashes" }
+sha2 = { git = "https://github.com/RustCrypto/hashes" }
+sha3 = { git = "https://github.com/RustCrypto/hashes" }
+streebog = { git = "https://github.com/RustCrypto/hashes" }
 tar = { git = "https://github.com/alexcrichton/tar-rs" }
 toml = { git = "https://github.com/alexcrichton/toml-rs" }
 url = { git = "https://github.com/servo/rust-url" }
 uuid = { git = "https://github.com/rust-lang-nursery/uuid" }
+whirlpool = { git = "https://github.com/RustCrypto/hashes" }
 xml-rs = { git = "https://github.com/netvl/xml-rs.git" }
 zip = { git = "https://github.com/mvdnes/zip-rs" }
 zopfli = { git = "https://github.com/carols10cents/zopfli" }

@@ -1,15 +1,17 @@
 extern crate openssl;
 extern crate tendril;
 
+extern crate blake2;
 extern crate brotli;
 extern crate bson;
 extern crate chrono;
-extern crate crypto_hashes;
 extern crate cssparser;
 extern crate deflate;
 extern crate dns_parser;
 extern crate flac;
 extern crate gif;
+extern crate gost94;
+extern crate groestl;
 extern crate html5ever;
 extern crate http;
 extern crate httparse;
@@ -18,6 +20,9 @@ extern crate image;
 extern crate iso8601;
 extern crate jpeg_decoder;
 extern crate lewton;
+extern crate md2;
+extern crate md4;
+extern crate md5;
 extern crate minidump;
 extern crate mp4parse;
 extern crate obj;
@@ -31,11 +36,16 @@ extern crate quick_xml;
 extern crate regex;
 extern crate regex_syntax;
 extern crate ring;
+extern crate ripemd160;
 extern crate rsass;
 extern crate semver;
 extern crate serde_json;
 extern crate serde_yaml;
+extern crate sha1;
+extern crate sha2;
+extern crate sha3;
 extern crate sleep_parser;
+extern crate streebog;
 extern crate svgdom;
 extern crate svgtypes;
 extern crate tar;
@@ -43,6 +53,7 @@ extern crate toml;
 extern crate url;
 extern crate resvg;
 extern crate uuid;
+extern crate whirlpool;
 extern crate xml;
 extern crate xmlparser;
 extern crate zip;
@@ -76,141 +87,144 @@ pub fn fuzz_chrono_read(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_blake2b(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
-    let mut hasher = crypto_hashes::blake2::Blake2b::default();
+    use blake2::Digest;
+
+    let mut hasher = blake2::Blake2b::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_blake2s(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
-    let mut hasher = crypto_hashes::blake2::Blake2s::default();
+    use blake2::Digest;
+
+    let mut hasher = blake2::Blake2s::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_gost94(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
-    let mut hasher = crypto_hashes::gost94::Gost94Test::default();
+    use gost94::Digest;
+
+    let mut hasher = gost94::Gost94Test::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_md2(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use md2::Digest;
 
-    let mut hasher = crypto_hashes::md2::Md2::default();
+    let mut hasher = md2::Md2::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_md4(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use md4::Digest;
 
-    let mut hasher = crypto_hashes::md4::Md4::default();
+    let mut hasher = md4::Md4::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_md5(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use md5::Digest;
 
-    let mut hasher = crypto_hashes::md5::Md5::default();
+    let mut hasher = md5::Md5::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_ripemd160(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use ripemd160::Digest;
 
-    let mut hasher = crypto_hashes::ripemd160::Ripemd160::default();
+    let mut hasher = ripemd160::Ripemd160::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha1(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha1::Digest;
 
-    let mut hasher = crypto_hashes::sha1::Sha1::default();
+    let mut hasher = sha1::Sha1::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha2_256(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha2::Digest;
 
-    let mut hasher = crypto_hashes::sha2::Sha256::default();
+    let mut hasher = sha2::Sha256::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha2_512(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha2::Digest;
 
-    let mut hasher = crypto_hashes::sha2::Sha512::default();
+    let mut hasher = sha2::Sha512::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha3_512(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha3::Digest;
 
-    let mut hasher = crypto_hashes::sha3::Sha3_512::default();
+    let mut hasher = sha3::Sha3_512::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha3_keccak512(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha3::Digest;
 
-    let mut hasher = crypto_hashes::sha3::Keccak512::default();
+    let mut hasher = sha3::Keccak512::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha3_shake256(data: &[u8]) {
-    use crypto_hashes::digest::{ExtendableOutput, Input};
+    use sha3::digest::{ExtendableOutput, Input};
 
-    let mut hasher = crypto_hashes::sha3::Shake256::default();
-    hasher.process(data);
+    let mut hasher = sha3::Shake256::default();
+    hasher.input(data);
     hasher.xof_result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_streebog_256(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use streebog::Digest;
 
-    let mut hasher = crypto_hashes::streebog::Streebog256::default();
+    let mut hasher = streebog::Streebog256::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_streebog_512(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use streebog::Digest;
 
-    let mut hasher = crypto_hashes::streebog::Streebog512::default();
+    let mut hasher = streebog::Streebog512::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_whirlpool(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use whirlpool::Digest;
 
-    let mut hasher = crypto_hashes::whirlpool::Whirlpool::default();
+    let mut hasher = whirlpool::Whirlpool::default();
     hasher.input(data);
     hasher.result();
 }
