@@ -1,15 +1,16 @@
 extern crate openssl;
-extern crate tendril;
 
+extern crate blake2;
 extern crate brotli;
 extern crate bson;
 extern crate chrono;
-extern crate crypto_hashes;
 extern crate cssparser;
 extern crate deflate;
 extern crate dns_parser;
 extern crate flac;
 extern crate gif;
+extern crate gost94;
+extern crate groestl;
 extern crate html5ever;
 extern crate http;
 extern crate httparse;
@@ -18,6 +19,10 @@ extern crate image;
 extern crate iso8601;
 extern crate jpeg_decoder;
 extern crate lewton;
+extern crate markup5ever_rcdom;
+extern crate md2;
+extern crate md4;
+extern crate md5;
 extern crate minidump;
 extern crate mp4parse;
 extern crate obj;
@@ -31,11 +36,16 @@ extern crate quick_xml;
 extern crate regex;
 extern crate regex_syntax;
 extern crate ring;
+extern crate ripemd160;
 extern crate rsass;
 extern crate semver;
 extern crate serde_json;
 extern crate serde_yaml;
+extern crate sha1;
+extern crate sha2;
+extern crate sha3;
 extern crate sleep_parser;
+extern crate streebog;
 extern crate svgdom;
 extern crate svgtypes;
 extern crate tar;
@@ -43,6 +53,7 @@ extern crate toml;
 extern crate url;
 extern crate resvg;
 extern crate uuid;
+extern crate whirlpool;
 extern crate xml;
 extern crate xmlparser;
 extern crate zip;
@@ -76,141 +87,144 @@ pub fn fuzz_chrono_read(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_blake2b(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
-    let mut hasher = crypto_hashes::blake2::Blake2b::default();
+    use blake2::Digest;
+
+    let mut hasher = blake2::Blake2b::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_blake2s(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
-    let mut hasher = crypto_hashes::blake2::Blake2s::default();
+    use blake2::Digest;
+
+    let mut hasher = blake2::Blake2s::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_gost94(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
-    let mut hasher = crypto_hashes::gost94::Gost94Test::default();
+    use gost94::Digest;
+
+    let mut hasher = gost94::Gost94Test::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_md2(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use md2::Digest;
 
-    let mut hasher = crypto_hashes::md2::Md2::default();
+    let mut hasher = md2::Md2::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_md4(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use md4::Digest;
 
-    let mut hasher = crypto_hashes::md4::Md4::default();
+    let mut hasher = md4::Md4::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_md5(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use md5::Digest;
 
-    let mut hasher = crypto_hashes::md5::Md5::default();
+    let mut hasher = md5::Md5::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_ripemd160(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use ripemd160::Digest;
 
-    let mut hasher = crypto_hashes::ripemd160::Ripemd160::default();
+    let mut hasher = ripemd160::Ripemd160::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha1(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha1::Digest;
 
-    let mut hasher = crypto_hashes::sha1::Sha1::default();
+    let mut hasher = sha1::Sha1::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha2_256(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha2::Digest;
 
-    let mut hasher = crypto_hashes::sha2::Sha256::default();
+    let mut hasher = sha2::Sha256::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha2_512(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha2::Digest;
 
-    let mut hasher = crypto_hashes::sha2::Sha512::default();
+    let mut hasher = sha2::Sha512::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha3_512(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha3::Digest;
 
-    let mut hasher = crypto_hashes::sha3::Sha3_512::default();
+    let mut hasher = sha3::Sha3_512::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha3_keccak512(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use sha3::Digest;
 
-    let mut hasher = crypto_hashes::sha3::Keccak512::default();
+    let mut hasher = sha3::Keccak512::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_sha3_shake256(data: &[u8]) {
-    use crypto_hashes::digest::{ExtendableOutput, Input};
+    use sha3::digest::{ExtendableOutput, Input};
 
-    let mut hasher = crypto_hashes::sha3::Shake256::default();
-    hasher.process(data);
+    let mut hasher = sha3::Shake256::default();
+    hasher.input(data);
     hasher.xof_result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_streebog_256(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use streebog::Digest;
 
-    let mut hasher = crypto_hashes::streebog::Streebog256::default();
+    let mut hasher = streebog::Streebog256::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_streebog_512(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use streebog::Digest;
 
-    let mut hasher = crypto_hashes::streebog::Streebog512::default();
+    let mut hasher = streebog::Streebog512::default();
     hasher.input(data);
     hasher.result();
 }
 
 #[inline(always)]
 pub fn fuzz_crypto_hashes_whirlpool(data: &[u8]) {
-    use crypto_hashes::digest::Digest;
+    use whirlpool::Digest;
 
-    let mut hasher = crypto_hashes::whirlpool::Whirlpool::default();
+    let mut hasher = whirlpool::Whirlpool::default();
     hasher.input(data);
     hasher.result();
 }
@@ -300,7 +314,7 @@ pub fn fuzz_html5ever_read(data: &[u8]) {
     use std::io::BufReader;
 
     use html5ever::driver::ParseOpts;
-    use html5ever::rcdom::RcDom;
+    use markup5ever_rcdom::{RcDom, SerializableHandle};
     use html5ever::tendril::TendrilSink;
     use html5ever::tree_builder::TreeBuilderOpts;
     use html5ever::{parse_document, serialize};
@@ -324,7 +338,8 @@ pub fn fuzz_html5ever_read(data: &[u8]) {
     };
 
     let mut out = Vec::with_capacity(data.len());
-    let _ = serialize(&mut out, &dom.document, Default::default());
+    let document: SerializableHandle = dom.document.into();
+    let _ = serialize(&mut out, &document, Default::default());
 }
 
 #[inline(always)]
@@ -410,10 +425,7 @@ pub fn fuzz_lewton_read(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_minidump_read(data: &[u8]) {
-    use std::io::Cursor;
-
-    let cursor = Cursor::new(data);
-    let _ = minidump::Minidump::read(cursor);
+    let _ = minidump::Minidump::read(data);
 }
 
 #[inline(always)]
@@ -439,7 +451,7 @@ pub fn fuzz_ogg_read(data: &[u8]) {
 #[inline(always)]
 pub fn fuzz_patch_read(data: &[u8]) {
     if let Ok(data) = std::str::from_utf8(data) {
-        let _ = patch::parse(data);
+        let _ = patch::Patch::from_multiple(data);
     }
 }
 
@@ -465,13 +477,12 @@ fn png_decode(data: &[u8]) -> Result<(png::OutputInfo, Vec<u8>), ()> {
 }
 
 fn png_encode(info: &png::OutputInfo, data: &[u8]) -> Result<Vec<u8>, ()> {
-    use png::HasParameters;
-
     let mut out = Vec::with_capacity(data.len());
 
     {
         let mut encoder = png::Encoder::new(&mut out, info.width, info.height);
-        encoder.set(info.color_type).set(info.bit_depth);
+        encoder.set_color(info.color_type);
+        encoder.set_depth(info.bit_depth);
         let mut writer = encoder.write_header().map_err(|_| ())?;
         writer.write_image_data(&data).map_err(|_| ())?;
     }
@@ -566,8 +577,8 @@ pub fn fuzz_regex_is_match(data: &[u8]) {
 #[inline(always)]
 pub fn fuzz_ring_digest_sha1(data: &[u8]) {
     assert_eq!(
-        ring::digest::digest(&ring::digest::SHA1, data).as_ref(),
-        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha1(), data).unwrap()
+        ring::digest::digest(&ring::digest::SHA1_FOR_LEGACY_USE_ONLY, data).as_ref(),
+        &*openssl::hash::hash(openssl::hash::MessageDigest::sha1(), data).unwrap()
     )
 }
 
@@ -575,7 +586,7 @@ pub fn fuzz_ring_digest_sha1(data: &[u8]) {
 pub fn fuzz_ring_digest_sha256(data: &[u8]) {
     assert_eq!(
         ring::digest::digest(&ring::digest::SHA256, data).as_ref(),
-        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha256(), data).unwrap()
+        &*openssl::hash::hash(openssl::hash::MessageDigest::sha256(), data).unwrap()
     )
 }
 
@@ -583,7 +594,7 @@ pub fn fuzz_ring_digest_sha256(data: &[u8]) {
 pub fn fuzz_ring_digest_sha384(data: &[u8]) {
     assert_eq!(
         ring::digest::digest(&ring::digest::SHA384, data).as_ref(),
-        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha384(), data).unwrap()
+        &*openssl::hash::hash(openssl::hash::MessageDigest::sha384(), data).unwrap()
     )
 }
 
@@ -591,7 +602,7 @@ pub fn fuzz_ring_digest_sha384(data: &[u8]) {
 pub fn fuzz_ring_digest_sha512(data: &[u8]) {
     assert_eq!(
         ring::digest::digest(&ring::digest::SHA512, data).as_ref(),
-        &*openssl::hash::hash2(openssl::hash::MessageDigest::sha512(), data).unwrap()
+        &*openssl::hash::hash(openssl::hash::MessageDigest::sha512(), data).unwrap()
     )
 }
 
@@ -785,8 +796,6 @@ pub fn fuzz_uuid_read(data: &[u8]) {
 
     if let Ok(data) = std::str::from_utf8(data) {
         let _ = Uuid::parse_str(data);
-    } else {
-        let _ = Uuid::from_bytes(data);
     }
 }
 
@@ -872,23 +881,6 @@ pub fn fuzz_svgtypes_path(data: &[u8]) {
 }
 
 #[inline(always)]
-pub fn fuzz_svgtypes_style(data: &[u8]) {
-    use std::str;
-
-    if let Ok(s) = str::from_utf8(data) {
-        // Must not panic.
-        let mut n = 0;
-        for _ in svgtypes::StyleParser::from(s) {
-            n += 1;
-
-            if n == 1000 {
-                panic!("endless loop");
-            }
-        }
-    }
-}
-
-#[inline(always)]
 pub fn fuzz_svgtypes_transforms(data: &[u8]) {
     use std::str;
 
@@ -902,17 +894,6 @@ pub fn fuzz_svgtypes_transforms(data: &[u8]) {
                 panic!("endless loop");
             }
         }
-    }
-}
-
-#[inline(always)]
-pub fn fuzz_xmlparser_unescape(data: &[u8]) {
-    use std::str;
-    use xmlparser::{TextUnescape, XmlSpace};
-
-    if let Ok(s) = str::from_utf8(data) {
-        let _ = TextUnescape::unescape(s, XmlSpace::Default);
-        let _ = TextUnescape::unescape(s, XmlSpace::Preserve);
     }
 }
 

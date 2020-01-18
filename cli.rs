@@ -1,6 +1,5 @@
 #![allow(deprecated)]
 
-#[macro_use]
 extern crate structopt;
 #[macro_use]
 extern crate clap;
