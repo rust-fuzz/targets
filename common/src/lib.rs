@@ -667,13 +667,12 @@ pub fn fuzz_serde_yaml_read_write_read(data: &[u8]) {
         Ok(v) => v,
         Err(_) => return,
     };
-    let serialized = match serde_yaml::to_vec(&value) {
-        Ok(s) => s,
-        Err(_) => return,
+    let serialized = serde_yaml::to_vec(&value).unwrap();
+    let value2 = match serde_yaml::from_slice::<serde_yaml::Value>(&serialized) {
+        Ok(p) => p,
+        Err(..) => return,
     };
-    if let Ok(v) = serde_yaml::from_slice::<serde_yaml::Value>(&serialized) {
-        assert_eq!(v, value);
-    }
+    assert_eq!(value, value2);
 }
 
 #[inline(always)]
