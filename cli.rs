@@ -237,7 +237,7 @@ fn run_honggfuzz(target: &str, timeout: Option<i32>) -> Result<(), Error> {
         .env("HFUZZ_RUN_ARGS", &args)
         .current_dir(&dir)
         .spawn()
-        .context(format!("error starting {:?} to runn {}", fuzzer, target))?
+        .context(format!("error starting {:?} to run {}", fuzzer, target))?
         .wait()
         .context(format!(
             "error while waiting for {:?} running {}",
@@ -258,16 +258,28 @@ fn run_afl(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
     let seed_dir = create_seed_dir(&target)?;
     let corpus_dir = create_corpus_dir(&dir, target)?;
 
+    let build_cmd = Command::new("cargo")
+        .args(&["afl", "build", "--release", "--bin", target])
+        .current_dir(&dir)
+        .spawn()
+        .context(format!("error starting build for {:?} of {}", fuzzer, target))?
+        .wait()
+        .context(format!("error while waiting for build for {:?} of {}", fuzzer, target))?;
+
+    if !build_cmd.success() {
+        Err(FuzzerQuit)?;
+    }
+
     let fuzzer_bin = Command::new("cargo")
         .args(&["afl", "fuzz"])
         .arg("-i")
         .arg(&seed_dir)
         .arg("-o")
         .arg(&corpus_dir)
-        .args(&["--", &format!("target/release/{}", target)])
+        .args(&["--", &format!("../target/release/{}", target)])
         .current_dir(&dir)
         .spawn()
-        .context(format!("error starting {:?} to runn {}", fuzzer, target))?
+        .context(format!("error starting {:?} to run {}", fuzzer, target))?
         .wait()
         .context(format!(
             "error while waiting for {:?} running {}",
@@ -331,7 +343,7 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
         .env("ASAN_OPTIONS", &asan_options)
         .current_dir(&dir)
         .spawn()
-        .context(format!("error starting {:?} to runn {}", fuzzer, target))?
+        .context(format!("error starting {:?} to run {}", fuzzer, target))?
         .wait()
         .context(format!(
             "error while waiting for {:?} running {}",
