@@ -8,6 +8,7 @@ extern crate failure;
 extern crate regex;
 
 use std::env;
+use std::ffi::OsStr;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -270,10 +271,17 @@ fn run_afl(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
         Err(FuzzerQuit)?;
     }
 
+    let queue_dir = corpus_dir.join("queue");
+    let input_arg: &OsStr = if queue_dir.is_dir() && fs::read_dir(queue_dir)?.next().is_some() {
+        "-".as_ref()
+    } else {
+        seed_dir.as_ref()
+    };
+
     let fuzzer_bin = Command::new("cargo")
         .args(&["afl", "fuzz"])
         .arg("-i")
-        .arg(&seed_dir)
+        .arg(&input_arg)
         .arg("-o")
         .arg(&corpus_dir)
         .args(&["--", &format!("../target/release/{}", target)])
