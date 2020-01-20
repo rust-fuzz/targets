@@ -288,6 +288,8 @@ fn run_afl(target: &str, timeout: Option<i32>) -> Result<(), Error> {
         .arg(&input_arg)
         .arg("-o")
         .arg(&corpus_dir)
+        .arg("-T")
+        .arg(target)
         .args(&["--", &format!("../target/release/{}", target)])
         .current_dir(&dir);
     let fuzzer_status = fuzzer_cmd
