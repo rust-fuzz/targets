@@ -27,7 +27,7 @@ enum Cli {
         #[structopt(short = "q", long = "filter")]
         filter: Option<String>,
         /// Set timeout per target
-        #[structopt(short = "t", long = "timeout", default_value = "10")]
+        #[structopt(short = "t", long = "timeout", default_value = "30")]
         timeout: i32,
         // Run until the end of time (or Ctrl+C)
         #[structopt(short = "i", long = "infinite")]
