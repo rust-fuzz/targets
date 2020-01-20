@@ -251,7 +251,7 @@ fn run_honggfuzz(target: &str, timeout: Option<i32>) -> Result<(), Error> {
     Ok(())
 }
 
-fn run_afl(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
+fn run_afl(target: &str, timeout: Option<i32>) -> Result<(), Error> {
     let fuzzer = Fuzzer::Afl;
     write_fuzzer_target(fuzzer, target)?;
     let dir = fuzzer.dir()?;
@@ -278,14 +278,19 @@ fn run_afl(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
         seed_dir.as_ref()
     };
 
-    let fuzzer_bin = Command::new("cargo")
-        .args(&["afl", "fuzz"])
+    let mut fuzzer_cmd = Command::new("cargo");
+    fuzzer_cmd.args(&["afl", "fuzz"]);
+    if let Some(timeout) = timeout {
+        fuzzer_cmd.arg(format!("--max_total_time={}", timeout));
+    }
+    fuzzer_cmd
         .arg("-i")
         .arg(&input_arg)
         .arg("-o")
         .arg(&corpus_dir)
         .args(&["--", &format!("../target/release/{}", target)])
-        .current_dir(&dir)
+        .current_dir(&dir);
+    let fuzzer_status = fuzzer_cmd
         .spawn()
         .context(format!("error starting {:?} to run {}", fuzzer, target))?
         .wait()
@@ -294,7 +299,7 @@ fn run_afl(target: &str, _timeout: Option<i32>) -> Result<(), Error> {
             fuzzer, target
         ))?;
 
-    if !fuzzer_bin.success() {
+    if !fuzzer_status.success() {
         Err(FuzzerQuit)?;
     }
     Ok(())
