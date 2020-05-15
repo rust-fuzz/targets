@@ -1003,11 +1003,20 @@ pub fn fuzz_sleep_parser_header(data: &[u8]) {
 
 #[inline(always)]
 pub fn fuzz_rsass_sass(data: &[u8]) {
-    use rsass::{compile_scss, OutputStyle};
-    let _ = compile_scss(data, OutputStyle::Compressed);
+    use rsass::{compile_scss, output};
+    let format = output::Format {
+        style: output::Style::Compressed,
+        precision: 5,
+    };
+    let _ = compile_scss(data, format);
 }
 
 #[inline(always)]
 pub fn fuzz_rsass_value(data: &[u8]) {
-    let _ = rsass::compile_value(data);
+    use rsass::{compile_value, output};
+    let format = output::Format {
+        style: output::Style::Compressed,
+        precision: 5,
+    };
+    let _ = compile_value(data, format);
 }

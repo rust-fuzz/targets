@@ -762,7 +762,7 @@ dependencies = [
  "resvg 0.8.0 (git+https://github.com/RazrFalcon/resvg)",
  "ring 0.16.9 (git+https://github.com/briansmith/ring)",
  "ripemd160 0.8.0 (git+https://github.com/RustCrypto/hashes)",
- "rsass 0.12.0 (git+https://github.com/kaj/rsass)",
+ "rsass 0.13.1-PRE (git+https://github.com/kaj/rsass)",
  "semver 0.9.0 (git+https://github.com/steveklabnik/semver)",
  "serde_json 1.0.44 (git+https://github.com/serde-rs/json)",
  "serde_yaml 0.8.11 (git+https://github.com/dtolnay/serde-yaml)",
@@ -1878,8 +1878,8 @@ dependencies = [
 
 [[package]]
 name = "rsass"
-version = "0.12.0"
-source = "git+https://github.com/kaj/rsass#5038b180a288fbb941e0f35b5c8eb67699e5d623"
+version = "0.13.1-PRE"
+source = "git+https://github.com/kaj/rsass#3e610cad188fc2d1ecc0ae35df7ec7dd1a68b8ff"
 dependencies = [
  "bytecount 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 1.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -2960,7 +2960,7 @@ dependencies = [
 "checksum ripemd160 0.8.0 (git+https://github.com/RustCrypto/hashes)" = "<none>"
 "checksum roxmltree 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)" = "330d8f80a274bc3cb608908ee345970e7e24b96907f1ad69615a498bec57871c"
 "checksum roxmltree 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = "27824cdacc2666f494734bd7bd0d05124f3dea3199893fd67e37277220702643"
-"checksum rsass 0.12.0 (git+https://github.com/kaj/rsass)" = "<none>"
+"checksum rsass 0.13.1-PRE (git+https://github.com/kaj/rsass)" = "<none>"
 "checksum rustc-demangle 0.1.16 (registry+https://github.com/rust-lang/crates.io-index)" = "4c691c0e608126e00913e33f0ccf3727d5fc84573623b8d65b2df340b5201783"
 "checksum rustc-serialize 0.3.24 (registry+https://github.com/rust-lang/crates.io-index)" = "dcf128d1287d2ea9d80910b5f1120d0b8eede3fbf1abe91c40d39ea7d51e6fda"
 "checksum rustc_version 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)" = "138e3e0acb6c9fb258b19b67cb8abd63c00679d2851805ea151465464fe9030a"
