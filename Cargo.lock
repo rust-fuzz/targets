@@ -68,11 +68,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "arbitrary"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[[package]]
-name = "arbitrary"
 version = "0.4.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
@@ -802,7 +797,7 @@ name = "fuzz-targets-libfuzzer"
 version = "0.1.0"
 dependencies = [
  "fuzz-targets-common 0.1.0",
- "libfuzzer-sys 0.1.0 (git+https://github.com/rust-fuzz/libfuzzer-sys.git)",
+ "libfuzzer-sys 0.3.2 (git+https://github.com/rust-fuzz/libfuzzer.git)",
 ]
 
 [[package]]
@@ -1105,10 +1100,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "libfuzzer-sys"
-version = "0.1.0"
-source = "git+https://github.com/rust-fuzz/libfuzzer-sys.git#35ce7d7177c254b9c798aec171dfe76877d1a20f"
+version = "0.3.2"
+source = "git+https://github.com/rust-fuzz/libfuzzer.git#088ccf83d343de293b2eed25d2abd0db34a694f1"
 dependencies = [
- "arbitrary 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "arbitrary 0.4.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "cc 1.0.50 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -2763,7 +2758,6 @@ dependencies = [
 "checksum alloc-stdlib 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "697ed7edc0f1711de49ce108c541623a0af97c6c60b2f6e2b65229847ac843c2"
 "checksum ansi_term 0.11.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ee49baf6cb617b853aa8d93bf420db2383fab46d314482ca2803b40d5fde979b"
 "checksum anyhow 1.0.26 (registry+https://github.com/rust-lang/crates.io-index)" = "7825f6833612eb2414095684fcf6c635becf3ce97fe48cf6421321e93bfbd53c"
-"checksum arbitrary 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "64cf76cb6e2222ed0ea86b2b0ee2f71c96ec6edd5af42e84d59160e91b836ec4"
 "checksum arbitrary 0.4.5 (registry+https://github.com/rust-lang/crates.io-index)" = "7cb544f1057eaaff4b34f8c4dcf56fc3cd04debd291998405d135017a7c3c0f4"
 "checksum arrayvec 0.4.12 (registry+https://github.com/rust-lang/crates.io-index)" = "cd9fd44efafa8690358b7408d253adf110036b88f55672a933f01d616ad9b1b9"
 "checksum arrayvec 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "cff77d8686867eceff3105329d4698d96c2391c176d5d03adc90c7389162b5b8"
@@ -2876,7 +2870,7 @@ dependencies = [
 "checksum lewton 0.9.4 (git+https://github.com/RustAudio/lewton)" = "<none>"
 "checksum lexical-core 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)" = "2304bccb228c4b020f3a4835d247df0a02a7c4686098d4167762cfbbe4c5cb14"
 "checksum libc 0.2.66 (registry+https://github.com/rust-lang/crates.io-index)" = "d515b1f41455adea1313a4a2ac8a8a477634fbae63cc6100e3aebb207ce61558"
-"checksum libfuzzer-sys 0.1.0 (git+https://github.com/rust-fuzz/libfuzzer-sys.git)" = "<none>"
+"checksum libfuzzer-sys 0.3.2 (git+https://github.com/rust-fuzz/libfuzzer.git)" = "<none>"
 "checksum linked-hash-map 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = "ae91b68aebc4ddb91978b11a1b02ddd8602a05ec19002801c5666000e05e0f83"
 "checksum log 0.4.8 (registry+https://github.com/rust-lang/crates.io-index)" = "14b6052be84e6b71ab17edffc2eeabf5c2c3ae1fdb464aae35ac50c67a44e1f7"
 "checksum lzw 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)" = "7d947cbb889ed21c2a84be6ffbaebf5b4e0f4340638cba0444907e38b56be084"
