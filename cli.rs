@@ -325,14 +325,17 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
     let mut rust_flags = env::var("RUSTFLAGS").unwrap_or_default();
     rust_flags.push_str(
         " --cfg fuzzing \
-         -C passes=sancov \
-         -C llvm-args=-sanitizer-coverage-level=4 \
-         -C llvm-args=-sanitizer-coverage-trace-pc-guard \
-         -C llvm-args=-sanitizer-coverage-prune-blocks=0 \
-         -C debug-assertions=on \
-         -C debuginfo=0 \
-         -C opt-level=3 ",
+         -Cpasses=sancov \
+         -Cllvm-args=-sanitizer-coverage-level=4 \
+         -Cllvm-args=-sanitizer-coverage-trace-compares \
+         -Cllvm-args=-sanitizer-coverage-inline-8bit-counters \
+         -Cllvm-args=-sanitizer-coverage-pc-table \
+         -Clink-dead-code \
+         -Zsanitizer=address"
     );
+
+    // https://github.com/rust-fuzz/cargo-fuzz/blob/c3fd16b31de1b7bde6d8e551deebdafbafb80bfc/src/project.rs#L186-L193
+    rust_flags.push_str(" -C codegen-units=1");
 
     let mut asan_options = env::var("ASAN_OPTIONS").unwrap_or_default();
     asan_options.push_str(" detect_odr_violation=0 ");
@@ -346,6 +349,8 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
     let fuzzer_bin = Command::new("cargo")
         .args(&[
             "run",
+            "--release",
+            "-Zbuild-std",
             "--target",
             &target_platform,
             "--bin",
