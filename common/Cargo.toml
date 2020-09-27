@@ -41,7 +41,6 @@ pulldown-cmark = { git = "https://github.com/google/pulldown-cmark.git" }
 quick-xml = { git = "https://github.com/tafia/quick-xml" }
 regex = { git = "https://github.com/rust-lang-nursery/regex" }
 regex-syntax = { git = "https://github.com/rust-lang-nursery/regex" }
-resvg = { git = "https://github.com/RazrFalcon/resvg" }
 ring = { git = "https://github.com/briansmith/ring" }
 ripemd160 = { git = "https://github.com/RustCrypto/hashes" }
 rsass = { git = "https://github.com/kaj/rsass" }
@@ -58,6 +57,7 @@ svgtypes = { git = "https://github.com/RazrFalcon/svgtypes" }
 tar = { git = "https://github.com/alexcrichton/tar-rs" }
 toml = { git = "https://github.com/alexcrichton/toml-rs" }
 url = { git = "https://github.com/servo/rust-url" }
+usvg = { git = "https://github.com/RazrFalcon/resvg" }
 uuid = { git = "https://github.com/rust-lang-nursery/uuid" }
 whirlpool = { git = "https://github.com/RustCrypto/hashes" }
 xmlparser = { git = "https://github.com/RazrFalcon/xmlparser" }
