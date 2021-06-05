@@ -343,7 +343,7 @@ fn run_libfuzzer(target: &str, timeout: Option<i32>) -> Result<(), Error> {
     let max_time = if let Some(timeout) = timeout {
         format!("-max_total_time={}", timeout)
     } else {
-        "".into()
+        "-max_total_time=0".into()
     };
 
     let fuzzer_bin = Command::new("cargo")
